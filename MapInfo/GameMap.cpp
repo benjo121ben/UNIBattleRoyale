@@ -26,11 +26,11 @@ GameMap::GameMap(const std::string& mapString) {
     int y = 0;
     for (const auto& ch: mapString){
         switch (ch) {
-            case '~': add(BRTile(x,y,Tile::water)); x++; break;
-            case 'p': add(BRTile(x,y,Tile::plains)); x++; break;
-            case '#': add(BRTile(x,y,Tile::forest)); x++; break;
-            case 'M': add(BRTile(x,y,Tile::mountain)); x++; break;
-            case '0': add(BRTile(x,y,Tile::plains, true)); x++; break;
+            case '~': add(new BRTile(x,y,Tile::water)); x++; break;
+            case 'p': add(new BRTile(x,y,Tile::plains)); x++; break;
+            case '#': add(new BRTile(x,y,Tile::forest)); x++; break;
+            case 'M': add(new BRTile(x,y,Tile::mountain)); x++; break;
+            case '0': add(new BRTile(x,y,Tile::plains, true)); x++; break;
             case '\n' : y++; x = 0; break;
             default: break;
         }

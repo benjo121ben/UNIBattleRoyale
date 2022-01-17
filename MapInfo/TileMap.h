@@ -19,11 +19,13 @@ public:
 
     int sizeX = 0;
     int sizeY = 0;
-    void add(const T& t);
+    void add(T* t);
     std::vector<T*> getTilesAround(int x, int y) const;
     std::vector<T*> getTilesAround(const Coordinate& c)const;
-    T* getTileAt(int x, int y) const;
+    const T* getTileAt(int x, int y) const;
     [[nodiscard]] bool existsTileAt(int x, int y) const;
+
+    ~TileMap();
 
     std::string printMap();
 

@@ -12,10 +12,10 @@
 
 
 template <typename T>
-void TileMap<T>::add(const T& t) {
-    tileMap.insert_or_assign(t.hashValue(), new T(t));
-    sizeX = (t.getX() >= sizeX) ? t.getX() +1 : sizeX;
-    sizeY = (t.getY() >= sizeY) ? t.getY() +1 : sizeY;
+void TileMap<T>::add(T* t) {
+    tileMap.insert_or_assign(t->hashValue(), t->getCopyPtr());
+    sizeX = (t->getX() >= sizeX) ? t->getX() +1 : sizeX;
+    sizeY = (t->getY() >= sizeY) ? t->getY() +1 : sizeY;
 }
 
 template <typename T>
@@ -31,18 +31,18 @@ std::vector<T*> TileMap<T>::getTilesAround(int x, int y) const{
         //std::cout << "exists? " << static_cast<char>(static_cast<int>(x) + addedIndex) << std::to_string(y);
 
         if(existsTileAt(x + addedIndex, y)){
-            ret.push_back(getTileAt(x + addedIndex, y));
+            ret.push_back(getTileAt(x + addedIndex, y)->getCopyPtr());
         }
 
         if(existsTileAt(x, y + addedIndex)){
-            ret.push_back(getTileAt(x, y + addedIndex));
+            ret.push_back(getTileAt(x, y + addedIndex)->getCopyPtr());
         }
     }
     return ret;
 }
 
 template <typename T>
-T* TileMap<T>::getTileAt(int x, int y) const{
+const T* TileMap<T>::getTileAt(int x, int y) const{
     if(tileMap.count(Coordinate(x,y).hashValue())){
         return tileMap.at(Coordinate(x,y).hashValue());
     }
@@ -53,6 +53,15 @@ template <typename T>
 bool TileMap<T>::existsTileAt(int x, int y) const{
     return tileMap.count(Coordinate(x,y).hashValue()) != 0;
 }
+
+template<typename T> TileMap<T>::~TileMap(){
+    for(int outY {0}; outY < sizeY; outY++) {
+        for (int outX{0}; outX < sizeX; outX++) {
+            delete getTileAt(outX,outY);
+        }
+    }
+}
+
 template <typename T>
 std::string TileMap<T>::printMap() {
     std::string ret;

@@ -85,6 +85,10 @@ int Tile::getY() const{
     return coords.y;
 }
 
+Tile* Tile::getCopyPtr() const{
+    return new Tile(*this);
+}
+
 
 
 BRTile::BRTile(int x, int y, TerrainType tileType, bool spawn) : Tile(x,y, tileType), spawn{spawn}{}
@@ -97,4 +101,8 @@ std::string BRTile::print() const {
 
 bool BRTile::isSpawn() const{
     return spawn;
+}
+
+BRTile* BRTile::getCopyPtr() const{
+    return new BRTile(*this);
 }

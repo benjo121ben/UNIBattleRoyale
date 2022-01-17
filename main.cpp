@@ -12,9 +12,9 @@ int main() {
     std::cout << p1.fight(p2)<< std::endl;
     GameManager man;
     std::cout << man.printMap();
-    /*Pathfinder b(&man.map);
-    Coordinate start(3,3);
-    Coordinate end(4,6);
-    b.outputPath(start,end);*/
+
+    Coordinate start(7,1);
+    Coordinate end(9,3);
+    Pathfinder::outputPath(man.map,start,end);
     return 0;
 }

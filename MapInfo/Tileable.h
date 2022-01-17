@@ -32,6 +32,7 @@ public:
     virtual int getY() const = 0;
     virtual float cost() const = 0;
     virtual std::string hashValue() const;
+    virtual Tileable* getCopyPtr() const = 0;
     Tileable(int x, int y);
     virtual std::string print() const = 0;
 };
@@ -48,9 +49,10 @@ public:
     Tile& operator=(const Tile&);
     virtual int getX() const override;
     virtual int getY() const override;
+    virtual Tile* getCopyPtr() const override;
 
-    float cost() const override;
-    std::string print() const override;
+    [[nodiscard]] float cost() const override;
+    [[nodiscard]] std::string print() const override;
 };
 
 class BRTile : public Tile{
@@ -58,8 +60,9 @@ class BRTile : public Tile{
 public:
     BRTile(int x, int y, TerrainType tileType, bool spawn = false);
     BRTile(const BRTile& other);
-    std::string print() const override;
-    bool isSpawn() const;
+    virtual BRTile* getCopyPtr() const override;
+    [[nodiscard]] std::string print() const override;
+    [[nodiscard]] bool isSpawn() const;
 };
 
 

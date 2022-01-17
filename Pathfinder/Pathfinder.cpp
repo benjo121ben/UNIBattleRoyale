@@ -9,7 +9,15 @@
 #include<iostream>
 
 
-
+std::stack<Node> Pathfinder::findPath(const GameMap& map, const Coordinate &start, const Coordinate &goal) {
+    TileMap<Tileable> tileMap;
+    for(int y {0}; y < map.sizeY; y++) {
+        for (int x{0}; x < map.sizeX; x++) {
+            tileMap.add(map.getTileAt(x,y)->getCopyPtr());
+        }
+    }
+    return findPath(tileMap,start,goal);
+}
 
 std::stack<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordinate &start, const Coordinate &goal) {
 
@@ -71,6 +79,18 @@ std::stack<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordi
 }
 
 void Pathfinder::outputPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal){
+    std::cout << "Route: " << start.print() << " -> " << goal.print() << std::endl;
+    std::stack<Node> stack = findPath(map,start,goal);
+    Node n = stack.top();
+    std::cout << "Path taken: ";
+    for(;!stack.empty(); stack.pop()){
+        n = stack.top();
+        std::cout << " -> " << n.getCoords().print() << "/" << n.getCost();
+    }
+    std::cout << "\ncost: " << n.getCost() << "\n\n\n";
+}
+
+void Pathfinder::outputPath(const GameMap& map, const Coordinate& start, const Coordinate& goal){
     std::cout << "Route: " << start.print() << " -> " << goal.print() << std::endl;
     std::stack<Node> stack = findPath(map,start,goal);
     Node n = stack.top();
