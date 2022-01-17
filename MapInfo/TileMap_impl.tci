@@ -1,0 +1,68 @@
+//
+// Created by benja on 07/12/2021.
+//
+
+#ifndef TILEMAP_IMPL_TCI
+#define TILEMAP_IMPL_TCI
+
+#include "TileMap.h"
+#include<stdexcept>
+#include<iostream>
+
+
+
+template <typename T>
+void TileMap<T>::add(const T& t) {
+    tileMap.insert_or_assign(t.hashValue(), new T(t));
+    sizeX = (t.getX() >= sizeX) ? t.getX() +1 : sizeX;
+    sizeY = (t.getY() >= sizeY) ? t.getY() +1 : sizeY;
+}
+
+template <typename T>
+std::vector<T*> TileMap<T>::getTilesAround(const Coordinate& c)const{
+    return this->getTilesAround(c.x, c.y);
+}
+
+template <typename T>
+std::vector<T*> TileMap<T>::getTilesAround(int x, int y) const{
+    std::vector<T*> ret {};
+    for (int addedIndex {-1}; addedIndex < 2; addedIndex+=2){
+
+        //std::cout << "exists? " << static_cast<char>(static_cast<int>(x) + addedIndex) << std::to_string(y);
+
+        if(existsTileAt(x + addedIndex, y)){
+            ret.push_back(getTileAt(x + addedIndex, y));
+        }
+
+        if(existsTileAt(x, y + addedIndex)){
+            ret.push_back(getTileAt(x, y + addedIndex));
+        }
+    }
+    return ret;
+}
+
+template <typename T>
+T* TileMap<T>::getTileAt(int x, int y) const{
+    if(tileMap.count(Coordinate(x,y).hashValue())){
+        return tileMap.at(Coordinate(x,y).hashValue());
+    }
+    throw std::runtime_error("Tiles do not exist at: " + std::to_string(x) +", " + std::to_string(y));
+}
+
+template <typename T>
+bool TileMap<T>::existsTileAt(int x, int y) const{
+    return tileMap.count(Coordinate(x,y).hashValue()) != 0;
+}
+template <typename T>
+std::string TileMap<T>::printMap() {
+    std::string ret;
+    for(int outY {0}; outY < sizeY; outY++) {
+        for (int outX{0}; outX < sizeX; outX++) {
+            ret += getTileAt(outX,outY)->print();
+        }
+        ret += "\n";
+    }
+    return ret;
+}
+
+#endif
