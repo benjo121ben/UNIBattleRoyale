@@ -9,14 +9,20 @@
 
 class GameManager{
 public:
+    bool started = false;
     GameMap map;
     std::vector<Player> playerList;
     std::vector<Coordinate> playerPositions;
 
     void init_game();
+
 public:
     GameManager();
     explicit GameManager(GameMap& map);
-    std::string printMap();
+
+    void registerPlayer(const Player& p);
+    void removePlayer(int index);
+
+    std::string printMap(bool showSpawn = false);
 };
 #endif //GAME_GAMEMANAGER_H

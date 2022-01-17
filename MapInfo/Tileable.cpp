@@ -57,15 +57,15 @@ Tile::Tile(const Tile& other) : Tile(other.coords.x, other.coords.y, other.tileT
 
 float Tile::cost() const {
     switch(tileType){
-        case plains: return 1;
-        case forest: return 1.5;
+        case plains:
+        case forest: return 1;
         case mountain: return 2;
         case water: return 3;
     }
     throw std::runtime_error("wrong tiletype asked from cost: " + std::to_string(tileType));
 }
 
-std::string Tile::print() const{
+std::string Tile::print(bool) const{
     switch (tileType) {
         case water: return "~";
         case plains: return "p";
@@ -94,9 +94,9 @@ Tile* Tile::getCopyPtr() const{
 BRTile::BRTile(int x, int y, TerrainType tileType, bool spawn) : Tile(x,y, tileType), spawn{spawn}{}
 BRTile::BRTile(const BRTile& other) : BRTile(other.getX(),other.getY(), other.tileType, other.spawn){}
 
-std::string BRTile::print() const {
-    if (spawn)return "0";
-    return Tile::print();
+std::string BRTile::print(bool showSpawn) const {
+    if (showSpawn && spawn)return "0";
+    return Tile::print(false);
 }
 
 bool BRTile::isSpawn() const{

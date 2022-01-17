@@ -9,7 +9,7 @@
 #include<iostream>
 
 
-std::stack<Node> Pathfinder::findPath(const GameMap& map, const Coordinate &start, const Coordinate &goal) {
+std::deque<Node> Pathfinder::findPath(const GameMap& map, const Coordinate &start, const Coordinate &goal) {
     TileMap<Tileable> tileMap;
     for(int y {0}; y < map.sizeY; y++) {
         for (int x{0}; x < map.sizeX; x++) {
@@ -19,7 +19,7 @@ std::stack<Node> Pathfinder::findPath(const GameMap& map, const Coordinate &star
     return findPath(tileMap,start,goal);
 }
 
-std::stack<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordinate &start, const Coordinate &goal) {
+std::deque<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordinate &start, const Coordinate &goal) {
 
     if(!map.existsTileAt(start.x,start.y)) throw std::invalid_argument("invalid start coordinate");
 
@@ -52,7 +52,7 @@ std::stack<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordi
         visited.insert(n->getCoords().hashValue());
         if(n->getCoords() == goal) {
             //std:.cout<< "ended search: "<< n->getCoords().print() << "parent: " << n->getParentCoordinates().print()<<"\n";
-            return n->getPathStack();
+            return n->getPathDeque();
         }
         //std:.cout << "searching around: ";
         for(const Tileable* checkTile : map.getTilesAround(n->getCoords())){
@@ -80,26 +80,27 @@ std::stack<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordi
 
 void Pathfinder::outputPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal){
     std::cout << "Route: " << start.print() << " -> " << goal.print() << std::endl;
-    std::stack<Node> stack = findPath(map,start,goal);
-    Node n = stack.top();
+    std::deque<Node> deque = findPath(map,start,goal);
     std::cout << "Path taken: ";
-    for(;!stack.empty(); stack.pop()){
-        n = stack.top();
+    for(int pos {0}; pos < deque.size(); pos++){
+        Node n = deque.at(pos);
         std::cout << " -> " << n.getCoords().print() << "/" << n.getCost();
     }
-    std::cout << "\ncost: " << n.getCost() << "\n\n\n";
+    std::cout << "\ncost: " << deque.at(deque.size()-1).getCost() << "\n\n\n";
 }
 
 void Pathfinder::outputPath(const GameMap& map, const Coordinate& start, const Coordinate& goal){
     std::cout << "Route: " << start.print() << " -> " << goal.print() << std::endl;
-    std::stack<Node> stack = findPath(map,start,goal);
-    Node n = stack.top();
+    std::deque<Node> deque = findPath(map,start,goal);
     std::cout << "Path taken: ";
-    for(;!stack.empty(); stack.pop()){
-        n = stack.top();
-        std::cout << " -> " << n.getCoords().print() << "/" << n.getCost();
+    for(int pos {0}; pos < deque.size(); pos++){
+        Node n = deque.at(pos);
+        if(pos != 0){
+            std::cout << " -> ";
+        }
+        std::cout << n.getCoords().print() << "/" << n.getCost();
     }
-    std::cout << "\ncost: " << n.getCost() << "\n\n\n";
+    std::cout << "\ncost: " << deque.at(deque.size()-1).getCost() << "\n\n\n";
 }
 
 Node::Node(const Tileable* t, const Coordinate& goal, Node *parent) : tile{t}, parent{parent} {
@@ -165,17 +166,17 @@ Node& Node::operator=(const Node& n){
     return *this;
 }
 
-std::stack<Node> Node::getPathStack() {
-    std::stack<Node> stack;
+std::deque<Node> Node::getPathDeque() {
+    std::deque<Node> deque;
     Node *n = this;
     //std:.cout << "going down rabbit hole: " << n->getCoords().print();
     do {
-        stack.push(Node(*n));
+        deque.emplace_front(*n);
         //std:.cout << n->getCoords().print();
         n = n->parent;
     }while(n != nullptr);
     //std:.cout << "went down rabbit hole\n";
-    return stack;
+    return deque;
 }
 
 

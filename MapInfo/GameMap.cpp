@@ -37,3 +37,7 @@ GameMap::GameMap(const std::string& mapString) {
     }
 }
 
+std::string GameMap::printMap(bool showSpawns) {
+    return TileMap::printMap(showSpawns);
+}
+

@@ -35,7 +35,7 @@ public:
     [[nodiscard]] virtual float cost() const = 0;
     [[nodiscard]] virtual std::string hashValue() const;
     [[nodiscard]] virtual Tileable* getCopyPtr() const = 0;
-    [[nodiscard]] virtual std::string print() const = 0;
+    [[nodiscard]] virtual std::string print(bool) const = 0;
 };
 
 class Tile : public Tileable{
@@ -53,7 +53,7 @@ public:
     [[nodiscard]] Tile* getCopyPtr() const override;
 
     [[nodiscard]] float cost() const override;
-    [[nodiscard]] std::string print() const override;
+    [[nodiscard]] std::string print(bool) const override;
 };
 
 class BRTile : public Tile{
@@ -62,7 +62,7 @@ public:
     BRTile(int x, int y, TerrainType tileType, bool spawn = false);
     BRTile(const BRTile& other);
     [[nodiscard]] BRTile* getCopyPtr() const override;
-    [[nodiscard]] std::string print() const override;
+    [[nodiscard]] std::string print(bool showSpawn) const override;
     [[nodiscard]] bool isSpawn() const;
 };
 

@@ -27,7 +27,7 @@ public:
 
     ~TileMap();
 
-    std::string printMap();
+    virtual std::string printMap(bool showSpawn = false);
 
 };
 

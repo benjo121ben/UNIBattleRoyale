@@ -31,7 +31,7 @@ public:
     const Tileable* getTile() const;
     void trySetParent(Node& newParent);
     Coordinate getParentCoordinates() const;
-    std::stack<Node> getPathStack();
+    std::deque<Node> getPathDeque();
 
     Node& operator=(const Node& n);
 };
@@ -39,8 +39,8 @@ public:
 
 class Pathfinder{
 public:
-    static std::stack<Node> findPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal);
-    static std::stack<Node> findPath(const GameMap& map, const Coordinate& start, const Coordinate& goal);
+    static std::deque<Node> findPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal);
+    static std::deque<Node> findPath(const GameMap& map, const Coordinate& start, const Coordinate& goal);
     static void outputPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal);
     static void outputPath(const GameMap& map, const Coordinate& start, const Coordinate& goal);
 

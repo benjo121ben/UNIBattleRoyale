@@ -13,10 +13,13 @@
 class GameMap : public TileMap<BRTile>{
 
 public:
+    static std::string getMap1();
 
     GameMap();
     explicit GameMap(const std::string& mapString);
-    static std::string getMap1();
+
+    std::string printMap(bool showSpawns) override;
+
 };
 
 
