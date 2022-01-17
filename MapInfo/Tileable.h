@@ -28,13 +28,14 @@ class Tileable{
 protected:
     Coordinate coords;
 public:
-    virtual int getX() const = 0;
-    virtual int getY() const = 0;
-    virtual float cost() const = 0;
-    virtual std::string hashValue() const;
-    virtual Tileable* getCopyPtr() const = 0;
     Tileable(int x, int y);
-    virtual std::string print() const = 0;
+
+    [[nodiscard]] virtual int getX() const = 0;
+    [[nodiscard]] virtual int getY() const = 0;
+    [[nodiscard]] virtual float cost() const = 0;
+    [[nodiscard]] virtual std::string hashValue() const;
+    [[nodiscard]] virtual Tileable* getCopyPtr() const = 0;
+    [[nodiscard]] virtual std::string print() const = 0;
 };
 
 class Tile : public Tileable{
@@ -47,9 +48,9 @@ public:
     Tile(int x, int y, TerrainType t);
     Tile(const Tile& other);
     Tile& operator=(const Tile&);
-    virtual int getX() const override;
-    virtual int getY() const override;
-    virtual Tile* getCopyPtr() const override;
+    [[nodiscard]] int getX() const override;
+    [[nodiscard]] int getY() const override;
+    [[nodiscard]] Tile* getCopyPtr() const override;
 
     [[nodiscard]] float cost() const override;
     [[nodiscard]] std::string print() const override;
@@ -60,7 +61,7 @@ class BRTile : public Tile{
 public:
     BRTile(int x, int y, TerrainType tileType, bool spawn = false);
     BRTile(const BRTile& other);
-    virtual BRTile* getCopyPtr() const override;
+    [[nodiscard]] BRTile* getCopyPtr() const override;
     [[nodiscard]] std::string print() const override;
     [[nodiscard]] bool isSpawn() const;
 };

@@ -58,8 +58,8 @@ Tile::Tile(const Tile& other) : Tile(other.coords.x, other.coords.y, other.tileT
 float Tile::cost() const {
     switch(tileType){
         case plains: return 1;
+        case forest: return 1.5;
         case mountain: return 2;
-        case forest: return 1;
         case water: return 3;
     }
     throw std::runtime_error("wrong tiletype asked from cost: " + std::to_string(tileType));

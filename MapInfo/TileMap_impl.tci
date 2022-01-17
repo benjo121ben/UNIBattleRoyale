@@ -13,7 +13,7 @@
 
 template <typename T>
 void TileMap<T>::add(T* t) {
-    tileMap.insert_or_assign(t->hashValue(), t->getCopyPtr());
+    tileMap.insert_or_assign(t->hashValue(), t);
     sizeX = (t->getX() >= sizeX) ? t->getX() +1 : sizeX;
     sizeY = (t->getY() >= sizeY) ? t->getY() +1 : sizeY;
 }
