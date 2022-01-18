@@ -71,6 +71,7 @@ std::string TileMap<T>::printMap(bool showSpawn) {
         }
         ret += "\n";
     }
+    ret += "\n";
     return ret;
 }
 

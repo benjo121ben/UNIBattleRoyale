@@ -2,6 +2,7 @@
 // Created by benja on 18/01/2022.
 //
 #include "TickInfo.h"
+#include <iostream>
 
 TickInfo::TickInfo() : type{recover}{}
 TickInfo::TickInfo(ActionType type, std::any&& data) : type{type}, data{data}{}
