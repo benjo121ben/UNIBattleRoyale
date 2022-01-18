@@ -2,7 +2,8 @@
 // Created by benja on 18/01/2022.
 //
 #include "TurnManager.h"
-#include "Exceptions/GameExceptions.h"
+#include "../Exceptions/GameExceptions.h"
+
 TurnManager::TurnManager(std::vector<Player> &playerList, std::vector<Coordinate> &playerPositions, GameMap &map) :
 playerList{playerList}, playerPositions{playerPositions}, map{map} {}
 
@@ -20,9 +21,7 @@ void TurnManager::handleTurn(){
         const TickInfo& t = instructions.at(playerNr);
         switch (t.type) {
             case TickInfo::move: {
-                auto dir = std::any_cast<cardinal_directions>(t.data);
-                Coordinate coord = playerPositions.at(playerNr);
-                playerPositions.at(playerNr) = Coordinate(coord.x, coord.y - 1);
+                handleMove(playerNr, t);
                 break;
             }
             case TickInfo::flee:
@@ -40,4 +39,23 @@ void TurnManager::handleTurn(){
         }
     }
     instructions.clear();
+}
+
+void TurnManager::handleMove(int playerNr, const TickInfo &t) {
+    auto dir = std::any_cast<cardinal_directions>(t.data);
+    Coordinate coord = playerPositions.at(playerNr);
+    switch(dir){
+        case north:
+            playerPositions.at(playerNr) = Coordinate(coord.x, coord.y-1);
+            break;
+        case south:
+            playerPositions.at(playerNr) = Coordinate(coord.x, coord.y+1);
+            break;
+        case west:
+            playerPositions.at(playerNr) = Coordinate(coord.x-1, coord.y);
+            break;
+        case east:
+            playerPositions.at(playerNr) = Coordinate(coord.x+1, coord.y);
+            break;
+    }
 }

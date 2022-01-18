@@ -2,14 +2,13 @@
 // Created by benja on 16/01/2022.
 //
 #include "Player.h"
-#include<cstdlib>
-#include <utility>
 #include<iostream>
+#include "../Random.h"
 
 
 std::string Player::fight(const Player& other){
-    srand(time(NULL));
-    int erg = rand() % 2;
+
+    int erg = Random::get_random_Int(2);
     if(erg == 0){
         return this->name + " killed " + other.name + " with " + this->pronouns.possessive + " " +  this->weapon;
     }
@@ -21,5 +20,9 @@ std::string Player::fight(const Player& other){
 Player::Player(std::string name, std::string weapon, Pronouns pronouns) : name{std::move(name)}, weapon{std::move(weapon)},pronouns{std::move(pronouns)}{}
 
 TickInfo Player::tick() const{
-    return {TickInfo::move, std::make_any<cardinal_directions>(north)};
+
+
+    cardinal_directions dir = static_cast<cardinal_directions>(Random::get_random_Int(4));
+    std::cout << dir << std::endl;
+    return {TickInfo::move, std::make_any<cardinal_directions>(dir)};
 }

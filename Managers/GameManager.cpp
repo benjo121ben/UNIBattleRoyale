@@ -2,7 +2,7 @@
 // Created by benja on 17/01/2022.
 //
 #include "GameManager.h"
-#include "Exceptions/GameExceptions.h"
+#include "../Exceptions/GameExceptions.h"
 
 
 
@@ -19,14 +19,14 @@ const GameMap& GameManager::getMap() const{
     return map;
 }
 
-std::string GameManager::printMap(bool showSpawn){
+void GameManager::printMap(bool showSpawn){
     std::string ret {map.printMap(showSpawn)};
     char playerNr = '0';
     for(int posNr{0}; posNr < playerList.size(); ++posNr){
         Coordinate coord{playerPositions.at(posNr)};
         ret.at(coord.x + (map.sizeX + 1) * coord.y) = playerNr++;
     }
-    return ret;
+    std::cout << ret;
 }
 
 

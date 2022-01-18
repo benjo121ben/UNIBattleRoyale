@@ -1,8 +1,9 @@
 #include <iostream>
 #include "PlayerInfo/Player.h"
 #include "MapInfo/GameMap.h"
-#include "GameManager.h"
+#include "Managers/GameManager.h"
 #include "Pathfinder/Pathfinder.h"
+#include "Random.h"
 
 
 
@@ -18,15 +19,13 @@ int main() {
     //Pathfinder::outputPath(man.getMap(),start,end);
 
     man.registerPlayer({p1,p2});
-    std::cout << man.printMap();
-    try {
-        std::cout << man.printMap();
-        man.tick();
-        std::cout << man.printMap();
-        man.tick();
-        std::cout << man.printMap();
-    }catch (std::exception& e){
-        std::cout << e.what();
-    }
+    man.printMap();
+    man.tick();
+    man.printMap();
+    man.tick();
+    man.printMap();
+    man.tick();
+    man.printMap();
+
     return 0;
 }

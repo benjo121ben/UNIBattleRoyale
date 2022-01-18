@@ -4,8 +4,8 @@
 
 #ifndef GAME_GAMEMANAGER_H
 #define GAME_GAMEMANAGER_H
-#include "MapInfo/GameMap.h"
-#include "PlayerInfo/Player.h"
+#include "../MapInfo/GameMap.h"
+#include "../PlayerInfo/Player.h"
 #include "TurnManager.h"
 
 class GameManager{
@@ -22,7 +22,7 @@ public:
     explicit GameManager(GameMap& map);
 
     const GameMap& getMap() const;
-    [[nodiscard]] std::string printMap(bool showSpawn = false);
+    void printMap(bool showSpawn = false);
 
     void registerPlayer(const Player& p);
     void registerPlayer(std::initializer_list<const Player> l);
