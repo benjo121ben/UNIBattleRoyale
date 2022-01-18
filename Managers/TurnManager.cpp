@@ -46,16 +46,20 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
     Coordinate coord = playerPositions.at(playerNr);
     switch(dir){
         case north:
-            playerPositions.at(playerNr) = Coordinate(coord.x, coord.y-1);
+            coord = Coordinate(coord.x, coord.y-1);
             break;
         case south:
-            playerPositions.at(playerNr) = Coordinate(coord.x, coord.y+1);
+            coord = Coordinate(coord.x, coord.y+1);
             break;
         case west:
-            playerPositions.at(playerNr) = Coordinate(coord.x-1, coord.y);
+            coord = Coordinate(coord.x-1, coord.y);
             break;
         case east:
-            playerPositions.at(playerNr) = Coordinate(coord.x+1, coord.y);
+            coord = Coordinate(coord.x+1, coord.y);
             break;
+    }
+
+    if(map.existsTileAt(coord)){
+        playerPositions.at(playerNr) = coord;
     }
 }

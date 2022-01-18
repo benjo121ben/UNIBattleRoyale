@@ -23,6 +23,5 @@ TickInfo Player::tick() const{
 
 
     cardinal_directions dir = static_cast<cardinal_directions>(Random::get_random_Int(4));
-    std::cout << dir << std::endl;
     return {TickInfo::move, std::make_any<cardinal_directions>(dir)};
 }

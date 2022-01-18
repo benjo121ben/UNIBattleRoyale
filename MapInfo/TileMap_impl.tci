@@ -54,6 +54,11 @@ bool TileMap<T>::existsTileAt(int x, int y) const{
     return tileMap.count(Coordinate(x,y).hashValue()) != 0;
 }
 
+template <typename T>
+bool TileMap<T>::existsTileAt(const Coordinate& c) const{
+    return tileMap.count(c.hashValue()) != 0;
+}
+
 template<typename T> TileMap<T>::~TileMap(){
     for(int outY {0}; outY < sizeY; outY++) {
         for (int outX{0}; outX < sizeX; outX++) {

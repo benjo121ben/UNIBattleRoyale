@@ -24,6 +24,7 @@ public:
     std::vector<T*> getTilesAround(const Coordinate& c)const;
     const T* getTileAt(int x, int y) const;
     [[nodiscard]] bool existsTileAt(int x, int y) const;
+    [[nodiscard]] bool existsTileAt(const Coordinate& c) const;
 
     ~TileMap();
 

@@ -58,3 +58,11 @@
 4	921	6642408159632385	CMakeFiles/Game.dir/main.cpp.obj	e52603165db40bbd
 30	1090	6642408161361739	CMakeFiles/Game.dir/Managers/GameManager.cpp.obj	ff2f8582ddd9c70e
 1090	1484	6642408165250280	Game.exe	9fdfc16f6a8e7b32
+9	1531	6642411475711276	CMakeFiles/Game.dir/main.cpp.obj	e52603165db40bbd
+107	1567	6642411475991125	CMakeFiles/Game.dir/Managers/TurnManager.cpp.obj	4c20af28b0f27487
+113	1584	6642411476210668	CMakeFiles/Game.dir/MapInfo/GameMap.cpp.obj	96b49f7d5dc7fc5c
+118	1672	6642411477121686	CMakeFiles/Game.dir/Managers/GameManager.cpp.obj	ff2f8582ddd9c70e
+127	2215	6642411482552959	CMakeFiles/Game.dir/Pathfinder/Pathfinder.cpp.obj	1b8fca920ff21657
+2215	2828	6642411488615074	Game.exe	9fdfc16f6a8e7b32
+4	542	6642413128791778	CMakeFiles/Game.dir/PlayerInfo/Player.cpp.obj	71a4ea012062fefe
+543	976	6642413133076677	Game.exe	9fdfc16f6a8e7b32
