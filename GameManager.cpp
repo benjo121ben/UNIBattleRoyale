@@ -15,6 +15,21 @@ GameManager::GameManager(GameMap& setMap) : map{setMap}{
     init_game();
 }
 
+const GameMap& GameManager::getMap() const{
+    return map;
+}
+
+std::string GameManager::printMap(bool showSpawn){
+    std::string ret {map.printMap(showSpawn)};
+    char playerNr = '0';
+    for(int posNr{0}; posNr < playerList.size(); ++posNr){
+        Coordinate coord{playerPositions.at(posNr)};
+        ret.at(coord.x + (map.sizeX + 1) * coord.y) = playerNr++;
+    }
+    return ret;
+}
+
+
 
 void GameManager::init_game(){
     for(int y {0}; y < map.sizeY; ++y){
@@ -43,12 +58,10 @@ void GameManager::removePlayer(int index) {
 }
 
 
-std::string GameManager::printMap(bool showSpawn){
-    std::string ret {map.printMap(showSpawn)};
-    char playerNr = '0';
-    for(int posNr{0}; posNr < playerList.size(); ++posNr){
-        Coordinate coord{playerPositions.at(posNr)};
-        ret.at(coord.x + (map.sizeX + 1) * coord.y) = playerNr++;
+
+
+void GameManager::tick() {
+    for(const Player& p : playerList){
+        TickInfo action = p.tick();
     }
-    return ret;
 }

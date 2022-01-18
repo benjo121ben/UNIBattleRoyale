@@ -18,3 +18,7 @@ std::string Player::fight(const Player& other){
 }
 
 Player::Player(std::string name, std::string weapon, Pronouns pronouns) : name{std::move(name)}, weapon{std::move(weapon)},pronouns{std::move(pronouns)}{}
+
+TickInfo Player::tick() const{
+    return TickInfo(TickInfo::move, std::make_any<cardinal_directions>(north));
+}

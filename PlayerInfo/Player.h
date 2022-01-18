@@ -6,6 +6,7 @@
 
 #include <string>
 #include"Pronouns.h"
+#include"TickInfo.h"
 
 class Pronouns;
 
@@ -18,6 +19,9 @@ public:
     Player(std::string name, std::string weapon, Pronouns pronouns);
 
     std::string fight(const Player& other);
+
+    TickInfo tick() const;
+
 };
 
 

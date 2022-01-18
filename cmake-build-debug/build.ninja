@@ -91,6 +91,12 @@ build CMakeFiles/Game.dir/Pathfinder/Pathfinder.cpp.obj: CXX_COMPILER__Game_Debu
   OBJECT_DIR = CMakeFiles\Game.dir
   OBJECT_FILE_DIR = CMakeFiles\Game.dir\Pathfinder
 
+build CMakeFiles/Game.dir/PlayerInfo/TickInfo.cpp.obj: CXX_COMPILER__Game_Debug C$:/UniProject/Game/PlayerInfo/TickInfo.cpp || cmake_object_order_depends_target_Game
+  DEP_FILE = CMakeFiles\Game.dir\PlayerInfo\TickInfo.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\Game.dir
+  OBJECT_FILE_DIR = CMakeFiles\Game.dir\PlayerInfo
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Game
@@ -99,7 +105,7 @@ build CMakeFiles/Game.dir/Pathfinder/Pathfinder.cpp.obj: CXX_COMPILER__Game_Debu
 #############################################
 # Link the executable Game.exe
 
-build Game.exe: CXX_EXECUTABLE_LINKER__Game_Debug CMakeFiles/Game.dir/main.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Player.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Pronouns.cpp.obj CMakeFiles/Game.dir/MapInfo/GameMap.cpp.obj CMakeFiles/Game.dir/MapInfo/Tileable.cpp.obj CMakeFiles/Game.dir/GameManager.cpp.obj CMakeFiles/Game.dir/Pathfinder/Pathfinder.cpp.obj
+build Game.exe: CXX_EXECUTABLE_LINKER__Game_Debug CMakeFiles/Game.dir/main.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Player.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Pronouns.cpp.obj CMakeFiles/Game.dir/MapInfo/GameMap.cpp.obj CMakeFiles/Game.dir/MapInfo/Tileable.cpp.obj CMakeFiles/Game.dir/GameManager.cpp.obj CMakeFiles/Game.dir/Pathfinder/Pathfinder.cpp.obj CMakeFiles/Game.dir/PlayerInfo/TickInfo.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Game.dir

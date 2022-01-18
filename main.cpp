@@ -15,6 +15,6 @@ int main() {
 
     Coordinate start(7,1);
     Coordinate end(9,3);
-    Pathfinder::outputPath(man.map,start,end);
+    Pathfinder::outputPath(man.getMap(),start,end);
     return 0;
 }

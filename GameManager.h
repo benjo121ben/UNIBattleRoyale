@@ -8,21 +8,24 @@
 #include "PlayerInfo/Player.h"
 
 class GameManager{
-public:
     bool started = false;
-    GameMap map;
     std::vector<Player> playerList;
     std::vector<Coordinate> playerPositions;
+    GameMap map;
 
     void init_game();
-
 public:
+
+
+
     GameManager();
     explicit GameManager(GameMap& map);
 
+    const GameMap& getMap() const;
+    std::string printMap(bool showSpawn = false);
+
     void registerPlayer(const Player& p);
     void removePlayer(int index);
-
-    std::string printMap(bool showSpawn = false);
+    void tick();
 };
 #endif //GAME_GAMEMANAGER_H
