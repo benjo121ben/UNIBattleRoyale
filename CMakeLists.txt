@@ -13,4 +13,9 @@ add_executable(Game
         Managers/TurnManager.cpp
         Pathfinder/Pathfinder.cpp
         PlayerInfo/TickInfo.cpp
-        Random.cpp)
+        Random.cpp
+        Managers/EventSystem/EventHandler.cpp
+        Managers/EventSystem/Events/MoveEvent.cpp
+        Managers/EventSystem/Events/BaseEvent.cpp
+        MapInfo/cardinal_directions.cpp
+        )

@@ -8,7 +8,6 @@
 #include"Pronouns.h"
 #include"TickInfo.h"
 
-class Pronouns;
 
 class Player{
 public:

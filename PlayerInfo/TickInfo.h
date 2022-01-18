@@ -7,9 +7,7 @@
 #include<string>
 #include<any>
 
-enum cardinal_directions{
-    north, south, west, east
-};
+
 
 struct TickInfo{
     enum ActionType{

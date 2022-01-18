@@ -6,16 +6,16 @@
 #include<iostream>
 
 std::string GameMap::getMap1() {
-    const static std::string map1("~~~~~~~~~~~~~~~~~~~~\n"
-    "~~~~~~~pp##p~~~pp~~~\n"
-    "~~~~~p0#######p0~~~~\n"
-    "~~~~pp~~~##~~~~pppp~\n"
-    "~~~~~pp#MMMM##pp~~~~\n"
-    "~~~~~p0#MMM~~##0p~~~\n"
-    "~~~~~pp##MMM~#pp~~~~\n"
-    "~~~~~~~pp#M##p0~~~~~\n"
-    "~~~~~~~~0pp~~~~~~~~~\n"
-    "~~~~~~~~~~~~~~~~~~~~\n");
+    const static std::string map1(  "~~~~~~~~~~~~~~~~~~~~\n"
+                                    "~~~~~~~pp##p~~~pp~~~\n"
+                                    "~~~~~p0#######p0~~~~\n"
+                                    "~~~~pp~~~##~~~~pppp~\n"
+                                    "~~~~~pp#MMMM##pp~~~~\n"
+                                    "~~~~~p0#MMM~~##0p~~~\n"
+                                    "~~~~~pp##MMM~#pp~~~~\n"
+                                    "~~~~~~~pp#M##p0~~~~~\n"
+                                    "~~~~~~~~0pp~~~~~~~~~\n"
+                                    "~~~~~~~~~~~~~~~~~~~~\n");
     return map1;
 }
 

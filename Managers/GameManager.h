@@ -14,6 +14,7 @@ class GameManager{
     std::vector<Coordinate> playerPositions;
     GameMap map;
     TurnManager turnManager;
+    EventHandler eventHandler;
 
     void init_game();
 public:

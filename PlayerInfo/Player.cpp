@@ -4,6 +4,7 @@
 #include "Player.h"
 #include<iostream>
 #include "../Random.h"
+#include "../MapInfo/cardinal_directions.h"
 
 
 std::string Player::fight(const Player& other){

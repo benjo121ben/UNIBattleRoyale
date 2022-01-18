@@ -7,11 +7,11 @@
 
 
 
-GameManager::GameManager() : map{GameMap(GameMap::getMap1())}, turnManager {playerList, playerPositions, map}{
+GameManager::GameManager() : map{GameMap(GameMap::getMap1())}, turnManager {eventHandler,playerList, playerPositions, map}{
     init_game();
 }
 
-GameManager::GameManager(GameMap& setMap) : map{setMap}, turnManager {playerList, playerPositions, map}{
+GameManager::GameManager(GameMap& setMap) : map{setMap}, turnManager{eventHandler, playerList, playerPositions, map}{
     init_game();
 }
 

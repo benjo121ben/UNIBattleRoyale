@@ -109,6 +109,30 @@ build CMakeFiles/Game.dir/Random.cpp.obj: CXX_COMPILER__Game_Debug C$:/UniProjec
   OBJECT_DIR = CMakeFiles\Game.dir
   OBJECT_FILE_DIR = CMakeFiles\Game.dir
 
+build CMakeFiles/Game.dir/Managers/EventSystem/EventHandler.cpp.obj: CXX_COMPILER__Game_Debug C$:/UniProject/Game/Managers/EventSystem/EventHandler.cpp || cmake_object_order_depends_target_Game
+  DEP_FILE = CMakeFiles\Game.dir\Managers\EventSystem\EventHandler.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\Game.dir
+  OBJECT_FILE_DIR = CMakeFiles\Game.dir\Managers\EventSystem
+
+build CMakeFiles/Game.dir/Managers/EventSystem/Events/MoveEvent.cpp.obj: CXX_COMPILER__Game_Debug C$:/UniProject/Game/Managers/EventSystem/Events/MoveEvent.cpp || cmake_object_order_depends_target_Game
+  DEP_FILE = CMakeFiles\Game.dir\Managers\EventSystem\Events\MoveEvent.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\Game.dir
+  OBJECT_FILE_DIR = CMakeFiles\Game.dir\Managers\EventSystem\Events
+
+build CMakeFiles/Game.dir/Managers/EventSystem/Events/BaseEvent.cpp.obj: CXX_COMPILER__Game_Debug C$:/UniProject/Game/Managers/EventSystem/Events/BaseEvent.cpp || cmake_object_order_depends_target_Game
+  DEP_FILE = CMakeFiles\Game.dir\Managers\EventSystem\Events\BaseEvent.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\Game.dir
+  OBJECT_FILE_DIR = CMakeFiles\Game.dir\Managers\EventSystem\Events
+
+build CMakeFiles/Game.dir/MapInfo/cardinal_directions.cpp.obj: CXX_COMPILER__Game_Debug C$:/UniProject/Game/MapInfo/cardinal_directions.cpp || cmake_object_order_depends_target_Game
+  DEP_FILE = CMakeFiles\Game.dir\MapInfo\cardinal_directions.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\Game.dir
+  OBJECT_FILE_DIR = CMakeFiles\Game.dir\MapInfo
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Game
@@ -117,7 +141,7 @@ build CMakeFiles/Game.dir/Random.cpp.obj: CXX_COMPILER__Game_Debug C$:/UniProjec
 #############################################
 # Link the executable Game.exe
 
-build Game.exe: CXX_EXECUTABLE_LINKER__Game_Debug CMakeFiles/Game.dir/main.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Player.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Pronouns.cpp.obj CMakeFiles/Game.dir/MapInfo/GameMap.cpp.obj CMakeFiles/Game.dir/MapInfo/Tileable.cpp.obj CMakeFiles/Game.dir/Managers/GameManager.cpp.obj CMakeFiles/Game.dir/Managers/TurnManager.cpp.obj CMakeFiles/Game.dir/Pathfinder/Pathfinder.cpp.obj CMakeFiles/Game.dir/PlayerInfo/TickInfo.cpp.obj CMakeFiles/Game.dir/Random.cpp.obj
+build Game.exe: CXX_EXECUTABLE_LINKER__Game_Debug CMakeFiles/Game.dir/main.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Player.cpp.obj CMakeFiles/Game.dir/PlayerInfo/Pronouns.cpp.obj CMakeFiles/Game.dir/MapInfo/GameMap.cpp.obj CMakeFiles/Game.dir/MapInfo/Tileable.cpp.obj CMakeFiles/Game.dir/Managers/GameManager.cpp.obj CMakeFiles/Game.dir/Managers/TurnManager.cpp.obj CMakeFiles/Game.dir/Pathfinder/Pathfinder.cpp.obj CMakeFiles/Game.dir/PlayerInfo/TickInfo.cpp.obj CMakeFiles/Game.dir/Random.cpp.obj CMakeFiles/Game.dir/Managers/EventSystem/EventHandler.cpp.obj CMakeFiles/Game.dir/Managers/EventSystem/Events/MoveEvent.cpp.obj CMakeFiles/Game.dir/Managers/EventSystem/Events/BaseEvent.cpp.obj CMakeFiles/Game.dir/MapInfo/cardinal_directions.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Game.dir
