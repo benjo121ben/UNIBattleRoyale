@@ -4,6 +4,7 @@
 #include "Managers/GameManager.h"
 #include "Pathfinder/Pathfinder.h"
 #include "Random.h"
+#include "BehaviourTree/BehaviourTree.h"
 
 
 bool handleInput(GameManager &man, const std::string &line);
@@ -15,6 +16,8 @@ int main() {
     Player p2("Lena", "Axe", Pronouns::feminine());
     Player p3("Froggy", "Tongue", Pronouns::neutral());
     GameManager man;
+
+
 
 
     //Coordinate start(7,1);

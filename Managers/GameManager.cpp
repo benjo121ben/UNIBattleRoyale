@@ -3,8 +3,7 @@
 //
 #include "GameManager.h"
 #include "../Exceptions/GameExceptions.h"
-
-
+#include "../BehaviourTree/BehaviourTree.h"
 
 
 GameManager::GameManager() : map{GameMap(GameMap::getMap1())}, turnManager {playerList, playerPositions, map}{
@@ -49,11 +48,15 @@ void GameManager::init_game(){
     }
 }
 
+
+
 void GameManager::registerPlayer(const Player& p){
     if(started) throw game_started_error();
     if(playerList.size() == 6) throw generic_game_error("already max amount of players");
     else{
+        BehaviourTree tree{map,playerList};
         playerList.push_back(p);
+        playerList.at(playerList.size()-1).addBehaviour(tree);
     }
 }
 
@@ -88,3 +91,5 @@ void GameManager::tick() {
     printMap(false);
     std::cout << std::endl;
 }
+
+

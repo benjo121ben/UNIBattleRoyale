@@ -30,5 +30,7 @@ public:
     void removePlayer(int index);
     void printEvents();
     void tick();
+
+
 };
 #endif //GAME_GAMEMANAGER_H

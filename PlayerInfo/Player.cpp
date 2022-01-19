@@ -3,8 +3,16 @@
 //
 #include "Player.h"
 #include<iostream>
+#include <utility>
 #include "../Random.h"
 #include "../MapInfo/cardinal_directions.h"
+#include "../BehaviourTree/BehaviourTree.h"
+
+
+
+
+Player::Player(std::string name, std::string weapon, Pronouns pronouns) :
+    name{std::move(name)}, weapon{std::move(weapon)}, pronouns{std::move(pronouns)} {}
 
 
 std::string Player::fight(const Player& other){
@@ -18,11 +26,10 @@ std::string Player::fight(const Player& other){
     }
 }
 
-Player::Player(std::string name, std::string weapon, Pronouns pronouns) : name{std::move(name)}, weapon{std::move(weapon)},pronouns{std::move(pronouns)}{}
+void Player::addBehaviour(const BehaviourTree& bt){
+    this->bt = bt.getCopy();
+}
 
 TickInfo Player::tick() const{
-
-
-    cardinal_directions dir = static_cast<cardinal_directions>(Random::get_random_Int(4));
-    return {TickInfo::move, std::make_any<cardinal_directions>(dir)};
+    return bt->traverse();
 }
