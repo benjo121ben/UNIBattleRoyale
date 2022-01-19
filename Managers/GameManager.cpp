@@ -29,6 +29,12 @@ void GameManager::printMap(bool showSpawn){
         ret.at(coord.x + (map.sizeX + 1) * coord.y) = playerNr++;
     }
     std::cout << ret;
+
+    for(int posNr{0}; posNr < playerList.size(); ++posNr){
+        std::cout << posNr << "=" << playerList.at(posNr).name << ",  ";
+    }
+    std::cout<<std::endl;
+    std::cout<<std::endl;
 }
 
 
@@ -79,5 +85,6 @@ void GameManager::tick() {
 
     turnManager.handleTurn();
     textHandler.printEvents();
+    printMap(false);
     std::cout << std::endl;
 }

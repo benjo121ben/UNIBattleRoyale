@@ -15,6 +15,7 @@ void GameEventTextHandler::printEvents(){
     for(const BaseEvent& e : events){
         std::cout << e.getEventText();
     }
+    std::cout << std::endl;
 }
 
 void GameEventTextHandler::clearEvents(){
