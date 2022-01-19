@@ -1,0 +1,13 @@
+
+#include "BTBlackboard.h"
+
+template <typename T> T BTBlackboard::getValue(const std::string& key){
+    if(!isSet(key)){
+        throw unavailable_blackboard_key_exception(key);
+    }
+    return std::any_cast<T>(blackboardMap.at(key));
+}
+
+template <typename T> void BTBlackboard::setValue(const std::string& key, T value){
+    blackboardMap.insert_or_assign(key, std::make_any<T>(value));
+}
