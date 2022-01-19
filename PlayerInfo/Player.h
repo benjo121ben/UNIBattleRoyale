@@ -20,10 +20,12 @@ public:
     Player(std::string name, std::string weapon, Pronouns pronouns);
 
     std::string fight(const Player& other);
-    void addBehaviour(const BehaviourTree& bt);
+    void addBehaviour(const BehaviourTree& bt, int id);
     TickInfo tick() const;
 
 };
+
+bool operator==(const Player& p1, const Player& p2);
 
 
 #endif //GAME_PLAYER_H

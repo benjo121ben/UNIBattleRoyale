@@ -19,8 +19,8 @@ add_executable(Game
         Managers/EventSystem/Events/BaseEvent.cpp
         MapInfo/cardinal_directions.cpp
         Managers/EventSystem/EventAnnouncer.cpp
-        BehaviourTree/BTBlackboard.cpp
-        BehaviourTree/ActionNodes/ActionNode.cpp
+        BehaviourTree/Blackboard/BTBlackboard.cpp
+        BehaviourTree/Nodes/ActionNodes/ActionNode.cpp
         BehaviourTree/BehaviourTree.cpp
         BehaviourTree/BehaviourTree.h
-        BehaviourTree/ActionNodes/MoveNode.cpp)
+        BehaviourTree/Nodes/ActionNodes/MoveNode.cpp BehaviourTree/Blackboard/BlackboardKeys.h BehaviourTree/Blackboard/BlackboardKeys.cpp BehaviourTree/BTTemplates.cpp)

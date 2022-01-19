@@ -4,9 +4,9 @@
 
 #ifndef GAME_ALLNODES_H
 #define GAME_ALLNODES_H
-#include "BTNodeInterface.h"
-#include "ActionNodes/ActionNode.h"
-#include "ActionNodes/MoveNode.h"
+#include "Nodes/BTNodeInterface.h"
+#include "Nodes/ActionNodes/ActionNode.h"
+#include "Nodes/ActionNodes/MoveNode.h"
 
 
 #endif //GAME_ALLNODES_H

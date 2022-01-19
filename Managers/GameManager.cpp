@@ -56,7 +56,8 @@ void GameManager::registerPlayer(const Player& p){
     else{
         BehaviourTree tree{map,playerList};
         playerList.push_back(p);
-        playerList.at(playerList.size()-1).addBehaviour(tree);
+        auto nr = playerList.size()-1;
+        playerList.at(nr).addBehaviour(tree, nr);
     }
 }
 

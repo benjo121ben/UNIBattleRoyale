@@ -26,10 +26,16 @@ std::string Player::fight(const Player& other){
     }
 }
 
-void Player::addBehaviour(const BehaviourTree& bt){
+void Player::addBehaviour(const BehaviourTree& bt, int id){
     this->bt = bt.getCopy();
+    this->bt->setPlayerId(id);
 }
 
 TickInfo Player::tick() const{
     return bt->traverse();
+}
+
+
+bool operator==(const Player& p1, const Player& p2){
+    return p1.name == p2.name;
 }
