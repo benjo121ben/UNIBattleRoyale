@@ -68,7 +68,8 @@
 				10,
 				11,
 				12,
-				13
+				13,
+				14
 			]
 		}
 	],
@@ -118,7 +119,8 @@
 				10,
 				11,
 				12,
-				13
+				13,
+				14
 			]
 		}
 	],
@@ -187,7 +189,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Managers/EventSystem/EventHandler.cpp",
+			"path" : "Managers/EventSystem/GameEventTextHandler.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -206,6 +208,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "MapInfo/cardinal_directions.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Managers/EventSystem/EventAnnouncer.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

@@ -14,8 +14,8 @@ add_executable(Game
         Pathfinder/Pathfinder.cpp
         PlayerInfo/TickInfo.cpp
         Random.cpp
-        Managers/EventSystem/EventHandler.cpp
+        Managers/EventSystem/GameEventTextHandler.cpp
         Managers/EventSystem/Events/MoveEvent.cpp
         Managers/EventSystem/Events/BaseEvent.cpp
         MapInfo/cardinal_directions.cpp
-        )
+        Managers/EventSystem/EventAnnouncer.cpp)

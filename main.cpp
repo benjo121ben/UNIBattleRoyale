@@ -6,6 +6,7 @@
 #include "Random.h"
 
 
+bool handleInput(GameManager &man, const std::string &line);
 
 int main() {
     Player p1("Benji", "Sword", Pronouns::masculine());
@@ -21,17 +22,33 @@ int main() {
 
     man.registerPlayer({p1,p2,p3});
     man.printMap();
-    try {
-        man.tick();
-    }catch (std::exception& e){
-        std::cout << e.what();
+
+
+    std::string line;
+    bool running = true;
+    while (running && std::getline(std::cin, line)){
+        std::cout << "-------------------------------------------\n\n";
+        running = handleInput(man, line);
+
+        std::cout << "\n\n";
+
     }
 
-    man.printMap();
-    man.tick();
-    man.printMap();
-    man.tick();
-    man.printMap();
-
     return 0;
+}
+
+bool handleInput(GameManager &man, const std::string &line) {
+    if(line == "q") return false;
+    if(line == "t"){
+        man.tick();
+    }
+    else if(line == "m"){
+        man.printMap();
+    }
+    else if(line == "e"){
+        man.printEvents();
+    }
+
+    return true;
+
 }

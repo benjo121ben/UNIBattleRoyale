@@ -5,8 +5,8 @@
 #include "../Exceptions/GameExceptions.h"
 #include "EventSystem/Events/Events.h"
 
-TurnManager::TurnManager(EventHandler& eventHandler, std::vector<Player> &playerList, std::vector<Coordinate> &playerPositions, GameMap &map) :
-eventHandler{eventHandler}, playerList{playerList}, playerPositions{playerPositions}, map{map} {}
+TurnManager::TurnManager(std::vector<Player> &playerList, std::vector<Coordinate> &playerPositions, GameMap &map) :
+    playerList{playerList}, playerPositions{playerPositions}, map{map} {}
 
 void TurnManager::queueInstruction(const TickInfo& t){
     if(instructions.size() <6) {
@@ -39,7 +39,6 @@ void TurnManager::handleTurn(){
                 break;
         }
     }
-    eventHandler.printEvents();
     instructions.clear();
 }
 
@@ -63,6 +62,6 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
 
     if(map.existsTileAt(coord)){
         playerPositions.at(playerNr) = coord;
-        eventHandler.registerEvent(MoveEvent(playerList.at(playerNr), dir));
+        fireEvent(MoveEvent(playerList.at(playerNr), dir));
     }
 }

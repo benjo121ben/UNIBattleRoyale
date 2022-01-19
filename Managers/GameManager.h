@@ -14,7 +14,7 @@ class GameManager{
     std::vector<Coordinate> playerPositions;
     GameMap map;
     TurnManager turnManager;
-    EventHandler eventHandler;
+    GameEventTextHandler textHandler;
 
     void init_game();
 public:
@@ -28,6 +28,7 @@ public:
     void registerPlayer(const Player& p);
     void registerPlayer(std::initializer_list<const Player> l);
     void removePlayer(int index);
+    void printEvents();
     void tick();
 };
 #endif //GAME_GAMEMANAGER_H

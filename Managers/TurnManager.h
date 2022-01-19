@@ -7,19 +7,19 @@
 #include<vector>
 #include "../MapInfo/GameMap.h"
 #include "../PlayerInfo/Player.h"
-#include "EventSystem/EventHandler.h"
+#include "EventSystem/GameEventTextHandler.h"
+#include "EventSystem/EventAnnouncer.h"
 
-class TurnManager {
+class TurnManager : public EventAnnouncer{
     std::vector<Player> &playerList;
     std::vector<Coordinate> &playerPositions;
     GameMap &map;
-    EventHandler &eventHandler;
 
     std::vector<TickInfo> instructions;
 
     void handleMove(int playerNr, const TickInfo &t);
 public:
-    TurnManager(EventHandler &eventHandler, std::vector<Player> &playerList, std::vector<Coordinate> &playerPositions, GameMap &map);
+    TurnManager(std::vector<Player> &playerList, std::vector<Coordinate> &playerPositions, GameMap &map);
 
     void queueInstruction(const TickInfo& t);
     void handleTurn();

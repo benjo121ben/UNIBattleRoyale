@@ -7,11 +7,13 @@
 
 
 
-GameManager::GameManager() : map{GameMap(GameMap::getMap1())}, turnManager {eventHandler,playerList, playerPositions, map}{
+GameManager::GameManager() : map{GameMap(GameMap::getMap1())}, turnManager {playerList, playerPositions, map}{
+    turnManager.registerListener(textHandler);
     init_game();
 }
 
-GameManager::GameManager(GameMap& setMap) : map{setMap}, turnManager{eventHandler, playerList, playerPositions, map}{
+GameManager::GameManager(GameMap& setMap) : map{setMap}, turnManager{playerList, playerPositions, map}{
+    turnManager.registerListener(textHandler);
     init_game();
 }
 
@@ -50,13 +52,8 @@ void GameManager::registerPlayer(const Player& p){
 }
 
 void GameManager::registerPlayer(std::initializer_list<const Player> l){
-    if(started) throw game_started_error();
-    for( auto p : l) {
-        if (playerList.size() == 6) throw generic_game_error("already max amount of players");
-        else {
-
-            playerList.push_back(p);
-        }
+    for(auto p : l) {
+        registerPlayer(p);
     }
 }
 
@@ -69,13 +66,18 @@ void GameManager::removePlayer(int index) {
 }
 
 
-
+void GameManager::printEvents(){
+    textHandler.printEvents();
+}
 
 void GameManager::tick() {
     started = true;
+    textHandler.clearEvents();
     for(const Player& p : playerList){
         turnManager.queueInstruction(p.tick());
     }
 
     turnManager.handleTurn();
+    textHandler.printEvents();
+    std::cout << std::endl;
 }
