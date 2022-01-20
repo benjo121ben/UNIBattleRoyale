@@ -5,8 +5,8 @@
 #include "../Exceptions/GameExceptions.h"
 #include "EventSystem/Events/Events.h"
 
-TurnManager::TurnManager(std::vector<Player> &playerList, std::vector<Coordinate> &playerPositions, GameMap &map) :
-    playerList{playerList}, playerPositions{playerPositions}, map{map} {}
+TurnManager::TurnManager(GameData& dataObject) :
+    playerList{dataObject.playerList}, playerPositions{dataObject.playerPositions}, map{dataObject.map} {}
 
 void TurnManager::queueInstruction(const TickInfo& t){
     if(instructions.size() <6) {

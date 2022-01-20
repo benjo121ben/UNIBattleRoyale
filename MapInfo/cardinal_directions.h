@@ -13,6 +13,7 @@ enum cardinal_directions{
 
 
 std::string dir_to_string(cardinal_directions dir);
+cardinal_directions string_to_dir(std::string s);
 
 
 #endif //CARDINAL_DIRECTIONS_H

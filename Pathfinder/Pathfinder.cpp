@@ -8,6 +8,28 @@
 #include<stack>
 #include<iostream>
 
+bool Pathfinder::getDirection(const GameMap& map, const Coordinate& start, const Coordinate& goal, std::string& dir){
+    if(start == goal) return false;
+    auto nodes = findPath(map,start,goal);
+    Coordinate diff = nodes.at(1).getCoords()-nodes.at(0).getCoords();
+    if(diff.x > 0){
+        dir = "east";
+        return true;
+    }
+    else if(diff.x < 0){
+        dir = "west";
+        return true;
+    }
+    else if(diff.y > 0){
+        dir = "south";
+        return true;
+    }
+    else if(diff.y < 0){
+        dir = "north";
+        return true;
+    }
+    return false;
+}
 
 std::deque<Node> Pathfinder::findPath(const GameMap& map, const Coordinate &start, const Coordinate &goal) {
     TileMap<Tileable> tileMap;

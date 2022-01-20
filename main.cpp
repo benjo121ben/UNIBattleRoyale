@@ -5,6 +5,7 @@
 #include "Pathfinder/Pathfinder.h"
 #include "Random.h"
 #include "BehaviourTree/BehaviourTree.h"
+#include "BehaviourTree/allNodes.h"
 
 
 bool handleInput(GameManager &man, const std::string &line);
@@ -12,6 +13,18 @@ bool handleInput(GameManager &man, const std::string &line);
 void printInputOptions();
 
 int main() {
+
+    Selector s;
+    s.push_back_child(new CoutDebugNode("Test 1", failure));
+    s.push_back_child(new CoutDebugNode("Test 2", failure));
+    s.push_back_child(new CoutDebugNode("Test 3", running));
+    s.push_back_child(new CoutDebugNode("Test 4", success));
+    GameData data;
+    BTBlackboard bb{data};
+    std::cout << s.traverse(&bb) << std::endl;
+    std::cout << s.traverse(&bb) << std::endl;
+
+    return 0;
     Player p1("Benji", "Sword", Pronouns::masculine());
     Player p2("Lena", "Axe", Pronouns::feminine());
     Player p3("Froggy", "Tongue", Pronouns::neutral());

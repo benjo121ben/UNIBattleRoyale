@@ -4,9 +4,12 @@
 
 #ifndef GAME_MOVENODE_H
 #define GAME_MOVENODE_H
-#include "ActionNode.h"
-class MoveNode : public ActionNode{
-    virtual BTstatus traverse(BTBlackboard* board) override;
-    virtual BTNodeInterface* getCopy() const override;
+
+#include "../AbstractBTNode.h"
+
+class MoveNode : public AbstractBTNode{
+public:
+    BTNodestatus traverse(BTBlackboard* board) override;
+    AbstractBTNode* getCopy() const override;
 };
 #endif //GAME_MOVENODE_H

@@ -39,6 +39,7 @@ public:
 
 class Pathfinder{
 public:
+    static bool getDirection(const GameMap& map, const Coordinate& start, const Coordinate& goal, std::string& dir);
     static std::deque<Node> findPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal);
     static std::deque<Node> findPath(const GameMap& map, const Coordinate& start, const Coordinate& goal);
     static void outputPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal);

@@ -20,7 +20,14 @@ add_executable(Game
         MapInfo/cardinal_directions.cpp
         Managers/EventSystem/EventAnnouncer.cpp
         BehaviourTree/Blackboard/BTBlackboard.cpp
-        BehaviourTree/Nodes/ActionNodes/ActionNode.cpp
         BehaviourTree/BehaviourTree.cpp
         BehaviourTree/BehaviourTree.h
-        BehaviourTree/Nodes/ActionNodes/MoveNode.cpp BehaviourTree/Blackboard/BlackboardKeys.h BehaviourTree/Blackboard/BlackboardKeys.cpp BehaviourTree/BTTemplates.cpp)
+        BehaviourTree/Nodes/ActionNodes/MoveNode.cpp
+        BehaviourTree/Blackboard/BlackboardKeys.cpp
+        BehaviourTree/BTTemplates.cpp
+        BehaviourTree/Nodes/ActionNodes/SetEnemyDirNode.cpp
+        BehaviourTree/Nodes/CompositeNode/CompositeNode.cpp
+        BehaviourTree/Nodes/CompositeNode/Selector.cpp
+        BehaviourTree/Nodes/CompositeNode/Sequence.cpp
+        BehaviourTree/Nodes/ActionNodes/CoutDebugNode.cpp
+        BehaviourTree/Nodes/AbstractBTNode.cpp)

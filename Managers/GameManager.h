@@ -4,17 +4,21 @@
 
 #ifndef GAME_GAMEMANAGER_H
 #define GAME_GAMEMANAGER_H
-#include "../MapInfo/GameMap.h"
-#include "../PlayerInfo/Player.h"
 #include "TurnManager.h"
+#include "GameData.h"
+
+
+class GameMap;
 
 class GameManager{
     bool started = false;
-    std::vector<Player> playerList;
-    std::vector<Coordinate> playerPositions;
-    GameMap map;
+    GameData gameData;
     TurnManager turnManager;
     GameEventTextHandler textHandler;
+
+    GameMap& map();
+    std::vector<Player>& playerList();
+    std::vector<Coordinate>& playerPositions();
 
     void init_game();
 public:
@@ -30,6 +34,8 @@ public:
     void removePlayer(int index);
     void printEvents();
     void tick();
+
+
 
 
 };

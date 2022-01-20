@@ -9,6 +9,7 @@
 #include "../PlayerInfo/Player.h"
 #include "EventSystem/GameEventTextHandler.h"
 #include "EventSystem/EventAnnouncer.h"
+#include "GameData.h"
 
 class TurnManager : public EventAnnouncer{
     std::vector<Player> &playerList;
@@ -19,7 +20,7 @@ class TurnManager : public EventAnnouncer{
 
     void handleMove(int playerNr, const TickInfo &t);
 public:
-    TurnManager(std::vector<Player> &playerList, std::vector<Coordinate> &playerPositions, GameMap &map);
+    TurnManager(GameData& dataObject);
 
     void queueInstruction(const TickInfo& t);
     void handleTurn();

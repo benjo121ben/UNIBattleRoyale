@@ -14,7 +14,7 @@ BehaviourTree::BehaviourTree(const BTBlackboard& blackB) : blackboard{std::move(
     rootNode = new MoveNode();
 }
 
-BehaviourTree::BehaviourTree(const GameMap& m,const std::vector<Player>& pList) : blackboard{m,pList}{
+BehaviourTree::BehaviourTree(const GameData& data) : blackboard{data}{
     rootNode = new MoveNode();
 }
 
@@ -35,6 +35,6 @@ BehaviourTree* BehaviourTree::getCopy() const{
     return new BehaviourTree(blackboard);
 }
 
-BTNodeInterface* BehaviourTree::convertToSubtree()const {
+AbstractBTNode* BehaviourTree::convertToSubtree()const {
     return (rootNode) ? rootNode->getCopy() : nullptr;
 }

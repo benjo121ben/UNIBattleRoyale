@@ -9,6 +9,8 @@
 
 Coordinate::Coordinate(int x, int y) :x{x}, y{y}{}
 
+Coordinate Coordinate::invalidCoords() {return Coordinate(-1,-1);}
+
 std::string Coordinate::print() const{
     std::string ret = "(";
     ret += std::to_string(x);
@@ -22,6 +24,10 @@ std::string Coordinate::hashValue()const{
     return std::to_string(x) + "/" + std::to_string(y);
 }
 
+Coordinate operator-(const Coordinate &c1, const Coordinate &c2){
+    return Coordinate(c1.x-c2.x, c1.y-c2.y);
+}
+
 
 bool operator<(const Coordinate &c1, const Coordinate &c2) {
     return c1.y < c2.y || c1.x < c2.x;
@@ -29,6 +35,10 @@ bool operator<(const Coordinate &c1, const Coordinate &c2) {
 
 bool operator==(const Coordinate &c1, const Coordinate &c2) {
     return c1.x == c2.x && c1.y == c2.y;
+}
+
+bool operator!=(const Coordinate &c1, const Coordinate &c2) {
+    return !(c1 == c2);
 }
 
 float distance(const Coordinate &c1, const Coordinate &c2){

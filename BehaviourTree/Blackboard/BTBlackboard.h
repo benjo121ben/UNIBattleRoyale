@@ -10,20 +10,23 @@
 #include<vector>
 #include "../../PlayerInfo/TickInfo.h"
 #include "../BehaviourTreeExceptions.h"
+#include "../../MapInfo/Tileable.h"
 
 class GameMap;
 class Player;
+class GameData;
 
 class BTBlackboard{
     std::map<std::string, std::any> blackboardMap;
 public:
-    const GameMap& map;
-    const std::vector<Player>& playerList;
+    const GameData& publicData;
     TickInfo tickInfo;
 
 
-    BTBlackboard(const GameMap& m,const std::vector<Player>& pList);
+    explicit BTBlackboard(const GameData& data);
     bool isSet(std::string key);
+    Coordinate getPlayerCoordinate(int index);
+    const Player& getPlayerInfo(int index);
 
     template <typename T> T getValue(const std::string& key);
     template <typename T> void setValue(const std::string& key, T value);

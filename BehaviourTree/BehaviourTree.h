@@ -4,21 +4,21 @@
 
 #ifndef GAME_BEHAVIOURTREE_H
 #define GAME_BEHAVIOURTREE_H
-#include "Nodes/BTNodeInterface.h"
+#include "Nodes/AbstractBTNode.h"
 #include "Blackboard/BTBlackboard.h"
 #include "../PlayerInfo/TickInfo.h"
 #include "BehaviourTreeExceptions.h"
 class BehaviourTree{
-    BTNodeInterface* rootNode = nullptr;
+    AbstractBTNode* rootNode = nullptr;
     BTBlackboard blackboard;
 public:
     explicit BehaviourTree(const BTBlackboard& blackboard);
-    explicit BehaviourTree(const GameMap& m,const std::vector<Player>& pList);
+    explicit BehaviourTree(const GameData& data);
     TickInfo traverse();
 
     void setPlayerId(int id);
     BehaviourTree* getCopy() const;
-    BTNodeInterface* convertToSubtree() const;
+    AbstractBTNode* convertToSubtree() const;
 };
 
 #endif //GAME_BEHAVIOURTREE_H

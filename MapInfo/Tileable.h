@@ -12,15 +12,17 @@ public:
     int x;
     int y;
 
-    Coordinate(int x, int y);
+    explicit Coordinate(int x, int y);
+    static Coordinate invalidCoords();
     std::string hashValue() const;
     std::string print() const;
     Coordinate& operator=(const Coordinate& c2);
 };
 
-
+Coordinate operator-(const Coordinate &c1, const Coordinate &c2);
 bool operator<(const Coordinate &c1, const Coordinate &c2);
 bool operator==(const Coordinate &c1, const Coordinate &c2);
+bool operator!=(const Coordinate &c1, const Coordinate &c2);
 float distance(const Coordinate &c1, const Coordinate &c2);
 int stepDistance(const Coordinate &c1, const Coordinate &c2);
 
