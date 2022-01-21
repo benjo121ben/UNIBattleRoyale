@@ -2,7 +2,7 @@
 // Created by benja on 19/01/2022.
 //
 
-#include "SetEnemyDirNode.h"
+#include "BTActionNode_SetEnemyDir.h"
 #include "../../Blackboard/BTBlackboard.h"
 #include "../../../Managers/GameData.h"
 #include "../../../PlayerInfo/Player.h"
@@ -10,8 +10,8 @@
 #include "../../../MapInfo/cardinal_directions.h"
 #include "../../../Pathfinder/Pathfinder.h"
 
-BTNodestatus SetEnemyDirNode::traverse(BTBlackboard *board) {
-    AbstractBTNode::traverse(board);
+BTNodestatus BTActionNode_SetEnemyDir::traverse(BTBlackboard *board) {
+    BTNode_Abstract::traverse(board);
     Coordinate target{Coordinate::invalidCoords()};
     int selfIndex = board->getValue<int>(BlackboardKeys::PLAYERID());
     Coordinate selfPos = board->getPlayerCoordinate(selfIndex);
@@ -36,8 +36,8 @@ BTNodestatus SetEnemyDirNode::traverse(BTBlackboard *board) {
     return failure;
 }
 
-AbstractBTNode *SetEnemyDirNode::getCopy() const {
-    return new SetEnemyDirNode();
+BTNode_Abstract *BTActionNode_SetEnemyDir::getCopy() const {
+    return new BTActionNode_SetEnemyDir();
 }
 
 

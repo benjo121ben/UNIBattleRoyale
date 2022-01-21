@@ -5,13 +5,13 @@
 #ifndef GAME_SET_RANDOM_MOVEDIR_NODE_H
 #define GAME_SET_RANDOM_MOVEDIR_NODE_H
 
-#include "../AbstractBTNode.h"
+#include "../BTNode_Abstract.h"
 
-class SetRandomMoveDirNode : public AbstractBTNode{
+class BTActionNode_SetRandomMoveDir : public BTNode_Abstract{
 public:
 
     BTNodestatus traverse(BTBlackboard *board) override;
-    [[nodiscard]] AbstractBTNode *getCopy() const override;
+    [[nodiscard]] BTNode_Abstract *getCopy() const override;
 };
 
 

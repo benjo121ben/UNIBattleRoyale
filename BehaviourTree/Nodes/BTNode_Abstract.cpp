@@ -1,11 +1,11 @@
 //
 // Created by benja on 20/01/2022.
 //
-#include "AbstractBTNode.h"
-void AbstractBTNode::reset() {
+#include "BTNode_Abstract.h"
+void BTNode_Abstract::reset() {
     state = ready;
 }
-BTNodestatus AbstractBTNode::traverse(BTBlackboard* board){
+BTNodestatus BTNode_Abstract::traverse(BTBlackboard* board){
     if(state != running && state != ready) reset();
     return state;
 }

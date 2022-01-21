@@ -14,11 +14,11 @@ void printInputOptions();
 
 int main() {
 
-    /*Selector s;
-    s.push_back_child(new CoutDebugNode("Test 1", failure));
-    s.push_back_child(new CoutDebugNode("Test 2", failure));
-    s.push_back_child(new CoutDebugNode("Test 3", running));
-    s.push_back_child(new CoutDebugNode("Test 4", success));
+    /*CompNode_Selector s;
+    s.push_back_child(new BTActionNode_CoutDebug("Test 1", failure));
+    s.push_back_child(new BTActionNode_CoutDebug("Test 2", failure));
+    s.push_back_child(new BTActionNode_CoutDebug("Test 3", running));
+    s.push_back_child(new BTActionNode_CoutDebug("Test 4", success));
     GameData data;
     BTBlackboard bb{data};
     std::cout << s.traverse(&bb) << std::endl;

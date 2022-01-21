@@ -2,10 +2,10 @@
 // Created by benja on 20/01/2022.
 //
 
-#include "Sequence.h"
+#include "CompNode_Sequence.h"
 
-BTNodestatus Sequence::traverse(BTBlackboard *board) {
-    AbstractBTNode::traverse(board);
+BTNodestatus CompNode_Sequence::traverse(BTBlackboard *board) {
+    BTNode_Abstract::traverse(board);
     int startIndex {(runningChildIndex != -1) ? runningChildIndex : 0};
     for(int index{startIndex}; index < children.size(); ++index){
         BTNodestatus retState = children.at(index)->traverse(board);
@@ -28,15 +28,15 @@ BTNodestatus Sequence::traverse(BTBlackboard *board) {
     return success;
 }
 
-AbstractBTNode *Sequence::getCopy() const {
-    auto s = new Sequence();
+BTNode_Abstract *CompNode_Sequence::getCopy() const {
+    auto s = new CompNode_Sequence();
     for(auto child : children){
         s->push_back_child(child->getCopy());
     }
     return s;
 }
 
-void Sequence::reset() {
-    CompositeNode::reset();
+void CompNode_Sequence::reset() {
+    BTNode_CompositeNode::reset();
     runningChildIndex = -1;
 }

@@ -22,14 +22,14 @@ add_executable(Game
         BehaviourTree/Blackboard/BTBlackboard.cpp
         BehaviourTree/BehaviourTree.cpp
         BehaviourTree/BehaviourTree.h
-        BehaviourTree/Nodes/ActionNodes/MoveNode.cpp
+        BehaviourTree/Nodes/ActionNodes/BTActionNode_MoveTowardsDir.cpp
         BehaviourTree/Blackboard/BlackboardKeys.cpp
         BehaviourTree/BTTemplates.cpp
-        BehaviourTree/Nodes/ActionNodes/SetEnemyDirNode.cpp
-        BehaviourTree/Nodes/CompositeNode/CompositeNode.cpp
-        BehaviourTree/Nodes/CompositeNode/Selector.cpp
-        BehaviourTree/Nodes/CompositeNode/Sequence.cpp
-        BehaviourTree/Nodes/ActionNodes/CoutDebugNode.cpp
-        BehaviourTree/Nodes/AbstractBTNode.cpp
-        BehaviourTree/Nodes/ActionNodes/SetRandomMoveDirNode.cpp
-        BehaviourTree/Nodes/ActionNodes/CheckBoardValueNode.cpp BehaviourTree/Nodes/ActionNodes/CheckBoardValueNode.h)
+        BehaviourTree/Nodes/ActionNodes/BTActionNode_SetEnemyDir.cpp
+        BehaviourTree/Nodes/CompositeNode/BTNode_CompositeNode.cpp
+        BehaviourTree/Nodes/CompositeNode/CompNode_Selector.cpp
+        BehaviourTree/Nodes/CompositeNode/CompNode_Sequence.cpp
+        BehaviourTree/Nodes/ActionNodes/BTActionNode_CoutDebug.cpp
+        BehaviourTree/Nodes/BTNode_Abstract.cpp
+        BehaviourTree/Nodes/ActionNodes/BTActionNode_SetRandomMoveDir.cpp
+        BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckBoardValue.cpp BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckBoardValue.h BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckEnemyOnSameCoordinate.cpp BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckEnemyOnSameCoordinate.h)

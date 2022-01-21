@@ -9,12 +9,12 @@ enum BTNodestatus{
     failure, success, running,ready
 };
 
-class AbstractBTNode{
+class BTNode_Abstract{
 protected:
     BTNodestatus state = ready;
 public:
     virtual void reset();
     virtual BTNodestatus traverse(BTBlackboard* board);
-    virtual AbstractBTNode* getCopy() const = 0;
+    virtual BTNode_Abstract* getCopy() const = 0;
 };
 #endif //GAME_BTNODE_H

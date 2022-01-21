@@ -2,10 +2,10 @@
 // Created by benja on 20/01/2022.
 //
 
-#include "Selector.h"
+#include "CompNode_Selector.h"
 
-BTNodestatus Selector::traverse(BTBlackboard *board) {
-    AbstractBTNode::traverse(board);
+BTNodestatus CompNode_Selector::traverse(BTBlackboard *board) {
+    BTNode_Abstract::traverse(board);
     for(int index{0}; index < children.size(); ++index){
         BTNodestatus retState = children.at(index)->traverse(board);
         if(retState == success){
@@ -30,15 +30,15 @@ BTNodestatus Selector::traverse(BTBlackboard *board) {
     return failure;
 }
 
-AbstractBTNode *Selector::getCopy() const {
-    auto s = new Selector();
+BTNode_Abstract *CompNode_Selector::getCopy() const {
+    auto s = new CompNode_Selector();
     for(auto child : children){
         s->push_back_child(child->getCopy());
     }
     return s;
 }
 
-void Selector::reset() {
-    CompositeNode::reset();
+void CompNode_Selector::reset() {
+    BTNode_CompositeNode::reset();
     runningChildIndex = -1;
 }

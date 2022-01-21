@@ -4,12 +4,12 @@
 
 #ifndef GAME_BEHAVIOURTREE_H
 #define GAME_BEHAVIOURTREE_H
-#include "Nodes/AbstractBTNode.h"
+#include "Nodes/BTNode_Abstract.h"
 #include "Blackboard/BTBlackboard.h"
 #include "../PlayerInfo/TickInfo.h"
 #include "BehaviourTreeExceptions.h"
 class BehaviourTree{
-    AbstractBTNode* rootNode = nullptr;
+    BTNode_Abstract* rootNode = nullptr;
     BTBlackboard blackboard;
 public:
     BehaviourTree(const BehaviourTree& other);
@@ -18,9 +18,9 @@ public:
     TickInfo traverse();
 
     void setPlayerInfo(int id);
-    void setRootNode(AbstractBTNode * node);
+    void setRootNode(BTNode_Abstract * node);
     BehaviourTree* getCopy() const;
-    AbstractBTNode* convertToSubtree() const;
+    BTNode_Abstract* convertToSubtree() const;
 };
 
 #endif //GAME_BEHAVIOURTREE_H

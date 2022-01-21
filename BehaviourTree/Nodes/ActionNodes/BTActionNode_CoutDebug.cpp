@@ -2,22 +2,22 @@
 // Created by benja on 20/01/2022.
 //
 
-#include "CoutDebugNode.h"
+#include "BTActionNode_CoutDebug.h"
 
 #include <utility>
 #include <iostream>
 
 
-CoutDebugNode::CoutDebugNode(std::string outputString, BTNodestatus outputState) : outputstring{std::move(outputString)}{
+BTActionNode_CoutDebug::BTActionNode_CoutDebug(std::string outputString, BTNodestatus outputState) : outputstring{std::move(outputString)}{
     this->outputState = outputState;
 }
 
-AbstractBTNode *CoutDebugNode::getCopy() const {
-    return new CoutDebugNode(outputstring, state);
+BTNode_Abstract *BTActionNode_CoutDebug::getCopy() const {
+    return new BTActionNode_CoutDebug(outputstring, state);
 }
 
-BTNodestatus CoutDebugNode::traverse(BTBlackboard *board) {
-    AbstractBTNode::traverse(board);
+BTNodestatus BTActionNode_CoutDebug::traverse(BTBlackboard *board) {
+    BTNode_Abstract::traverse(board);
     if(state == running){
         std::cout << "Debug/" << state_toString() << ": " << outputstring << "was run again" <<std::endl;
     }
@@ -28,19 +28,19 @@ BTNodestatus CoutDebugNode::traverse(BTBlackboard *board) {
     return state;
 }
 
-void CoutDebugNode::reset() {
+void BTActionNode_CoutDebug::reset() {
     std::cout << "Debug/" << state_toString() << ": " << outputstring << "was reset" <<std::endl;
     state = ready;
 }
 
-std::string CoutDebugNode::state_toString() {
+std::string BTActionNode_CoutDebug::state_toString() {
     switch (outputState) {
         case failure: return "failure";
         case success: return "success";
         case running: return "running";
         default: break;
     }
-    throw generic_behaviour_tree_exception("CoutDebugNode::state_toString()", "Somehow tried to interpret an impossible/ready BTNodestatus" + std::to_string(state));
+    throw generic_behaviour_tree_exception("BTActionNode_CoutDebug::state_toString()", "Somehow tried to interpret an impossible/ready BTNodestatus" + std::to_string(state));
 }
 
 

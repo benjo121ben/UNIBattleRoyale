@@ -38,10 +38,10 @@ BehaviourTree* BehaviourTree::getCopy() const{
     return ret;
 }
 
-AbstractBTNode* BehaviourTree::convertToSubtree()const {
+BTNode_Abstract* BehaviourTree::convertToSubtree()const {
     return (rootNode) ? rootNode->getCopy() : nullptr;
 }
 
-void BehaviourTree::setRootNode(AbstractBTNode * node) {
+void BehaviourTree::setRootNode(BTNode_Abstract * node) {
     rootNode = node;
 }

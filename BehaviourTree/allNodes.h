@@ -4,17 +4,19 @@
 
 #ifndef GAME_ALLNODES_H
 #define GAME_ALLNODES_H
-#include "Nodes/AbstractBTNode.h"
+#include "Nodes/BTNode_Abstract.h"
 
 
-#include "Nodes/ActionNodes/SetRandomMoveDirNode.h"
-#include "Nodes/ActionNodes/SetEnemyDirNode.h"
-#include "Nodes/ActionNodes/MoveNode.h"
-#include "Nodes/ActionNodes/CoutDebugNode.h"
+#include "Nodes/ActionNodes/BTActionNode_CheckBoardValue.h"
+#include "Nodes/ActionNodes/BTActionNode_CheckEnemyOnSameCoordinate.h"
+#include "Nodes/ActionNodes/BTActionNode_CoutDebug.h"
+#include "Nodes/ActionNodes/BTActionNode_MoveTowardsDir.h"
+#include "Nodes/ActionNodes/BTActionNode_SetEnemyDir.h"
+#include "Nodes/ActionNodes/BTActionNode_SetRandomMoveDir.h"
 
-#include "Nodes/CompositeNode/CompositeNode.h"
-#include "Nodes/CompositeNode/Selector.h"
-#include "Nodes/CompositeNode/Sequence.h"
+#include "Nodes/CompositeNode/BTNode_CompositeNode.h"
+#include "Nodes/CompositeNode/CompNode_Selector.h"
+#include "Nodes/CompositeNode/CompNode_Sequence.h"
 
 
 #endif //GAME_ALLNODES_H

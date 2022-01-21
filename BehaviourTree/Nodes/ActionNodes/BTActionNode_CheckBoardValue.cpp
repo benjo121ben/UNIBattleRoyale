@@ -2,24 +2,24 @@
 // Created by benja on 21/01/2022.
 //
 
-#include "CheckBoardValueNode.h"
+#include "BTActionNode_CheckBoardValue.h"
 template<typename T>
-CheckBoardValueNode<T>::CheckBoardValueNode(std::string key, CheckBoardValueNode::comparisonType compType, T comparisonValue) :
+BTActionNode_CheckBoardValue<T>::BTActionNode_CheckBoardValue(std::string key, BTActionNode_CheckBoardValue::comparisonType compType, T comparisonValue) :
         key{std::move(key)}, compType{compType}, comparisonValue{comparisonValue}{}
 
 template<typename T>
-AbstractBTNode *CheckBoardValueNode<T>::getCopy() const {
-    return new CheckBoardValueNode(key,compType, comparisonValue);
+BTNode_Abstract *BTActionNode_CheckBoardValue<T>::getCopy() const {
+    return new BTActionNode_CheckBoardValue(key, compType, comparisonValue);
 }
 
 template<typename T>
-void CheckBoardValueNode<T>::reset() {
-    AbstractBTNode::reset();
+void BTActionNode_CheckBoardValue<T>::reset() {
+    BTNode_Abstract::reset();
 }
 
 template<typename T>
-BTNodestatus CheckBoardValueNode<T>::traverse(BTBlackboard *board) {
-    AbstractBTNode::traverse(board);
+BTNodestatus BTActionNode_CheckBoardValue<T>::traverse(BTBlackboard *board) {
+    BTNode_Abstract::traverse(board);
     if(!board->isSet(key)) return failure;
     T value = board->template getValue<T>(key);
     switch (compType) {
@@ -30,6 +30,6 @@ BTNodestatus CheckBoardValueNode<T>::traverse(BTBlackboard *board) {
         case greater_equal_than_compValue: return (comparisonValue <= value) ? success : failure;
         case smaller_equal_than_compValue: return (comparisonValue >= value) ? success : failure;
     }
-    throw generic_behaviour_tree_exception("CheckBoardValueNode::traverse", "Tried to execute an impossible compType");
+    throw generic_behaviour_tree_exception("BTActionNode_CheckBoardValue::traverse", "Tried to execute an impossible compType");
 }
 
