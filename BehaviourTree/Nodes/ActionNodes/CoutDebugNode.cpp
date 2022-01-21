@@ -40,7 +40,7 @@ std::string CoutDebugNode::state_toString() {
         case running: return "running";
         default: break;
     }
-    throw generic_behaviour_tree_exception("debug node somehow tried to interpret an impossible/ready BTNodestatus" + std::to_string(state));
+    throw generic_behaviour_tree_exception("CoutDebugNode::state_toString()", "Somehow tried to interpret an impossible/ready BTNodestatus" + std::to_string(state));
 }
 
 

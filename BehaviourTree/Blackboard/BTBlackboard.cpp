@@ -6,6 +6,7 @@
 #include "BTBlackboard.h"
 #include "../BehaviourTreeExceptions.h"
 #include "../../Managers/GameData.h"
+#include "BlackboardKeys.h"
 
 BTBlackboard::BTBlackboard(const GameData& insertData) : publicData{insertData}{}
 
@@ -19,6 +20,12 @@ Coordinate BTBlackboard::getPlayerCoordinate(int index){
 
 const Player& BTBlackboard::getPlayerInfo(int index){
     return publicData.playerList.at(index);
+}
+
+const Player& BTBlackboard::getCurrentPlayerInfo(){
+    if(!isSet(BlackboardKeys::PLAYERID())) throw unavailable_blackboard_key_BT_exception("BTBlackboard::getCurrentPlayerInfo",BlackboardKeys::PLAYERID());
+    int nr = getValue<int>(BlackboardKeys::PLAYERID());
+    return publicData.playerList.at(nr);
 }
 
 

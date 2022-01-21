@@ -32,4 +32,4 @@ add_executable(Game
         BehaviourTree/Nodes/ActionNodes/CoutDebugNode.cpp
         BehaviourTree/Nodes/AbstractBTNode.cpp
         BehaviourTree/Nodes/ActionNodes/SetRandomMoveDirNode.cpp
-        )
+        BehaviourTree/Nodes/ActionNodes/CheckBoardValueNode.cpp BehaviourTree/Nodes/ActionNodes/CheckBoardValueNode.h)

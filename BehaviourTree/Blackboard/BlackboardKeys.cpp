@@ -9,6 +9,9 @@ std::string BlackboardKeys::PLAYERID(){
     return PLAYERID;
 }
 
+
+
+
 std::string BlackboardKeys::PLAYERMOVEDIR(){
     static std::string PLAYERMOVEDIR = "PLAYERMOVEDIR";
     return PLAYERMOVEDIR;

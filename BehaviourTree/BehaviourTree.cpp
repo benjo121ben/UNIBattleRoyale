@@ -8,6 +8,7 @@
 #include "../MapInfo/GameMap.h"
 #include "../PlayerInfo/Player.h"
 #include "allNodes.h"
+#include "../Managers/GameData.h"
 #include "Blackboard/BlackboardKeys.h"
 
 BehaviourTree::BehaviourTree(const BTBlackboard& blackB) : blackboard{std::move(blackB.getCopy())}{
@@ -22,13 +23,13 @@ BehaviourTree::BehaviourTree(const GameData& data) : blackboard{data}{
 
 TickInfo BehaviourTree::traverse(){
     if(rootNode == nullptr){
-        throw generic_behaviour_tree_exception("Tree rootNode is nullptr");
+        throw called_nullptr_child_BT_exception("BehaviourTree::traverse");
     }
     rootNode->traverse(&blackboard);
     return blackboard.tickInfo;
 }
 
-void BehaviourTree::setPlayerId(int id){
+void BehaviourTree::setPlayerInfo(int id){
     blackboard.setValue(BlackboardKeys::PLAYERID(), id);
 }
 BehaviourTree* BehaviourTree::getCopy() const{

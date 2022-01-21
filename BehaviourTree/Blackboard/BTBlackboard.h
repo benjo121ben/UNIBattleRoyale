@@ -27,6 +27,7 @@ public:
     bool isSet(std::string key);
     Coordinate getPlayerCoordinate(int index);
     const Player& getPlayerInfo(int index);
+    const Player& getCurrentPlayerInfo();
 
     template <typename T> T getValue(const std::string& key);
     template <typename T> void setValue(const std::string& key, T value);
@@ -38,5 +39,6 @@ public:
 };
 
 #include "BTBlackboard.tci"
+#include "BlackboardKeys.h"
 
 #endif //GAME_BTBLACKBOARD_H

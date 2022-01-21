@@ -17,7 +17,7 @@ public:
     explicit BehaviourTree(const GameData& data);
     TickInfo traverse();
 
-    void setPlayerId(int id);
+    void setPlayerInfo(int id);
     void setRootNode(AbstractBTNode * node);
     BehaviourTree* getCopy() const;
     AbstractBTNode* convertToSubtree() const;

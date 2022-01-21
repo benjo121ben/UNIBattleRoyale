@@ -28,7 +28,7 @@ std::string Player::fight(const Player& other){
 
 void Player::addBehaviour(const BehaviourTree& bt, int id){
     this->bt = bt.getCopy();
-    this->bt->setPlayerId(id);
+    this->bt->setPlayerInfo(id);
 }
 
 TickInfo Player::tick() const{
