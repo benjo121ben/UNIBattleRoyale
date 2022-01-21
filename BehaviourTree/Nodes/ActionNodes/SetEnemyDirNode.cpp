@@ -3,7 +3,6 @@
 //
 
 #include "SetEnemyDirNode.h"
-#include "../../Blackboard/BlackboardKeys.h"
 #include "../../Blackboard/BTBlackboard.h"
 #include "../../../Managers/GameData.h"
 #include "../../../PlayerInfo/Player.h"
@@ -17,22 +16,20 @@ BTNodestatus SetEnemyDirNode::traverse(BTBlackboard *board) {
     int selfIndex = board->getValue<int>(BlackboardKeys::PLAYERID());
     Coordinate selfPos = board->getPlayerCoordinate(selfIndex);
 
-    const std::vector<Player> pList = board->publicData.playerList;
-    const std::vector<Coordinate> posList = board->publicData.playerPositions;
+    const std::vector<Coordinate> posList = board->getPlayerPositionList();
 
-    for(int index{0}; index < pList.size(); ++index){
+    for(int index{0}; index < board->getPlayerList().size(); ++index){
         if(index != selfIndex){
             Coordinate targetPosition {board->getPlayerCoordinate(index)};
-            if(target == Coordinate::invalidCoords()){
-                target = targetPosition;
-            }
-            else if (stepDistance(selfPos, target) > stepDistance(selfPos, targetPosition)){
+            if (target == Coordinate::invalidCoords() ||
+                        stepDistance(selfPos, target) > stepDistance(selfPos, targetPosition))
+            {
                 target = targetPosition;
             }
         }
     }
     std::string dir;
-    if(Pathfinder::getDirection(board->publicData.map, selfPos, target,dir)){
+    if(Pathfinder::getDirection(board->getMap(), selfPos, target,dir)){
         board->setValue(BlackboardKeys::PLAYERMOVEDIR(), string_to_dir(dir));
         return success;
     }

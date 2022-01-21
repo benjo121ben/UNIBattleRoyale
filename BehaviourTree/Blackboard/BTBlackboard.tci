@@ -1,7 +1,7 @@
 
 #include "BTBlackboard.h"
 
-template <typename T> T BTBlackboard::getValue(const std::string& key){
+template <typename T> T BTBlackboard::getValue(const std::string& key) const{
     if(!isSet(key)){
         throw unavailable_blackboard_key_BT_exception("BTBlackboard::getValue",key);
     }

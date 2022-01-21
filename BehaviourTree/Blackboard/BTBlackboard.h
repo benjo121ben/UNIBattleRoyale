@@ -18,18 +18,21 @@ class GameData;
 
 class BTBlackboard{
     std::map<std::string, std::any> blackboardMap;
-public:
     const GameData& publicData;
+public:
     TickInfo tickInfo;
 
 
     explicit BTBlackboard(const GameData& data);
-    bool isSet(std::string key);
-    Coordinate getPlayerCoordinate(int index);
-    const Player& getPlayerInfo(int index);
-    const Player& getCurrentPlayerInfo();
+    bool isSet(std::string key) const;
+    Coordinate getPlayerCoordinate(int index) const;
+    const Player& getPlayerInfo(int index) const;
+    const Player& getCurrentPlayerInfo() const;
+    const GameMap& getMap() const;
+    const std::vector<Player>& getPlayerList();
+    const std::vector<Coordinate>& getPlayerPositionList();
 
-    template <typename T> T getValue(const std::string& key);
+    template <typename T> T getValue(const std::string& key) const;
     template <typename T> void setValue(const std::string& key, T value);
 
     BTBlackboard getCopy() const;
