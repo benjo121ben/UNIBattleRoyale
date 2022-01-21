@@ -7,8 +7,9 @@
 #include "Nodes/BTNode_Abstract.h"
 
 
+#include "Nodes/ActionNodes/BTActionNode_Attack.h"
 #include "Nodes/ActionNodes/BTActionNode_CheckBoardValue.h"
-#include "Nodes/ActionNodes/BTActionNode_CheckEnemyOnSameCoordinate.h"
+#include "Nodes/ActionNodes/BTActionNode_CheckEnemyInAttackRange.h"
 #include "Nodes/ActionNodes/BTActionNode_CoutDebug.h"
 #include "Nodes/ActionNodes/BTActionNode_MoveTowardsDir.h"
 #include "Nodes/ActionNodes/BTActionNode_SetEnemyDir.h"

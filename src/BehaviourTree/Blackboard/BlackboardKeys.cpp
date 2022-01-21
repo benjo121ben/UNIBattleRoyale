@@ -4,15 +4,8 @@
 
 #include "BlackboardKeys.h"
 
-std::string BlackboardKeys::PLAYERID(){
-    static std::string PLAYERID = "PLAYERID";
-    return PLAYERID;
-}
+std::string BlackboardKeys::PLAYERID(){return "PLAYERID";}
 
+std::string BlackboardKeys::PLAYERMOVEDIR(){return "PLAYERMOVEDIR";}
 
-
-
-std::string BlackboardKeys::PLAYERMOVEDIR(){
-    static std::string PLAYERMOVEDIR = "PLAYERMOVEDIR";
-    return PLAYERMOVEDIR;
-}
+std::string BlackboardKeys::ATTACKTARGETID() { return "ATTACKTARGETID";}

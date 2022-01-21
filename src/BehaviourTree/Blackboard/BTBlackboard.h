@@ -25,8 +25,9 @@ public:
 
     explicit BTBlackboard(const GameData& data);
     bool isSet(std::string key) const;
-    Coordinate getPlayerCoordinate(int index) const;
-    const Player& getPlayerInfo(int index) const;
+    Coordinate getAnyPlayerCoordinate(int index) const;
+    Coordinate getCurrentPlayerPosition() const;
+    const Player& getAnyPlayerInfo(int index) const;
     const Player& getCurrentPlayerInfo() const;
     const GameMap& getMap() const;
     const std::vector<Player>& getPlayerList();

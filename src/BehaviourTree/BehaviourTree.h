@@ -4,10 +4,9 @@
 
 #ifndef GAME_BEHAVIOURTREE_H
 #define GAME_BEHAVIOURTREE_H
-#include "Nodes/BTNode_Abstract.h"
 #include "Blackboard/BTBlackboard.h"
-#include "../PlayerInfo/TickInfo.h"
-#include "BehaviourTreeExceptions.h"
+class BTNode_Abstract;
+
 class BehaviourTree{
     BTNode_Abstract* rootNode = nullptr;
     BTBlackboard blackboard;

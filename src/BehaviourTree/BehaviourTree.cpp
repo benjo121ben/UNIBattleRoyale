@@ -3,23 +3,23 @@
 //
 
 #include "BehaviourTree.h"
+#include "BehaviourTreeExceptions.h"
 
 #include <utility>
+#include "allNodes.h"
 #include "../MapInfo/GameMap.h"
 #include "../PlayerInfo/Player.h"
-#include "allNodes.h"
 #include "../Managers/GameData.h"
 #include "Blackboard/BlackboardKeys.h"
+#include "Blackboard/BTBlackboard.h"
 
-BehaviourTree::BehaviourTree(const BTBlackboard& blackB) : blackboard{std::move(blackB.getCopy())}{
-    rootNode = nullptr;
+BehaviourTree::BehaviourTree(const BehaviourTree &other) : blackboard{other.blackboard}{
+
 }
 
-BehaviourTree::BehaviourTree(const GameData& data) : blackboard{data}{
-    rootNode = nullptr;
-}
+BehaviourTree::BehaviourTree(const BTBlackboard& blackB) : blackboard{std::move(blackB.getCopy())}{}
 
-
+BehaviourTree::BehaviourTree(const GameData& data) : blackboard{data}{}
 
 TickInfo BehaviourTree::traverse(){
     if(rootNode == nullptr){
@@ -45,3 +45,5 @@ BTNode_Abstract* BehaviourTree::convertToSubtree()const {
 void BehaviourTree::setRootNode(BTNode_Abstract * node) {
     rootNode = node;
 }
+
+

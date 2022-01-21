@@ -32,4 +32,7 @@ add_executable(Game
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CoutDebug.cpp
         src/BehaviourTree/Nodes/BTNode_Abstract.cpp
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_SetRandomMoveDir.cpp
-        src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckBoardValue.cpp src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckBoardValue.h src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckEnemyOnSameCoordinate.cpp src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckEnemyOnSameCoordinate.h)
+        src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckBoardValue.cpp
+        src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckEnemyInAttackRange.cpp
+        src/BehaviourTree/Nodes/ActionNodes/BTActionNode_Attack.cpp
+        )
