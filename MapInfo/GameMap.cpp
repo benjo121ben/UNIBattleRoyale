@@ -21,6 +21,27 @@ std::string GameMap::getMap1() {
 
 GameMap::GameMap(){}
 
+GameMap::GameMap(const GameMap& map){
+    this->sizeX = map.sizeX;
+    this->sizeY = map.sizeY;
+    for(int y{0}; y < sizeY; ++y) {
+        for (int x{0}; x < sizeX; ++x) {
+            add(new BRTile( *map.getTileAt(x,y)));
+        }
+    }
+}
+
+GameMap& GameMap::operator=(const GameMap& map){
+    this->sizeX = map.sizeX;
+    this->sizeY = map.sizeY;
+    for(int y{0}; y < sizeY; ++y) {
+        for (int x{0}; x < sizeX; ++x) {
+            add(new BRTile( *map.getTileAt(x,y)));
+        }
+    }
+    return *this;
+}
+
 GameMap::GameMap(const std::string& mapString) {
     int x = 0;
     int y = 0;
@@ -37,7 +58,7 @@ GameMap::GameMap(const std::string& mapString) {
     }
 }
 
-std::string GameMap::printMap(bool showSpawns) {
+std::string GameMap::printMap(bool showSpawns) const{
     return TileMap::printMap(showSpawns);
 }
 

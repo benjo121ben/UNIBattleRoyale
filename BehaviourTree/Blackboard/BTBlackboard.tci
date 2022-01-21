@@ -3,7 +3,7 @@
 
 template <typename T> T BTBlackboard::getValue(const std::string& key){
     if(!isSet(key)){
-        throw unavailable_blackboard_key_exception(key);
+        throw unavailable_blackboard_key_BT_exception(key);
     }
     return std::any_cast<T>(blackboardMap.at(key));
 }

@@ -68,7 +68,7 @@ template<typename T> TileMap<T>::~TileMap(){
 }
 
 template <typename T>
-std::string TileMap<T>::printMap(bool showSpawn) {
+std::string TileMap<T>::printMap(bool showSpawn) const {
     std::string ret;
     for(int outY {0}; outY < sizeY; outY++) {
         for (int outX{0}; outX < sizeX; outX++) {

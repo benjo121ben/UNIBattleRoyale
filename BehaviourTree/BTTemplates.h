@@ -11,6 +11,7 @@ class BehaviourTree;
 class GameMap;
 class Player;
 class BTTemplates{
+public:
     static BehaviourTree move_randomly(const GameData& data);
     static BehaviourTree move_towards_nearest_enemy(const GameData& data);
     static BehaviourTree test_shit(const GameData& data);

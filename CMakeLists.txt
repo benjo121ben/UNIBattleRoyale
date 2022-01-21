@@ -30,4 +30,6 @@ add_executable(Game
         BehaviourTree/Nodes/CompositeNode/Selector.cpp
         BehaviourTree/Nodes/CompositeNode/Sequence.cpp
         BehaviourTree/Nodes/ActionNodes/CoutDebugNode.cpp
-        BehaviourTree/Nodes/AbstractBTNode.cpp)
+        BehaviourTree/Nodes/AbstractBTNode.cpp
+        BehaviourTree/Nodes/ActionNodes/SetRandomMoveDirNode.cpp
+        )

@@ -12,11 +12,13 @@ class BehaviourTree{
     AbstractBTNode* rootNode = nullptr;
     BTBlackboard blackboard;
 public:
+    BehaviourTree(const BehaviourTree& other);
     explicit BehaviourTree(const BTBlackboard& blackboard);
     explicit BehaviourTree(const GameData& data);
     TickInfo traverse();
 
     void setPlayerId(int id);
+    void setRootNode(AbstractBTNode * node);
     BehaviourTree* getCopy() const;
     AbstractBTNode* convertToSubtree() const;
 };

@@ -16,9 +16,12 @@ public:
     static std::string getMap1();
 
     GameMap();
+    GameMap(const GameMap& map);
     explicit GameMap(const std::string& mapString);
 
-    std::string printMap(bool showSpawns) override;
+    GameMap& operator=(const GameMap& map);
+
+    std::string printMap(bool showSpawns) const override;
 
 };
 

@@ -7,6 +7,7 @@
 #include "Nodes/AbstractBTNode.h"
 
 
+#include "Nodes/ActionNodes/SetRandomMoveDirNode.h"
 #include "Nodes/ActionNodes/SetEnemyDirNode.h"
 #include "Nodes/ActionNodes/MoveNode.h"
 #include "Nodes/ActionNodes/CoutDebugNode.h"

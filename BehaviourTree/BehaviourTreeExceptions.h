@@ -12,10 +12,16 @@ public:
     generic_behaviour_tree_exception(std::string message) : std::runtime_error(message){}
 };
 
-class unavailable_blackboard_key_exception : public generic_behaviour_tree_exception{
+class unavailable_blackboard_key_BT_exception : public generic_behaviour_tree_exception{
 public:
-    unavailable_blackboard_key_exception(const std::string& key) :
+    unavailable_blackboard_key_BT_exception(const std::string& key) :
         generic_behaviour_tree_exception("the requested key way not found in blackboard. Key=" + key){}
+};
+
+class called_nullptr_child_BT_exception : public generic_behaviour_tree_exception{
+public:
+    called_nullptr_child_BT_exception() :
+            generic_behaviour_tree_exception("BehaviourTree tried calling a function on a nullptr child"){}
 };
 
 #endif //GAME_BEHAVIOURTREEEXCEPTIONS_H

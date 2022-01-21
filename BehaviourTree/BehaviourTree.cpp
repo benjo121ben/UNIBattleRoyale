@@ -11,11 +11,11 @@
 #include "Blackboard/BlackboardKeys.h"
 
 BehaviourTree::BehaviourTree(const BTBlackboard& blackB) : blackboard{std::move(blackB.getCopy())}{
-    rootNode = new MoveNode();
+    rootNode = nullptr;
 }
 
 BehaviourTree::BehaviourTree(const GameData& data) : blackboard{data}{
-    rootNode = new MoveNode();
+    rootNode = nullptr;
 }
 
 
@@ -32,9 +32,15 @@ void BehaviourTree::setPlayerId(int id){
     blackboard.setValue(BlackboardKeys::PLAYERID(), id);
 }
 BehaviourTree* BehaviourTree::getCopy() const{
-    return new BehaviourTree(blackboard);
+    BehaviourTree* ret { new BehaviourTree(blackboard)};
+    ret->setRootNode(rootNode->getCopy());
+    return ret;
 }
 
 AbstractBTNode* BehaviourTree::convertToSubtree()const {
     return (rootNode) ? rootNode->getCopy() : nullptr;
+}
+
+void BehaviourTree::setRootNode(AbstractBTNode * node) {
+    rootNode = node;
 }
