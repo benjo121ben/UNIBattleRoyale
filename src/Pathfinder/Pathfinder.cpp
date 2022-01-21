@@ -3,6 +3,8 @@
 //
 
 #include"Pathfinder.h"
+#include"../MapInfo/TileMap.h"
+#include"../MapInfo/Tileable.h"
 #include<stdexcept>
 #include<unordered_set>
 #include<stack>
@@ -10,7 +12,7 @@
 
 bool Pathfinder::getDirection(const GameMap& map, const Coordinate& start, const Coordinate& goal, std::string& dir){
     if(start == goal) return false;
-    auto nodes = findPath(map,start,goal);
+    auto nodes {findPath(map,start,goal)};
     Coordinate diff = nodes.at(1).getCoords()-nodes.at(0).getCoords();
     if(diff.x > 0){
         dir = "east";
@@ -74,7 +76,8 @@ std::deque<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordi
         visited.insert(n->getCoords().hashValue());
         if(n->getCoords() == goal) {
             //std:.cout<< "ended search: "<< n->getCoords().print() << "parent: " << n->getParentCoordinates().print()<<"\n";
-            return n->getPathDeque();
+            auto ret{ n->getPathDeque()};
+            return ret;
         }
         //std:.cout << "searching around: ";
         for(const Tileable* checkTile : map.getTilesAround(n->getCoords())){
@@ -125,7 +128,7 @@ void Pathfinder::outputPath(const GameMap& map, const Coordinate& start, const C
     std::cout << "\ncost: " << deque.at(deque.size()-1).getCost() << "\n\n\n";
 }
 
-Node::Node(const Tileable* t, const Coordinate& goal, Node *parent) : tile{t}, parent{parent} {
+Node::Node(const Tileable* t, const Coordinate& goal, Node *parent) : tile{t->getCopyPtr()}, parent{parent} {
     if(parent){
         baseCost = tile->cost() + parent->getCost();
 
@@ -150,7 +153,7 @@ Node::Node(const Tileable* t, const Coordinate& goal, Node *parent) : tile{t}, p
     distanceCost = distance(Coordinate(t->getX(), t->getY()) ,goal);
 }
 
-Node::Node(const Node& n) : tile{n.tile},parent{n.parent},distanceCost{n.distanceCost},baseCost{n.baseCost}{
+Node::Node(const Node& n) : tile{n.tile->getCopyPtr()},parent{n.parent},distanceCost{n.distanceCost},baseCost{n.baseCost}{
 }
 
 Coordinate Node::getCoords() const{

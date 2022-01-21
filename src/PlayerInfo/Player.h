@@ -19,7 +19,7 @@ public:
 
     Player(std::string name, std::string weapon, Pronouns pronouns);
 
-    std::string fight(const Player& other);
+    int fight(const Player& other);
     void addBehaviour(const BehaviourTree& bt, int id);
     TickInfo tick() const;
 

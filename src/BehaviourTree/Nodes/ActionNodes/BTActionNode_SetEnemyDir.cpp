@@ -14,11 +14,11 @@ BTNodestatus BTActionNode_SetEnemyDir::traverse(BTBlackboard *board) {
     BTNode_Abstract::traverse(board);
     Coordinate target{Coordinate::invalidCoords()};
     int selfIndex = board->getValue<int>(BlackboardKeys::PLAYERID());
-    Coordinate selfPos = board->getAnyPlayerCoordinate(selfIndex);
+    Coordinate selfPos = board->getCurrentPlayerPosition();
 
-    const std::vector<Coordinate> posList = board->getPlayerPositionList();
+    auto posList = board->getPlayerPositionList();
 
-    for(int index{0}; index < board->getPlayerList().size(); ++index){
+    for(int index{0}; index < board->allPlayerList().size(); ++index){
         if(index != selfIndex){
             Coordinate targetPosition {board->getAnyPlayerCoordinate(index)};
             if (target == Coordinate::invalidCoords() ||

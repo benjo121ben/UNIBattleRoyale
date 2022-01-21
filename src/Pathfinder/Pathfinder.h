@@ -12,9 +12,7 @@
 
 
 class Node{
-    enum dir{
-        left,right,up,down, root
-    };
+
 
     const Tileable* tile;
     Node* parent;
@@ -22,6 +20,10 @@ class Node{
     float baseCost;
 
 public:
+    enum dir{
+        left,right,up,down, root
+    };
+
     dir walkDir;
     Node(const Node& n);
     Node(const Tileable* t, const Coordinate& goal, Node* parent = nullptr);
@@ -31,7 +33,7 @@ public:
     const Tileable* getTile() const;
     void trySetParent(Node& newParent);
     Coordinate getParentCoordinates() const;
-    std::deque<Node> getPathDeque();
+    std::deque<Node > getPathDeque();
 
     Node& operator=(const Node& n);
 };

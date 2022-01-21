@@ -8,8 +8,9 @@
 
 //private shortcut getters
 GameMap& GameManager::map(){return gameData.map;}
-std::vector<Player>& GameManager::playerList(){return gameData.playerList;}
-std::vector<Coordinate>& GameManager::playerPositions(){return gameData.playerPositions;}
+std::vector<int>& GameManager::alivePlayerList(){return gameData.alivePlayerList;}
+std::vector<Player>& GameManager::allPlayerList(){return gameData.allPlayersList;}
+std::map<int, Coordinate>& GameManager::playerPositions(){return gameData.newPlayerPositions;}
 
 
 
@@ -33,14 +34,14 @@ const GameMap& GameManager::getMap() const{
 void GameManager::printMap(bool showSpawn){
     std::string ret {getMap().printMap(showSpawn)};
     char playerNr = '0';
-    for(int posNr{0}; posNr < playerList().size(); ++posNr){
+    for(int posNr : alivePlayerList()){
         Coordinate coord{playerPositions().at(posNr)};
         ret.at(coord.x + (map().sizeX + 1) * coord.y) = playerNr++;
     }
     std::cout << ret;
 
-    for(int posNr{0}; posNr < playerList().size(); ++posNr){
-        std::cout << posNr << "=" << playerList().at(posNr).name << ",  ";
+    for(int posNr : alivePlayerList()){
+        std::cout << posNr << "=" << allPlayerList().at(posNr).name << ",  ";
     }
     std::cout<<std::endl;
     std::cout<<std::endl;
@@ -49,10 +50,11 @@ void GameManager::printMap(bool showSpawn){
 
 
 void GameManager::init_game(){
+    int counter {0};
     for(int y {0}; y < map().sizeY; ++y){
         for(int x {0}; x < map().sizeX; ++x){
             if(map().getTileAt(x,y)->isSpawn()){
-                playerPositions().emplace_back(x,y);
+                playerPositions().emplace(counter++,Coordinate(x,y));
             }
         }
     }
@@ -62,27 +64,28 @@ void GameManager::init_game(){
 
 void GameManager::registerPlayer(const Player& p){
     if(started) throw game_started_error();
-    if(playerList().size() == 6) throw generic_game_error("already max amount of players");
+    if(allPlayerList().size() == 6) throw generic_game_error("already max amount of players");
     else{
-        BehaviourTree tree {BTTemplates::move_towards_nearest_enemy(gameData)};
-        playerList().push_back(p);
-        auto nr = playerList().size()-1;
-        playerList().at(nr).addBehaviour(tree, nr);
+        BehaviourTree tree {BTTemplates::testTree_Move_and_Attack(gameData)};
+        int nr = allPlayerList().size();
+        allPlayerList().push_back(p);
+        alivePlayerList().push_back(nr);
+        allPlayerList().at(nr).addBehaviour(tree, nr);
     }
 }
 
 void GameManager::registerPlayer(std::initializer_list<const Player> l){
-    for(auto p : l) {
+    for(auto& p : l) {
         registerPlayer(p);
     }
 }
 
 void GameManager::removePlayer(int index) {
     if(started) throw game_started_error();
-    if(playerList().size() <= index){
+    if(allPlayerList().size() <= index){
         throw generic_game_error("tried to remove Player from GameManager at invalid Index");
     }
-    playerList().erase(playerList().begin()+index);
+    allPlayerList().erase(allPlayerList().begin() + index);
 }
 
 
@@ -93,8 +96,8 @@ void GameManager::printEvents(){
 void GameManager::tick() {
     started = true;
     textHandler.clearEvents();
-    for(const Player& p : playerList()){
-        turnManager.queueInstruction(p.tick());
+    for(int nr : alivePlayerList()){
+        turnManager.queueInstruction(nr, allPlayerList().at(nr).tick());
     }
 
     turnManager.handleTurn();

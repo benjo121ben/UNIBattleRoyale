@@ -3,6 +3,7 @@
 //
 #include "BTNode_Abstract.h"
 void BTNode_Abstract::reset() {
+    if(state == ready) return;
     state = ready;
 }
 BTNodestatus BTNode_Abstract::traverse(BTBlackboard* board){

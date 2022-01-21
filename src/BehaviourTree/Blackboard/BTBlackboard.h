@@ -30,8 +30,9 @@ public:
     const Player& getAnyPlayerInfo(int index) const;
     const Player& getCurrentPlayerInfo() const;
     const GameMap& getMap() const;
-    const std::vector<Player>& getPlayerList();
-    const std::vector<Coordinate>& getPlayerPositionList();
+    const std::vector<Player>& allPlayerList();
+    const std::vector<int>& alivePlayerList();
+    const std::map<int,Coordinate>& getPlayerPositionList();
 
     template <typename T> T getValue(const std::string& key) const;
     template <typename T> void setValue(const std::string& key, T value);

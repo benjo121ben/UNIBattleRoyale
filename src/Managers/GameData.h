@@ -9,8 +9,9 @@
 #include "../MapInfo/GameMap.h"
 struct GameData{
 
-    std::vector<Player> playerList;
-    std::vector<Coordinate> playerPositions;
+    std::vector<Player> allPlayersList;
+    std::vector<int> alivePlayerList;
+    std::map<int,Coordinate> newPlayerPositions;
     GameMap map;
 
 };

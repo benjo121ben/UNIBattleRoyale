@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16.2)
 project(Game)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -35,4 +35,4 @@ add_executable(Game
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckBoardValue.cpp
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckEnemyInAttackRange.cpp
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_Attack.cpp
-        )
+        src/Managers/EventSystem/Events/KillEvent.cpp src/Managers/EventSystem/Events/KillEvent.h)

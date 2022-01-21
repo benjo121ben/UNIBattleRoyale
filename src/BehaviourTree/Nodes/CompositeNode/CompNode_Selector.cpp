@@ -40,5 +40,6 @@ BTNode_Abstract *CompNode_Selector::getCopy() const {
 
 void CompNode_Selector::reset() {
     BTNode_CompositeNode::reset();
+    if(state == ready)return;
     runningChildIndex = -1;
 }

@@ -14,6 +14,7 @@ void BTNode_CompositeNode::push_front_child(BTNode_Abstract * child){
 
 void BTNode_CompositeNode::reset() {
     BTNode_Abstract::reset();
+    if(state == ready)return;
     for(auto& child : children){
         child->reset();
     }

@@ -15,15 +15,8 @@ Player::Player(std::string name, std::string weapon, Pronouns pronouns) :
     name{std::move(name)}, weapon{std::move(weapon)}, pronouns{std::move(pronouns)} {}
 
 
-std::string Player::fight(const Player& other){
-
-    int erg = Random::get_random_Int(2);
-    if(erg == 0){
-        return this->name + " killed " + other.name + " with " + this->pronouns.possessive + " " +  this->weapon;
-    }
-    else{
-        return other.name + " killed " + this->name + " with " + other.pronouns.possessive + " " +  other.weapon;
-    }
+int Player::fight(const Player& other){
+    return Random::get_random_Int(2) -1;
 }
 
 void Player::addBehaviour(const BehaviourTree& bt, int id){

@@ -13,23 +13,25 @@ BTActionNode_CoutDebug::BTActionNode_CoutDebug(std::string outputString, BTNodes
 }
 
 BTNode_Abstract *BTActionNode_CoutDebug::getCopy() const {
-    return new BTActionNode_CoutDebug(outputstring, state);
+    return new BTActionNode_CoutDebug(outputstring, outputState);
 }
 
 BTNodestatus BTActionNode_CoutDebug::traverse(BTBlackboard *board) {
     BTNode_Abstract::traverse(board);
     if(state == running){
-        std::cout << "Debug/" << state_toString() << ": " << outputstring << "was run again" <<std::endl;
+        std::cout << "Debug/" << state_toString() << ": " << outputstring << " was run again" <<std::endl;
     }
     else{
-        std::cout << "Debug/" << state_toString() << ": " << outputstring << "was run first time" <<std::endl;
+        std::cout << "Debug/" << state_toString() << ": " << outputstring << " was run first time" <<std::endl;
     }
     state = outputState;
     return state;
 }
 
 void BTActionNode_CoutDebug::reset() {
-    std::cout << "Debug/" << state_toString() << ": " << outputstring << "was reset" <<std::endl;
+    BTNode_Abstract::reset();
+    if(state == ready)return;
+    std::cout << "Debug/" << state_toString() << ": " << outputstring << " was reset" <<std::endl;
     state = ready;
 }
 
@@ -40,7 +42,7 @@ std::string BTActionNode_CoutDebug::state_toString() {
         case running: return "running";
         default: break;
     }
-    throw generic_behaviour_tree_exception("BTActionNode_CoutDebug::state_toString()", "Somehow tried to interpret an impossible/ready BTNodestatus" + std::to_string(state));
+    throw generic_behaviour_tree_exception("BTActionNode_CoutDebug::state_toString()", "Somehow tried to interpret an impossible/ready BTNodestatus " + std::to_string(outputState));
 }
 
 

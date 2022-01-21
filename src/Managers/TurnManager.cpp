@@ -6,11 +6,11 @@
 #include "EventSystem/Events/Events.h"
 
 TurnManager::TurnManager(GameData& dataObject) :
-    playerList{dataObject.playerList}, playerPositions{dataObject.playerPositions}, map{dataObject.map} {}
+        allPlayerList{dataObject.allPlayersList}, playerList{dataObject.alivePlayerList}, playerPositions{dataObject.newPlayerPositions}, map{dataObject.map} {}
 
-void TurnManager::queueInstruction(const TickInfo& t){
+void TurnManager::queueInstruction(int playerID, const TickInfo& t){
     if(instructions.size() <6) {
-        instructions.push_back(t);
+        instructions.emplace(playerID, t);
     }
     else{
         throw generic_game_error("tried to queue new Turn instruction with full list");
@@ -19,6 +19,13 @@ void TurnManager::queueInstruction(const TickInfo& t){
 void TurnManager::handleTurn(){
 
     for(int playerNr {0}; playerNr < instructions.size(); ++playerNr){
+        //checks if a players action was interupted by another player
+        bool interrupted = false;
+        for(auto id : interruptedList){
+            if(id == playerNr) interrupted = true;
+        }
+        if(interrupted) continue;
+
         const TickInfo& t = instructions.at(playerNr);
         switch (t.type) {
             case TickInfo::move: {
@@ -61,7 +68,20 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
     }
 
     if(map.existsTileAt(coord)){
+        for(int index{0}; index < playerPositions.size(); ++index){
+            if(playerPositions.at(index) == coord){
+                interruptedList.push_back(index);
+                handleFight(playerList.at(playerNr), playerList.at(playerNr));
+            }
+        }
         playerPositions.at(playerNr) = coord;
-        fireEvent(MoveEvent(playerList.at(playerNr), dir));
+        fireEvent(MoveEvent(allPlayerList.at(playerNr), dir));
     }
+}
+
+void TurnManager::handleFight(int p1ID, int p2ID) {
+    /*auto winner = (playerList.at(p1ID).fight(allPlayerList.at(p2ID)) == -1) ? p1ID : p2ID;
+    auto looser = (winner == p2ID) ? p2ID : p1ID;
+    interruptedList.push_back(looser);
+    fireEvent(MoveEvent(alivePlayerList.at(playerNr), dir));*/
 }

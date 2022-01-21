@@ -12,19 +12,22 @@ BTNodestatus CompNode_Sequence::traverse(BTBlackboard *board) {
         switch (retState) {
             case failure:{
                 runningChildIndex = -1;
-                reset();
+                state = failure;
                 return failure;
             }
             case running:{
                 runningChildIndex = index;
+                state = running;
                 return running;
             }
             case success:{
                 runningChildIndex = -1;
+                break;
             }
+            case ready: throw generic_behaviour_tree_exception("CompNode_Sequence::traverse", "an invalid ready sate was returned.");
         }
     }
-    reset();
+    state = success;
     return success;
 }
 
@@ -38,5 +41,6 @@ BTNode_Abstract *CompNode_Sequence::getCopy() const {
 
 void CompNode_Sequence::reset() {
     BTNode_CompositeNode::reset();
+    if(state == ready)return;
     runningChildIndex = -1;
 }

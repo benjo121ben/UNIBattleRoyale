@@ -17,8 +17,9 @@ class GameManager{
     GameEventTextHandler textHandler;
 
     GameMap& map();
-    std::vector<Player>& playerList();
-    std::vector<Coordinate>& playerPositions();
+    std::vector<int>& alivePlayerList();
+    std::vector<Player>& allPlayerList();
+    std::map<int,Coordinate>& playerPositions();
 
     void init_game();
 public:

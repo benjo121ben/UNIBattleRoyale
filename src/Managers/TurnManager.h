@@ -12,20 +12,20 @@
 #include "GameData.h"
 
 class TurnManager : public EventAnnouncer{
-    std::vector<Player> &playerList;
-    std::vector<Coordinate> &playerPositions;
+    std::vector<int> interruptedList;
+    std::vector<Player>& allPlayerList;
+    std::vector<int> &playerList;
+    std::map<int, Coordinate> &playerPositions;
     GameMap &map;
 
-    std::vector<TickInfo> instructions;
+    std::map<int, TickInfo> instructions;
 
     void handleMove(int playerNr, const TickInfo &t);
+    void handleFight(int p1ID, int p2ID);
 public:
     TurnManager(GameData& dataObject);
-
-    void queueInstruction(const TickInfo& t);
+    void queueInstruction(int playerID, const TickInfo& t);
     void handleTurn();
-
-
 };
 
 

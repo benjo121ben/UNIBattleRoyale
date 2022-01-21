@@ -5,5 +5,6 @@
 #ifndef GAME_EVENTS_H
 #define GAME_EVENTS_H
 #include "BaseEvent.h"
+#include "KillEvent.h"
 #include "MoveEvent.h"
 #endif //GAME_EVENTS_H

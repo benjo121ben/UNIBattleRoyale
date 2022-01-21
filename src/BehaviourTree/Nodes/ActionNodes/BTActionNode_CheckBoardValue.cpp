@@ -12,10 +12,7 @@ BTNode_Abstract *BTActionNode_CheckBoardValue<T>::getCopy() const {
     return new BTActionNode_CheckBoardValue(key, compType, comparisonValue);
 }
 
-template<typename T>
-void BTActionNode_CheckBoardValue<T>::reset() {
-    BTNode_Abstract::reset();
-}
+
 
 template<typename T>
 BTNodestatus BTActionNode_CheckBoardValue<T>::traverse(BTBlackboard *board) {

@@ -14,5 +14,5 @@ BTNodestatus BTActionNode_Attack::traverse(BTBlackboard *board) {
 }
 
 BTNode_Abstract *BTActionNode_Attack::getCopy() const {
-    return nullptr;
+    return new BTActionNode_Attack();
 }

@@ -17,7 +17,6 @@ class BTActionNode_CheckBoardValue : public BTNode_Abstract{
     T comparisonValue;
 public:
     BTActionNode_CheckBoardValue(std::string key, comparisonType compType, T comparisonValue);
-    void reset() override;
     BTNodestatus traverse(BTBlackboard *board) override;
     BTNode_Abstract *getCopy() const override;
 };
