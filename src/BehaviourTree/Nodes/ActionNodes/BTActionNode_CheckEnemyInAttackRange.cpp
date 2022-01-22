@@ -12,9 +12,9 @@ BTNodestatus BTActionNode_CheckEnemyInAttackRange::traverse(BTBlackboard *board)
     BTNode_Abstract::traverse(board);
     auto myPlayerNr = board->getValue<int>(BlackboardKeys::PLAYERID());
     auto myCoords = board->getCurrentPlayerPosition();
-    for(int index{0}; index < board->getPlayerPositionList().size(); ++index){
-        if(index != myPlayerNr && myCoords == board->getAnyPlayerCoordinate(index)){
-            board->setValue(BlackboardKeys::ATTACKTARGETID(), index);
+    for(auto& elem : board->getPlayerPositionList()){
+        if(elem.first != myPlayerNr && myCoords == elem.second){
+            board->setValue(BlackboardKeys::ATTACKTARGETID(), elem.first);
             return success;
         }
     }

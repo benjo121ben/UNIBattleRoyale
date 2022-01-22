@@ -17,7 +17,7 @@ class GameManager{
     GameEventTextHandler textHandler;
 
     GameMap& map();
-    std::vector<int>& alivePlayerList();
+    std::unordered_set<int>& alivePlayerList();
     std::vector<Player>& allPlayerList();
     std::map<int,Coordinate>& playerPositions();
 
@@ -34,10 +34,9 @@ public:
     void registerPlayer(std::initializer_list<const Player> l);
     void removePlayer(int index);
     void printEvents();
-    void tick();
+    bool tick();
 
 
-
-
+    void startGame();
 };
 #endif //GAME_GAMEMANAGER_H

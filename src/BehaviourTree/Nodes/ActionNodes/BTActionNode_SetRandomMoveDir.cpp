@@ -8,7 +8,8 @@
 #include "../../../MapInfo/cardinal_directions.h"
 
 BTNodestatus BTActionNode_SetRandomMoveDir::traverse(BTBlackboard *board) {
-    auto dir = static_cast<cardinal_directions>(Random::get_random_Int(4));
+    Random rand;
+    auto dir = static_cast<cardinal_directions>(rand.get_random_Int(4));
     board->setValue(BlackboardKeys::PLAYERMOVEDIR(), dir);
     return success;
 }

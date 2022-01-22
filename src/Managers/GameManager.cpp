@@ -8,9 +8,9 @@
 
 //private shortcut getters
 GameMap& GameManager::map(){return gameData.map;}
-std::vector<int>& GameManager::alivePlayerList(){return gameData.alivePlayerList;}
+std::unordered_set<int>& GameManager::alivePlayerList(){return gameData.alivePlayerList;}
 std::vector<Player>& GameManager::allPlayerList(){return gameData.allPlayersList;}
-std::map<int, Coordinate>& GameManager::playerPositions(){return gameData.newPlayerPositions;}
+std::map<int, Coordinate>& GameManager::playerPositions(){return gameData.playerPositions;}
 
 
 
@@ -33,10 +33,10 @@ const GameMap& GameManager::getMap() const{
 
 void GameManager::printMap(bool showSpawn){
     std::string ret {getMap().printMap(showSpawn)};
-    char playerNr = '0';
+    char playerNr[10] = {'0','1','2','3','4','5','6','7','8','9'};
     for(int posNr : alivePlayerList()){
         Coordinate coord{playerPositions().at(posNr)};
-        ret.at(coord.x + (map().sizeX + 1) * coord.y) = playerNr++;
+        ret.at(coord.x + (map().sizeX + 1) * coord.y) = playerNr[posNr];
     }
     std::cout << ret;
 
@@ -64,12 +64,12 @@ void GameManager::init_game(){
 
 void GameManager::registerPlayer(const Player& p){
     if(started) throw game_started_error();
-    if(allPlayerList().size() == 6) throw generic_game_error("already max amount of players");
+    if(allPlayerList().size() == playerPositions().size()) throw generic_game_error("already max amount of players");
     else{
         BehaviourTree tree {BTTemplates::testTree_Move_and_Attack(gameData)};
         int nr = allPlayerList().size();
         allPlayerList().push_back(p);
-        alivePlayerList().push_back(nr);
+        alivePlayerList().emplace(nr);
         allPlayerList().at(nr).addBehaviour(tree, nr);
     }
 }
@@ -93,7 +93,8 @@ void GameManager::printEvents(){
     textHandler.printEvents();
 }
 
-void GameManager::tick() {
+bool GameManager::tick() {
+    if(!started) startGame();
     started = true;
     textHandler.clearEvents();
     for(int nr : alivePlayerList()){
@@ -101,9 +102,22 @@ void GameManager::tick() {
     }
 
     turnManager.handleTurn();
-    textHandler.printEvents();
     printMap(false);
+    textHandler.printEvents();
+    if(alivePlayerList().size() == 1){
+        std::cout << allPlayerList().at(*alivePlayerList().begin()).name << " has won the game." << std::endl;
+        return false;
+    }
     std::cout << std::endl;
+    return true;
+}
+
+void GameManager::startGame() {
+    int countPlayers = allPlayerList().size();
+    int maxPlayers = playerPositions().size();
+    for(int index = countPlayers; index < maxPlayers; ++index){
+        playerPositions().erase(index);
+    }
 }
 
 

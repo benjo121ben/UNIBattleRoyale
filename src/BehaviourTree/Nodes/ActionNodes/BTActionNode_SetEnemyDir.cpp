@@ -16,15 +16,15 @@ BTNodestatus BTActionNode_SetEnemyDir::traverse(BTBlackboard *board) {
     int selfIndex = board->getValue<int>(BlackboardKeys::PLAYERID());
     Coordinate selfPos = board->getCurrentPlayerPosition();
 
-    auto posList = board->getPlayerPositionList();
+    auto& posList = board->getPlayerPositionList();
 
-    for(int index{0}; index < board->allPlayerList().size(); ++index){
-        if(index != selfIndex){
-            Coordinate targetPosition {board->getAnyPlayerCoordinate(index)};
+    for(auto& elem : board->getPlayerPositionList()){
+        if(elem.first != selfIndex){
+
             if (target == Coordinate::invalidCoords() ||
-                        stepDistance(selfPos, target) > stepDistance(selfPos, targetPosition))
+                        stepDistance(selfPos, target) > stepDistance(selfPos, elem.second))
             {
-                target = targetPosition;
+                target = elem.second;
             }
         }
     }

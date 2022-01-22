@@ -6,10 +6,11 @@
 #define GAME_RANDOM_H
 
 
+#include <random>
 
 class Random{
-
+    std::random_device device;
 public:
-    static int get_random_Int(int max);
+    int get_random_Int(int max);
 };
 #endif //GAME_RANDOM_H

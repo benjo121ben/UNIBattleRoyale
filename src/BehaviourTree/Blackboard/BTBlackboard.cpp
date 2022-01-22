@@ -15,11 +15,11 @@ bool BTBlackboard::isSet(std::string key) const{
 }
 
 Coordinate BTBlackboard::getAnyPlayerCoordinate(int index) const{
-    return publicData.newPlayerPositions.at(index);
+    return publicData.playerPositions.at(index);
 }
 
 Coordinate BTBlackboard::getCurrentPlayerPosition() const {
-    return publicData.newPlayerPositions.at(getValue<int>(BlackboardKeys::PLAYERID()));
+    return publicData.playerPositions.at(getValue<int>(BlackboardKeys::PLAYERID()));
 }
 
 const Player& BTBlackboard::getAnyPlayerInfo(int index) const{
@@ -36,10 +36,10 @@ BTBlackboard BTBlackboard::getCopy() const{
 }
 
 const std::map<int, Coordinate> &BTBlackboard::getPlayerPositionList() {
-    return publicData.newPlayerPositions;
+    return publicData.playerPositions;
 }
 
-const std::vector<int> &BTBlackboard::alivePlayerList() {
+const std::unordered_set<int> &BTBlackboard::alivePlayerList() {
     return publicData.alivePlayerList;
 }
 

@@ -9,8 +9,13 @@
 BTNodestatus BTActionNode_Attack::traverse(BTBlackboard *board) {
     BTNode_Abstract::traverse(board);
     auto targetNR = board->getValue<int>(BlackboardKeys::ATTACKTARGETID());
-    board->tickInfo = TickInfo(TickInfo::attack, targetNR);
-    return success;
+    if(board->alivePlayerList().count(targetNR)) {
+        board->tickInfo = TickInfo(TickInfo::attack, targetNR);
+        return success;
+    }
+    else{
+        return failure;
+    }
 }
 
 BTNode_Abstract *BTActionNode_Attack::getCopy() const {

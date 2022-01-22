@@ -5,13 +5,14 @@
 #ifndef GAME_GAMEDATA_H
 #define GAME_GAMEDATA_H
 #include <vector>
+#include <unordered_set>
 #include "../PlayerInfo/Player.h"
 #include "../MapInfo/GameMap.h"
 struct GameData{
 
     std::vector<Player> allPlayersList;
-    std::vector<int> alivePlayerList;
-    std::map<int,Coordinate> newPlayerPositions;
+    std::unordered_set<int> alivePlayerList;
+    std::map<int,Coordinate> playerPositions;
     GameMap map;
 
 };

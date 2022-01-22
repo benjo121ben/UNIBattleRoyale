@@ -8,6 +8,7 @@
 #include<any>
 #include<string>
 #include<vector>
+#include<unordered_set>
 #include "../../PlayerInfo/TickInfo.h"
 #include "../BehaviourTreeExceptions.h"
 #include "../../MapInfo/Tileable.h"
@@ -31,7 +32,7 @@ public:
     const Player& getCurrentPlayerInfo() const;
     const GameMap& getMap() const;
     const std::vector<Player>& allPlayerList();
-    const std::vector<int>& alivePlayerList();
+    const std::unordered_set<int>& alivePlayerList();
     const std::map<int,Coordinate>& getPlayerPositionList();
 
     template <typename T> T getValue(const std::string& key) const;

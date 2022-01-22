@@ -16,7 +16,8 @@ Player::Player(std::string name, std::string weapon, Pronouns pronouns) :
 
 
 int Player::fight(const Player& other){
-    return Random::get_random_Int(2) -1;
+    Random rand;
+    return rand.get_random_Int(2) -1;
 }
 
 void Player::addBehaviour(const BehaviourTree& bt, int id){

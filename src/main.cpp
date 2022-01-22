@@ -14,17 +14,6 @@ void printInputOptions();
 
 int main() {
 
-    /*CompNode_Selector s;
-    s.push_back_child(new BTActionNode_CoutDebug("Test 1", failure));
-    s.push_back_child(new BTActionNode_CoutDebug("Test 2", failure));
-    s.push_back_child(new BTActionNode_CoutDebug("Test 3", running));
-    s.push_back_child(new BTActionNode_CoutDebug("Test 4", success));
-    GameData data;
-    BTBlackboard bb{data};
-    std::cout << s.traverse(&bb) << std::endl;
-    std::cout << s.traverse(&bb) << std::endl;
-
-    return 0;*/
     Player p1("Benji", "Sword", Pronouns::masculine());
     Player p2("Lena", "Axe", Pronouns::feminine());
     Player p3("Froggy", "Tongue", Pronouns::neutral());
@@ -32,10 +21,6 @@ int main() {
 
 
 
-
-    //Coordinate start(7,1);
-    //Coordinate end(9,3);
-    //Pathfinder::outputPath(man.getMap(),start,end);
 
     man.registerPlayer({p1,p2,p3});
     man.printMap();
@@ -68,7 +53,7 @@ void printInputOptions() {
 bool handleInput(GameManager &man, const std::string &line) {
     if(line == "q" || line == "quit") return false;
     if(line == "next" || line == "n"){
-        man.tick();
+        return man.tick();
     }
     else if(line == "map" || line == "m"){
         man.printMap();

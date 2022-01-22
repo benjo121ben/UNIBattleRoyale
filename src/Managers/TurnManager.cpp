@@ -6,10 +6,10 @@
 #include "EventSystem/Events/Events.h"
 
 TurnManager::TurnManager(GameData& dataObject) :
-        allPlayerList{dataObject.allPlayersList}, playerList{dataObject.alivePlayerList}, playerPositions{dataObject.newPlayerPositions}, map{dataObject.map} {}
+        allPlayerList{dataObject.allPlayersList}, alive2PlayersList{dataObject.alivePlayerList}, playerPositions{dataObject.playerPositions}, map{dataObject.map} {}
 
 void TurnManager::queueInstruction(int playerID, const TickInfo& t){
-    if(instructions.size() <6) {
+    if(instructions.size() <allPlayerList.size()) {
         instructions.emplace(playerID, t);
     }
     else{
@@ -18,26 +18,33 @@ void TurnManager::queueInstruction(int playerID, const TickInfo& t){
 }
 void TurnManager::handleTurn(){
 
-    for(int playerNr {0}; playerNr < instructions.size(); ++playerNr){
+    while (!instructions.empty()){
         //checks if a players action was interupted by another player
         bool interrupted = false;
+        auto elem = instructions.begin();
+        int playerNr = elem->first;
         for(auto id : interruptedList){
             if(id == playerNr) interrupted = true;
         }
-        if(interrupted) continue;
+        if(interrupted || alive2PlayersList.count(playerNr) == 0) {
+            instructions.erase(elem);
+            continue;
+        }
+        auto& tickInfo {elem->second};
 
-        const TickInfo& t = instructions.at(playerNr);
-        switch (t.type) {
+        switch (tickInfo.type) {
             case TickInfo::move: {
-                handleMove(playerNr, t);
+                handleMove(playerNr, tickInfo);
                 break;
             }
             case TickInfo::flee:
                 break;
             case TickInfo::recover:
                 break;
-            case TickInfo::attack:
+            case TickInfo::attack:{
+                handleFight(playerNr, tickInfo);
                 break;
+            }
             case TickInfo::scout:
                 break;
             case TickInfo::gather:
@@ -45,12 +52,13 @@ void TurnManager::handleTurn(){
             case TickInfo::reinforce:
                 break;
         }
+        instructions.erase(elem);
     }
-    instructions.clear();
+    interruptedList.clear();
 }
 
 void TurnManager::handleMove(int playerNr, const TickInfo &t) {
-    auto dir = std::any_cast<cardinal_directions>(t.data);
+    auto dir {t.getData<cardinal_directions>()};
     Coordinate coord = playerPositions.at(playerNr);
     switch(dir){
         case north:
@@ -68,20 +76,36 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
     }
 
     if(map.existsTileAt(coord)){
-        for(int index{0}; index < playerPositions.size(); ++index){
-            if(playerPositions.at(index) == coord){
-                interruptedList.push_back(index);
-                handleFight(playerList.at(playerNr), playerList.at(playerNr));
-            }
-        }
         playerPositions.at(playerNr) = coord;
         fireEvent(MoveEvent(allPlayerList.at(playerNr), dir));
+        auto end = playerPositions.end();
+        for(auto playerPos {playerPositions.begin()}; alive2PlayersList.count(playerNr) != 0 && playerPos != end; playerPos++){
+            if(playerPos->first != playerNr && playerPos->second == coord){
+                interruptedList.push_back(playerPos->first);
+                if(handleFight(playerNr, playerPos->first)){
+                    playerPos = playerPositions.begin();
+                    end = playerPositions.end();
+                }
+            }
+        }
     }
 }
 
-void TurnManager::handleFight(int p1ID, int p2ID) {
-    /*auto winner = (playerList.at(p1ID).fight(allPlayerList.at(p2ID)) == -1) ? p1ID : p2ID;
-    auto looser = (winner == p2ID) ? p2ID : p1ID;
+bool TurnManager::handleFight(int p1ID, const TickInfo& t) {
+    return handleFight(p1ID, t.getData<int>());
+}
+
+bool TurnManager::handleFight(int p1ID, int p2ID) {
+    if(!alive2PlayersList.count(p1ID) || !alive2PlayersList.count(p2ID)) return false;
+    int winner = (allPlayerList.at(p1ID).fight(allPlayerList.at(p2ID)) == -1) ? p1ID : p2ID;
+    auto looser = (winner == p1ID) ? p2ID : p1ID;
+    fireEvent(KillEvent(allPlayerList.at(winner), allPlayerList.at(looser)));
+    killPlayer(looser);
+    return true;
+}
+
+void TurnManager::killPlayer(int looser) {
     interruptedList.push_back(looser);
-    fireEvent(MoveEvent(alivePlayerList.at(playerNr), dir));*/
+    alive2PlayersList.erase(looser);
+    playerPositions.erase(looser);
 }
