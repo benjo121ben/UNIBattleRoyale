@@ -11,6 +11,7 @@
 class BehaviourTree;
 
 class Player{
+    int id;
 public:
     enum SkillCheckType{
         testType
@@ -22,7 +23,7 @@ public:
     BehaviourTree* bt = nullptr;
 
     Player(std::string name, std::string weapon, Pronouns pronouns);
-
+    int getID() const;
     int fight(const Player& other);
     void addBehaviour(const BehaviourTree& bt, int id);
     TickInfo tick() const;

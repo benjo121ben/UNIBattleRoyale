@@ -29,7 +29,6 @@ BehaviourTree BTTemplates::attack_if_enemy_nearby(const GameData& data) {
     auto s = new CompNode_Sequence();
     s->push_back_child(new BTActionNode_CheckEnemyInAttackRange());
     s->push_back_child(new BTActionNode_Attack());
-    s->push_back_child(new BTActionNode_CoutDebug("attacked", success));
     bt.setRootNode(s);
     return bt;
 }

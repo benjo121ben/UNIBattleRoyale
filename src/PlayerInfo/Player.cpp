@@ -15,6 +15,8 @@ Player::Player(std::string name, std::string weapon, Pronouns pronouns) :
     name{std::move(name)}, weapon{std::move(weapon)}, pronouns{std::move(pronouns)} {}
 
 
+
+
 int Player::fight(const Player& other){
     Random rand;
     return rand.get_random_Int(2) -1;
@@ -23,6 +25,7 @@ int Player::fight(const Player& other){
 void Player::addBehaviour(const BehaviourTree& bt, int id){
     this->bt = bt.getCopy();
     this->bt->setPlayerInfo(id);
+    this->id = id;
 }
 
 TickInfo Player::tick() const{
@@ -34,7 +37,13 @@ int Player::skillCheck(SkillCheckType type){
     return rand.get_random_Int(2);
 }
 
+int Player::getID() const{
+    return id;
+}
+
+
+
 
 bool operator==(const Player& p1, const Player& p2){
-    return p1.name == p2.name;
+    return p1.getID() == p2.getID();
 }

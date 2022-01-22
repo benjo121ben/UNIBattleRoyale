@@ -2,6 +2,7 @@
 // Created by benja on 21/01/2022.
 //
 
+#include <iostream>
 #include "KillEvent.h"
 
 KillEvent::KillEvent(const Player &survivor, const Player &deadPlayer) {
@@ -12,12 +13,12 @@ KillEvent::KillEvent(const Player &survivor, const Player &deadPlayer) {
 KillEvent::KillEvent(const std::vector<Player> &survivorList, const std::vector<Player> &deadPlayerList) {
     eventType = "Kill";
     if(survivorList.size() > 1){
-        eventText = "As some Participants run into eachother, hesitantly ";
+        eventText = "Some Participants run into eachother:\nHesitantly, ";
         for(int index{0}; index < survivorList.size(); ++index){
-            if(index == survivorList.size()-2 && survivorList.size() > 1){
+            if(index == (int)survivorList.size()-2 && (int)survivorList.size() > 1){
                 eventText += survivorList.at(index).name + " and ";
             }
-            else if(index < survivorList.size()-2){
+            else if(index < (int)survivorList.size()-2){
                 eventText += survivorList.at(index).name + ", ";
             }
             else {
@@ -26,10 +27,10 @@ KillEvent::KillEvent(const std::vector<Player> &survivorList, const std::vector<
         }
         eventText +=  " team up and kill ";
         for(int index{0}; index < deadPlayerList.size(); ++index){
-            if(index == deadPlayerList.size()-2 && deadPlayerList.size() > 1){
+            if(index == deadPlayerList.size()-2 && (int)deadPlayerList.size() > 1){
                 eventText += deadPlayerList.at(index).name + " and ";
             }
-            else if(index < deadPlayerList.size()-2){
+            else if(index < (int)deadPlayerList.size()-2){
                 eventText += deadPlayerList.at(index).name + ", ";
             }
             else {
@@ -42,10 +43,10 @@ KillEvent::KillEvent(const std::vector<Player> &survivorList, const std::vector<
     else{
         eventText = "As a fight breaks out ";
         for(int index{0}; index < deadPlayerList.size(); ++index){
-            if(index == deadPlayerList.size()-2 && deadPlayerList.size() > 1){
+            if(index == (int)deadPlayerList.size()-2 && (int)deadPlayerList.size() > 1){
                 eventText += deadPlayerList.at(index).name + " and ";
             }
-            else if(index < deadPlayerList.size()-2){
+            else if(index < (int)deadPlayerList.size()-2){
                 eventText += deadPlayerList.at(index).name + ", ";
             }
             else {
