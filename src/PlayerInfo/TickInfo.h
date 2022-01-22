@@ -15,7 +15,7 @@ private:
     std::any freeActionData;
 public:
     enum ActionType{
-        move, flee, recover, attack, scout, gather, reinforce
+        move, recover, attack, scout, gather, reinforce
     };
     ActionType type;
     bool freeAction = false;

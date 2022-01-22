@@ -12,6 +12,7 @@ public:
     int x;
     int y;
 
+    Coordinate();
     explicit Coordinate(int x, int y);
     static Coordinate invalidCoords();
     std::string hashValue() const;

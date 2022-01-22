@@ -29,6 +29,11 @@ TickInfo Player::tick() const{
     return bt->traverse();
 }
 
+int Player::skillCheck(SkillCheckType type){
+    Random rand;
+    return rand.get_random_Int(2);
+}
+
 
 bool operator==(const Player& p1, const Player& p2){
     return p1.name == p2.name;

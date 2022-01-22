@@ -25,6 +25,7 @@ class GameManager{
 public:
 
     GameManager();
+    explicit GameManager(GameMap&& map);
     explicit GameManager(GameMap& map);
 
     const GameMap& getMap() const;

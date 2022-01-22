@@ -7,6 +7,7 @@
 #include<cmath>
 #include<iostream>
 
+Coordinate::Coordinate() {x = -1; y = -1;}
 Coordinate::Coordinate(int x, int y) :x{x}, y{y}{}
 
 Coordinate Coordinate::invalidCoords() {return Coordinate(-1,-1);}

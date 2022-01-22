@@ -20,6 +20,12 @@ GameManager::GameManager() : turnManager{gameData}{
     init_game();
 }
 
+GameManager::GameManager(GameMap&& setMap) : turnManager{gameData}{
+    gameData.map = setMap;
+    turnManager.registerListener(textHandler);
+    init_game();
+}
+
 GameManager::GameManager(GameMap& setMap) : turnManager{gameData}{
     gameData.map = setMap;
     turnManager.registerListener(textHandler);

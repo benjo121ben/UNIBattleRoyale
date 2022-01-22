@@ -13,7 +13,8 @@
 class GameMap : public TileMap<BRTile>{
 
 public:
-    static std::string getMap1();
+    static GameMap getMap1();
+    static GameMap getMultifightTestMap();
 
     GameMap();
     GameMap(const GameMap& map);

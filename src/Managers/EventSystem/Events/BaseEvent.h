@@ -10,10 +10,9 @@ class BaseEvent {
 protected:
     std::string eventType;
     std::string eventText;
-    const Player& player;
 public:
-    explicit BaseEvent(const Player& player);
-    BaseEvent(const BaseEvent& e);
+    BaseEvent() = default;
+    BaseEvent(const BaseEvent& e) = default;
     virtual std::string getEventType() const;
     virtual std::string getEventText() const;
 

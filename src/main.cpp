@@ -14,20 +14,21 @@ void printInputOptions();
 
 int main() {
 
-    Player p1("Benji", "Sword", Pronouns::masculine());
-    Player p2("Lena", "Axe", Pronouns::feminine());
-    Player p3("Froggy", "Tongue", Pronouns::neutral());
-    GameManager man;
+    Player p1("BigBoi", "Battleaxe", Pronouns::masculine());
+    Player p2("Old Asian Man", "Nunchucks", Pronouns::masculine());
+    Player p3("Super Woman", "Super Gun", Pronouns::feminine());
+    Player p4("Super Worm", "Super Teeth", Pronouns::neutral());
+    Player p5("tiny anime character", "Big ass sword", Pronouns::neutral());
+    Player p6("big anime character", "small ass sword", Pronouns::neutral());
+    GameManager man{GameMap::getMultifightTestMap()};
 
 
-
-
-    man.registerPlayer({p1,p2,p3});
+    man.registerPlayer({p1,p2,p3,p4,p5,p6});
     man.printMap();
 
 
     std::string line;
-    bool running = true;
+    bool running;
     do{
         std::cout << "-------------------------------------------\n\n";
         running = handleInput(man, line);

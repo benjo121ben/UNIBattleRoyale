@@ -4,12 +4,14 @@
 
 #ifndef GAME_KILLEVENT_H
 #define GAME_KILLEVENT_H
+
+#include <vector>
 #include "BaseEvent.h"
 
 class KillEvent : public BaseEvent{
-    const Player& target;
 public:
-    KillEvent(const Player& player, const Player& target);
+    KillEvent(const Player& survivor, const Player& deadPlayer);
+    KillEvent(const std::vector<Player>& survivor, const std::vector<Player>& deadPlayer);
 };
 
 

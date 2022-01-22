@@ -12,6 +12,10 @@ class BehaviourTree;
 
 class Player{
 public:
+    enum SkillCheckType{
+        testType
+    };
+
     std::string name;
     std::string weapon;
     Pronouns pronouns;
@@ -23,6 +27,7 @@ public:
     void addBehaviour(const BehaviourTree& bt, int id);
     TickInfo tick() const;
 
+    int skillCheck(SkillCheckType);
 };
 
 bool operator==(const Player& p1, const Player& p2);

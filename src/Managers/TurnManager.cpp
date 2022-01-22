@@ -4,9 +4,13 @@
 #include "TurnManager.h"
 #include "../Exceptions/GameExceptions.h"
 #include "EventSystem/Events/Events.h"
+#include "../Random.h"
 
 TurnManager::TurnManager(GameData& dataObject) :
-        allPlayerList{dataObject.allPlayersList}, alive2PlayersList{dataObject.alivePlayerList}, playerPositions{dataObject.playerPositions}, map{dataObject.map} {}
+        allPlayerList{dataObject.allPlayersList},
+        alive2PlayersList{dataObject.alivePlayerList},
+        playerPositions{dataObject.playerPositions},
+        map{dataObject.map} {}
 
 void TurnManager::queueInstruction(int playerID, const TickInfo& t){
     if(instructions.size() <allPlayerList.size()) {
@@ -20,13 +24,9 @@ void TurnManager::handleTurn(){
 
     while (!instructions.empty()){
         //checks if a players action was interupted by another player
-        bool interrupted = false;
         auto elem = instructions.begin();
         int playerNr = elem->first;
-        for(auto id : interruptedList){
-            if(id == playerNr) interrupted = true;
-        }
-        if(interrupted || alive2PlayersList.count(playerNr) == 0) {
+        if(interruptedList.count(playerNr) || alive2PlayersList.count(playerNr) == 0) {
             instructions.erase(elem);
             continue;
         }
@@ -37,12 +37,10 @@ void TurnManager::handleTurn(){
                 handleMove(playerNr, tickInfo);
                 break;
             }
-            case TickInfo::flee:
-                break;
             case TickInfo::recover:
                 break;
             case TickInfo::attack:{
-                handleFight(playerNr, tickInfo);
+                scheduleFight(playerPositions.at(playerNr));
                 break;
             }
             case TickInfo::scout:
@@ -55,45 +53,36 @@ void TurnManager::handleTurn(){
         instructions.erase(elem);
     }
     interruptedList.clear();
+    resolveAllFights();
 }
 
 void TurnManager::handleMove(int playerNr, const TickInfo &t) {
     auto dir {t.getData<cardinal_directions>()};
     Coordinate coord = playerPositions.at(playerNr);
+    if(isFightOnCoord(coord)){
+        if(allPlayerList.at(playerNr).skillCheck(Player::testType)){return;}
+    }
     switch(dir){
         case north:
-            coord = Coordinate(coord.x, coord.y-1);
-            break;
+            coord = Coordinate(coord.x, coord.y-1); break;
         case south:
-            coord = Coordinate(coord.x, coord.y+1);
-            break;
+            coord = Coordinate(coord.x, coord.y+1); break;
         case west:
-            coord = Coordinate(coord.x-1, coord.y);
-            break;
+            coord = Coordinate(coord.x-1, coord.y); break;
         case east:
-            coord = Coordinate(coord.x+1, coord.y);
-            break;
+            coord = Coordinate(coord.x+1, coord.y); break;
     }
 
     if(map.existsTileAt(coord)){
         playerPositions.at(playerNr) = coord;
         fireEvent(MoveEvent(allPlayerList.at(playerNr), dir));
-        auto end = playerPositions.end();
-        for(auto playerPos {playerPositions.begin()}; alive2PlayersList.count(playerNr) != 0 && playerPos != end; playerPos++){
-            if(playerPos->first != playerNr && playerPos->second == coord){
-                interruptedList.push_back(playerPos->first);
-                if(handleFight(playerNr, playerPos->first)){
-                    playerPos = playerPositions.begin();
-                    end = playerPositions.end();
-                }
-            }
+        if(anotherPlayerOnTile(playerNr)){
+            scheduleFight(coord);
         }
     }
 }
 
-bool TurnManager::handleFight(int p1ID, const TickInfo& t) {
-    return handleFight(p1ID, t.getData<int>());
-}
+
 
 bool TurnManager::handleFight(int p1ID, int p2ID) {
     if(!alive2PlayersList.count(p1ID) || !alive2PlayersList.count(p2ID)) return false;
@@ -105,7 +94,64 @@ bool TurnManager::handleFight(int p1ID, int p2ID) {
 }
 
 void TurnManager::killPlayer(int looser) {
-    interruptedList.push_back(looser);
+    interruptedList.insert(looser);
     alive2PlayersList.erase(looser);
     playerPositions.erase(looser);
+}
+
+void TurnManager::scheduleFight(Coordinate coordinate) {
+    for(auto& listCoord : scheduledFightsList){
+        if(listCoord == coordinate) return;
+    }
+    scheduledFightsList.push_back(coordinate);
+}
+
+bool TurnManager::isFightOnCoord(Coordinate coordinate) {
+    for(const auto& checkCoord : scheduledFightsList){
+        if(checkCoord == coordinate) return true;
+    }
+    return false;
+}
+
+bool TurnManager::anotherPlayerOnTile(int playerNr) {
+    auto coord = playerPositions.at(playerNr);
+    for(auto playerPos {playerPositions.begin()}; playerPos != playerPositions.end(); playerPos++) {
+        if (playerPos->first != playerNr && playerPos->second == coord) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void TurnManager::resolveAllFights() {
+    for(const auto& coord : scheduledFightsList){
+        std::vector<int> playerList;
+        for(const auto& elem : playerPositions){
+            if(elem.second ==coord) playerList.push_back(elem.first);
+        }
+        if(playerList.size() == 2){
+            handleFight(playerList.at(0), playerList.at(1));
+        }
+        else if(playerList.size() > 2){
+            handleSkirmish(playerList);
+        }
+    }
+}
+
+bool TurnManager::handleSkirmish(std::vector<int> &participantIndices) {
+    std::vector<Player> participants;
+    for(auto& index : participantIndices){
+        participants.push_back(allPlayerList.at(index));
+    }
+    Random rand;
+    int deadAmount = rand.get_random_Int(participants.size() - 1);
+    std::vector<Player> deadList;
+    while (deadAmount > 0){
+        int index = rand.get_random_Int(participants.size());
+        deadList.push_back(participants.at(index));
+        participants.erase(participants.begin() + index);
+        --deadAmount;
+    }
+    fireEvent(KillEvent(participants, deadList));
+    return true;
 }
