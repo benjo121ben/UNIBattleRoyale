@@ -38,9 +38,9 @@ const GameMap& GameManager::getMap() const{
 }
 
 void GameManager::printMap(bool showSpawn){
-    std::string ret {getMap().printMap(showSpawn)};
     char playerNr[10] = {'0','1','2','3','4','5','6','7','8','9'};
-    for(int posNr : alivePlayerList()){
+    std::string ret {getMap().printMap(showSpawn)};
+    /*for(int posNr : alivePlayerList()){
         Coordinate coord{playerPositions().at(posNr)};
         ret.at(coord.x + (map().sizeX + 1) * coord.y) = playerNr[posNr];
     }
@@ -48,7 +48,40 @@ void GameManager::printMap(bool showSpawn){
 
     for(int posNr : alivePlayerList()){
         std::cout << posNr << "=" << allPlayerList().at(posNr).name << ",  ";
+    }*/
+    std::map<Coordinate, std::vector<int>> registeredCoords;
+    for(auto posNr : alivePlayerList()){
+        Coordinate coord{playerPositions().at(posNr)};
+        if(registeredCoords.count(coord)){
+            registeredCoords.at(coord).push_back(posNr);
+        }
+        else{
+            ret.at(coord.x + (map().sizeX + 1) * coord.y) = playerNr[posNr];
+            std::vector<int> playerList;
+            playerList.push_back(posNr);
+            registeredCoords.insert_or_assign(coord, playerList);
+        }
     }
+
+    std::cout << ret;
+
+    for(auto& entry : registeredCoords){
+        auto& presentPlayers {entry.second};
+        std::cout << playerNr[presentPlayers.at(0)] << "=";
+
+        for(int index{0}; index < presentPlayers.size(); ++index){
+            Player& p = allPlayerList().at(presentPlayers.at(index));
+            if(index != 0){
+                std::cout << ", " << p.name;
+            }
+            else {
+                std::cout << p.name;
+            }
+        }
+        std::cout << "   ";
+    }
+
+    std::cout<<std::endl;
     std::cout<<std::endl;
     std::cout<<std::endl;
 }
