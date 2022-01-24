@@ -2,8 +2,6 @@
 #include "PlayerInfo/Player.h"
 #include "MapInfo/GameMap.h"
 #include "Managers/GameManager.h"
-#include "Pathfinder/Pathfinder.h"
-#include "Random.h"
 #include "BehaviourTree/BehaviourTree.h"
 #include "BehaviourTree/allNodes.h"
 
@@ -33,9 +31,10 @@ int main() {
         std::cout << "-------------------------------------------\n\n";
         running = handleInput(man, line);
 
-
-        std::cout << "input help: to see all commands." << std::endl;
-        std::cout << "input a command to continue:" << std::endl;
+        if(running) {
+            std::cout << "input help: to see all commands." << std::endl;
+            std::cout << "input a command to continue:" << std::endl;
+        }
     }while (running && std::getline(std::cin, line));
 
     return 0;

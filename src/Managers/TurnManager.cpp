@@ -57,10 +57,14 @@ void TurnManager::handleTurn(){
 }
 
 void TurnManager::handleMove(int playerNr, const TickInfo &t) {
+    MoveEvent::moveEventType type = MoveEvent::normal;
     auto dir {t.getData<cardinal_directions>()};
     Coordinate coord = playerPositions.at(playerNr);
     if(isFightOnCoord(coord)){
         if(allPlayerList.at(playerNr).skillCheck(Player::testType)){return;}
+        else{
+            type = MoveEvent::flee;
+        }
     }
     switch(dir){
         case north:
@@ -75,10 +79,11 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
 
     if(map.existsTileAt(coord)){
         playerPositions.at(playerNr) = coord;
-        fireEvent(MoveEvent(allPlayerList.at(playerNr), dir));
         if(anotherPlayerOnTile(playerNr)){
             scheduleFight(coord);
+            type = (type == MoveEvent::flee) ? MoveEvent::flee_back_into_fight : MoveEvent::mayCauseAttack;
         }
+        fireEvent(MoveEvent(allPlayerList.at(playerNr), dir, type));
     }
 }
 

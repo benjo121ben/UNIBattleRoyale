@@ -11,7 +11,10 @@
 class MoveEvent : public BaseEvent{
     const cardinal_directions direction;
 public:
-    MoveEvent(const Player& p, cardinal_directions dir);
+    enum moveEventType{
+        normal, mayCauseAttack, flee, flee_back_into_fight
+    };
+    MoveEvent(const Player& p, cardinal_directions dir, moveEventType type);
 };
 
 
