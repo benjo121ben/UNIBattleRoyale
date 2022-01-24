@@ -20,6 +20,7 @@ void TurnManager::queueInstruction(int playerID, const TickInfo& t){
         throw generic_game_error("tried to queue new Turn instruction with full list");
     }
 }
+
 void TurnManager::handleTurn(){
 
     while (!instructions.empty()){
@@ -61,7 +62,10 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
     auto dir {t.getData<cardinal_directions>()};
     Coordinate coord = playerPositions.at(playerNr);
     if(isFightOnCoord(coord)){
-        if(allPlayerList.at(playerNr).skillCheck(Player::testType)){return;}
+        if(allPlayerList.at(playerNr).skillCheck(Player::testType)){
+            fireEvent(MoveEvent(allPlayerList.at(playerNr), dir, MoveEvent::failed_flee));
+            return;
+        }
         else{
             type = MoveEvent::flee;
         }
@@ -81,7 +85,7 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
         playerPositions.at(playerNr) = coord;
         if(anotherPlayerOnTile(playerNr)){
             scheduleFight(coord);
-            type = (type == MoveEvent::flee) ? MoveEvent::flee_back_into_fight : MoveEvent::mayCauseAttack;
+            type = MoveEvent::charge;
         }
         fireEvent(MoveEvent(allPlayerList.at(playerNr), dir, type));
     }
