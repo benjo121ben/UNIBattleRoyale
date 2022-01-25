@@ -1,0 +1,21 @@
+
+#include "EventTextTranslator.h"
+
+template<typename T> std::string EventTextTranslator::outputList(std::vector<T> list, std::function<std::string(const std::any&)>& func) {
+    std::string ret;
+    int index {0};
+    for(auto& entry : list){
+        auto any_entry = std::make_any<T>(entry);
+        if(index == (int)list.size()-2 && (int)list.size() > 1){
+            ret += func(any_entry) + " and ";
+        }
+        else if(index < (int)list.size()-2){
+            ret += func(any_entry) + ", ";
+        }
+        else {
+            ret += func(any_entry);
+        }
+        index++;
+    }
+    return ret;
+}

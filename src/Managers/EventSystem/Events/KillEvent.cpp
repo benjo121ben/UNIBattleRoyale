@@ -3,27 +3,20 @@
 //
 
 #include "KillEvent.h"
-#include "TextTranslator/EventTextTranslator.h"
+#include "../TextTranslator/EventTextStorage_Access.h"
 
 KillEvent::KillEvent(const Player &survivor, const Player &deadPlayer) {
     eventType = "Kill";
-    eventText = "" + survivor.name + " manages to slay " + deadPlayer.name + " with " + survivor.pronouns.possessive + " " + survivor.weapon + ".\n";
+    TextVariables vars;
+    vars.setValue(TextVariables::KEY_PLAYER(), survivor);
+    vars.setValue(TextVariables::KEY_TARGETPLAYER(), deadPlayer);
+    eventText = EventTextStorage_Access::getKill(vars, false);
 }
 
 KillEvent::KillEvent(const std::vector<Player> &survivorList, const std::vector<Player> &deadPlayerList) {
     eventType = "Kill";
-    if(survivorList.size() > 1){
-        eventText = "Some Participants run into eachother:\nHesitantly, ";
-        eventText += EventTextTranslator::outputList<Player>(survivorList, [](const Player& p){return p.name;});
-        eventText +=  " team up and kill ";
-        eventText += EventTextTranslator::outputList<Player>(deadPlayerList, [](const Player& p){return p.name;});
-        eventText += "\n";
-
-    }
-    else{
-        eventText = "As a fight breaks out ";
-        eventText += EventTextTranslator::outputList<Player>(deadPlayerList, [](const Player& p){return p.name;});
-        eventText += " are killed in the skirmish, leaving " + survivorList.at(0).name + " as the lone survivor";
-        eventText += "\n";
-    }
+    TextVariables vars;
+    vars.setValue<std::vector<Player>>(TextVariables::KEY_SURVIVORLIST(), survivorList);
+    vars.setValue<std::vector<Player>>(TextVariables::KEY_DEADLIST(), deadPlayerList);
+    eventText = EventTextStorage_Access::getKill(vars, true);
 }

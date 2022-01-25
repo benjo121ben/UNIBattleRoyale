@@ -35,4 +35,10 @@ add_executable(Game
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckBoardValue.cpp
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_CheckEnemyInAttackRange.cpp
         src/BehaviourTree/Nodes/ActionNodes/BTActionNode_Attack.cpp
-        src/Managers/EventSystem/Events/KillEvent.cpp src/Managers/EventSystem/Events/KillEvent.h src/Managers/EventSystem/Events/TextTranslator/EventTextTranslator.cpp src/Managers/EventSystem/Events/TextTranslator/EventTextTranslator.h src/Managers/EventSystem/Events/TextTranslator/TextVariables.cpp src/Managers/EventSystem/Events/TextTranslator/TextVariables.h)
+        src/Managers/EventSystem/Events/KillEvent.cpp
+        src/Managers/EventSystem/TextTranslator/EventTextStorage/EventTextTranslator.cpp
+        src/Managers/EventSystem/TextTranslator/EventTextStorage/TextVariables.cpp
+        src/Managers/EventSystem/TextTranslator/EventTextStorage/EventTextLambdas.cpp
+        src/Managers/EventSystem/TextTranslator/EventTextStorage_Access.cpp
+        src/Managers/EventSystem/TextTranslator/EventTextStorage/EventTextStorageContainer.cpp
+        )

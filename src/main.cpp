@@ -2,9 +2,7 @@
 #include "PlayerInfo/Player.h"
 #include "MapInfo/GameMap.h"
 #include "Managers/GameManager.h"
-#include "BehaviourTree/BehaviourTree.h"
-#include "BehaviourTree/allNodes.h"
-#include "Managers/EventSystem/Events/TextTranslator/EventTextTranslator.h"
+#include "Managers/EventSystem/TextTranslator/EventTextStorage/EventTextTranslator.h"
 
 
 bool handleInput(GameManager &man, const std::string &line);
@@ -14,15 +12,38 @@ void printInputOptions();
 int main() {
 
 
-    //std::cout << EventTextTranslator::translate("Test should have {test} this", TextVariables()) <<std::endl;
-    //std::cout << EventTextTranslator::translate("{test Test should have test} this {test}", TextVariables()) <<std::endl;
+    /*try {
+
+        v.setValue<std::string>("test", "REPLACED");
+        std::cout << EventTextTranslator::translate("Test should have {test} this", v) << std::endl;
+        std::cout << EventTextTranslator::translate("{test} should this be {test}?", v) << std::endl;
+
+    }catch (std::runtime_error& e){
+        std::cout << e.what();
+    }*/
+
     Player p1("BigBoi", "Battleaxe", Pronouns::masculine());
     Player p2("Old Asian Man", "Nunchucks", Pronouns::masculine());
+    /*std::vector<Player> surv;
+    std::vector<Player> dead;
+    surv.push_back(p1);
+    dead.push_back(p2);
+
+    TextVariables v;
+    v.setValue<std::vector<Player>>(TextVariables::KEY_SURVIVORLIST(), surv);
+    v.setValue<std::vector<Player>>(TextVariables::KEY_DEADLIST(), dead);
+
+    std::string tes = "Hesitantly, {[FIGHT_SURVIVORLIST,(LAMBDA_PLAYERNAME)]} team up and kill {[FIGHT_DEADLIST,(LAMBDA_PLAYERNAME)]}\n";
+    EventTextTranslator translator;
+    std::cout << translator.translate(v, tes) ;*/
+
+
+
+
     Player p3("Super Woman", "Super Gun", Pronouns::feminine());
     Player p4("Super Worm", "Super Teeth", Pronouns::neutral());
     Player p5("tiny anime character", "Big ass sword", Pronouns::neutral());
     Player p6("big anime character", "small ass sword", Pronouns::neutral());
-
     GameManager man{GameMap::getMultifightTestMap()};
 
 
