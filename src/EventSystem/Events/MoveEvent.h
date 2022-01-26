@@ -5,7 +5,7 @@
 #ifndef GAME_MOVEEVENT_H
 #define GAME_MOVEEVENT_H
 #include "BaseEvent.h"
-#include "../../../MapInfo/cardinal_directions.h"
+#include "../../MapInfo/cardinal_directions.h"
 
 
 class MoveEvent : public BaseEvent{

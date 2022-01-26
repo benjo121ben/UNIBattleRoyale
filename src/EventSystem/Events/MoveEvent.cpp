@@ -1,7 +1,7 @@
 //
 // Created by benja on 18/01/2022.
 //
-#include"../../../Random.h"
+#include"../../Random.h"
 #include "MoveEvent.h"
 MoveEvent::MoveEvent(const Player& p, cardinal_directions dir, moveEventType type) : direction{dir}{
     Random rand;

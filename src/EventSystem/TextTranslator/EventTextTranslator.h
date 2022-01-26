@@ -8,8 +8,8 @@
 #include<vector>
 #include<any>
 #include <functional>
-#include "TextVariables.h"
-#include "TextVariableLambdas.h"
+#include "../EventTextStorage/TextVariables.h"
+#include "../EventTextStorage/TextVariableLambdas.h"
 class EventTextTranslator {
     static std::string interpretKeyword(const TextVariables &variables, const std::string& keyword);
     static std::string interpretKeywordWithLambda(const TextVariables &variables, std::string& keyword, std::string& lambda_keyword);

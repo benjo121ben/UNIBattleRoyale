@@ -3,7 +3,7 @@
 //
 #include "TurnManager.h"
 #include "../Exceptions/GameExceptions.h"
-#include "EventSystem/Events/Events.h"
+#include "../EventSystem/Events/Events.h"
 #include "../Random.h"
 
 TurnManager::TurnManager(GameData& dataObject) :

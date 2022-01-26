@@ -8,8 +8,8 @@
 #include<unordered_set>
 #include "../MapInfo/GameMap.h"
 #include "../PlayerInfo/Player.h"
-#include "EventSystem/GameEventTextHandler.h"
-#include "EventSystem/EventAnnouncer.h"
+#include "../EventSystem/GameEventTextHandler.h"
+#include "../EventSystem/EventAnnouncer.h"
 #include "GameData.h"
 
 class TurnManager : public EventAnnouncer{

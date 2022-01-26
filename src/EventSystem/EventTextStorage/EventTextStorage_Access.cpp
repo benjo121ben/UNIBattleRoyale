@@ -6,12 +6,12 @@
 #include<vector>
 #include <iostream>
 #include "EventTextStorage_Access.h"
-#include "EventTextStorage/EventTextTranslator.h"
-#include "EventTextStorage/TextVariableLambdas.h"
-#include "EventTextStorage/TextVariables.h"
-#include "EventTextStorage/EventTextStorageContainer.h"
-#include "../../../PlayerInfo/Player.h"
-#include "../../../Random.h"
+#include "EventTextStorageContainer.h"
+#include "TextVariables.h"
+#include "TextVariableLambdas.h"
+#include "../TextTranslator/EventTextTranslator.h"
+#include "../../PlayerInfo/Player.h"
+#include "../../Random.h"
 using container = EventTextStorageContainer;
 
 

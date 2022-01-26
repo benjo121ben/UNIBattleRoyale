@@ -7,7 +7,7 @@
 
 
 #include <string>
-#include "EventTextStorage/TextVariables.h"
+#include "TextVariables.h"
 
 class EventTextStorage_Access {
 

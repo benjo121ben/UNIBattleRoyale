@@ -5,7 +5,7 @@
 #ifndef GAME_BASEEVENT_H
 #define GAME_BASEEVENT_H
 #include<string>
-#include "../../../PlayerInfo/Player.h"
+#include "../../PlayerInfo/Player.h"
 class BaseEvent {
 protected:
     std::string eventType;

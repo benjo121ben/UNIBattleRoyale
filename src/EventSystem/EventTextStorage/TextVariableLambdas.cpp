@@ -2,7 +2,7 @@
 // Created by benja on 24/01/2022.
 //
 #include "TextVariableLambdas.h"
-#include "../../../../PlayerInfo/Player.h"
+#include "../../PlayerInfo/Player.h"
 #include <any>
 #include <stdexcept>
 #include <map>

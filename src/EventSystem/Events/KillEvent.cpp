@@ -3,7 +3,8 @@
 //
 
 #include "KillEvent.h"
-#include "../TextTranslator/EventTextStorage_Access.h"
+#include "../EventTextStorage/TextVariables.h"
+#include "../EventTextStorage/EventTextStorage_Access.h"
 
 KillEvent::KillEvent(const Player &survivor, const Player &deadPlayer) {
     eventType = "Kill";

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <functional>
 #include "EventTextTranslator.h"
-#include "../../../../PlayerInfo/Player.h"
+#include "../../PlayerInfo/Player.h"
 
 using lambdas = TextVariableLambdas;
 

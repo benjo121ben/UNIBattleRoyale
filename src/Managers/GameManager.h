@@ -33,6 +33,7 @@ public:
 
     void registerPlayer(const Player& p);
     void registerPlayer(std::initializer_list<const Player> l);
+    void registerPlayer(std::vector<Player> l);
     void removePlayer(int index);
     void printEvents();
     bool tick();

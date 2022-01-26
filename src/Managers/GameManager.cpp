@@ -118,6 +118,11 @@ void GameManager::registerPlayer(std::initializer_list<const Player> l){
         registerPlayer(p);
     }
 }
+void GameManager::registerPlayer(std::vector<Player> l){
+    for(auto& p : l) {
+        registerPlayer(p);
+    }
+}
 
 void GameManager::removePlayer(int index) {
     if(started) throw game_started_error();
