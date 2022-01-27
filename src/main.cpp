@@ -1,9 +1,6 @@
 #include <iostream>
 #include "UIHelpers.h"
-#include "PlayerInfo/Player.h"
-#include "MapInfo/GameMap.h"
 #include "Managers/GameManager.h"
-#include "EventSystem/TextTranslator/EventTextTranslator.h"
 
 
 
