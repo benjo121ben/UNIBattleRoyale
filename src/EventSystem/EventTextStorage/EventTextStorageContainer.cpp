@@ -109,13 +109,12 @@ std::string EventTextStorageContainer::oneVone() {
 
             "A slight breeze touches " +
                 makeQuery(Vars::KEY_TARGETPLAYER(), Lambdas::LM_PLAYERNAME()) +
-                "'s exposed belly as "+
+                "'s exposed belly. "+
                 makeQuery(Vars::KEY_TARGETPLAYER(), Lambdas::LM_PLAYER_SUBJECTIVE()) +
                 " lies in the warm seawater.\n" +
+                "The salt's sting quickly fades and the water takes on a red tinge as " +
                 makeQuery(Vars::KEY_TARGETPLAYER(), Lambdas::LM_PLAYER_SUBJECTIVE()) +
-                "The salt's sting quickly fades while the water takes on a red tinge as" +
-                makeQuery(Vars::KEY_TARGETPLAYER(), Lambdas::LM_PLAYER_SUBJECTIVE()) +
-                " bleeds out from the wound inflicted by " +
+                " bleeds out from the wound\n inflicted by " +
                 makeQuery(Vars::KEY_PLAYER(), Lambdas::LM_PLAYERNAME()) + "'s " +
                 makeQuery(Vars::KEY_PLAYER(), Lambdas::LM_PLAYERWEAPON()) + ".\n",
 
@@ -178,4 +177,18 @@ std::string EventTextStorageContainer::oneVone() {
 
     };
     return ret.at(Random::get_random_Int(ret.size()));
+}
+
+std::string EventTextStorageContainer::move() {
+    return "" + makeQuery(Vars::KEY_PLAYER(), Lambdas::LM_PLAYERNAME()) +
+    " continued " + makeQuery(Vars::KEY_PLAYER(), Lambdas::LM_PLAYER_POSESSIVE()) +
+    " journey towards " + makeQuery(Vars::MOVE_DIR(), Lambdas::LM_CARDINAL_DIR()) + ".\n";
+}
+
+std::string EventTextStorageContainer::flee() {
+    return std::string();
+}
+
+std::string EventTextStorageContainer::charge() {
+    return std::string();
 }

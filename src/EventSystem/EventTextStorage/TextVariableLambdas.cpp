@@ -3,6 +3,7 @@
 //
 #include "TextVariableLambdas.h"
 #include "../../PlayerInfo/Player.h"
+#include "../../MapInfo/cardinal_directions.h"
 #include <any>
 #include <stdexcept>
 #include <map>
@@ -17,6 +18,11 @@ std::string TextVariableLambdas::getPlayerInfo(const std::any& an, playerInfoTyp
         case pronoun_poss: return p.pronouns.possessive;
     }
     throw std::runtime_error("error in TextVariableLambdas::getPlayerInfo");
+}
+
+std::string TextVariableLambdas::translateCardinalDir(const std::any &anyObj) {
+    auto dir = std::any_cast<cardinal_directions>(anyObj);
+    return dir_to_string(dir);
 }
 
 std::string TextVariableLambdas::getPlayerName(const std::any &p) {
@@ -45,7 +51,8 @@ std::function<std::string(std::any)> TextVariableLambdas::getLambda(std::string 
             {LM_PLAYERWEAPON(), getPlayerWeapon},
             {LM_PLAYER_SUBJECTIVE(), getPlayerPronoun_subjective},
             {LM_PLAYER_POSESSIVE(), getPlayerPronoun_possessive},
-            {LM_PLAYER_OBJECTIVE(), getPlayerPronoun_objective}
+            {LM_PLAYER_OBJECTIVE(), getPlayerPronoun_objective},
+            {LM_CARDINAL_DIR(), translateCardinalDir}
     };
     if(!functionMap.count(key)) throw std::runtime_error("TextVariableLambdas::getLambda( key invalid: " + key  +")");
     else return functionMap.at(key);

@@ -12,10 +12,12 @@ std::string makeQuery(std::string mainKeyWord);
 class EventTextStorageContainer {
 public:
     static std::string manySurvivorSkirmish();
-
     static std::string soleSurvivorSkirmish();
-
     static std::string oneVone();
+
+    static std::string flee();
+    static std::string move();
+    static std::string charge();
 };
 
 

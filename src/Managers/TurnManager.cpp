@@ -59,16 +59,16 @@ void TurnManager::handleTurn(){
 }
 
 void TurnManager::handleMove(int playerNr, const TickInfo &t) {
-    MoveEvent::moveEventType type = MoveEvent::normal;
+    moveEventType type = normal;
     auto dir {t.getData<cardinal_directions>()};
     Coordinate coord = playerPositions.at(playerNr);
     if(isFightOnCoord(coord)){
-        if(allPlayerList.at(playerNr).skillCheck(Player::testType)){
-            fireEvent(MoveEvent(allPlayerList.at(playerNr), dir, MoveEvent::failed_flee));
+        if(!allPlayerList.at(playerNr).skillCheck(Player::testType)){
+            //fireEvent(MoveEvent(allPlayerList.at(playerNr), dir, failed_flee));
             return;
         }
         else{
-            type = MoveEvent::flee;
+            type = flee;
         }
     }
     switch(dir){
@@ -86,9 +86,9 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
         playerPositions.at(playerNr) = coord;
         if(anotherPlayerOnTile(playerNr)){
             scheduleFight(coord);
-            type = MoveEvent::charge;
+            type = charge;
         }
-        fireEvent(MoveEvent(allPlayerList.at(playerNr), dir, type));
+        //fireEvent(MoveEvent(allPlayerList.at(playerNr), dir, type));
     }
 }
 

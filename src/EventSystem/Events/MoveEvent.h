@@ -7,13 +7,14 @@
 #include "BaseEvent.h"
 #include "../../MapInfo/cardinal_directions.h"
 
+enum moveEventType{
+    normal, charge, flee, failed_flee
+};
 
 class MoveEvent : public BaseEvent{
     const cardinal_directions direction;
 public:
-    enum moveEventType{
-        normal, charge, flee, failed_flee
-    };
+
     MoveEvent(const Player& p, cardinal_directions dir, moveEventType type);
 };
 

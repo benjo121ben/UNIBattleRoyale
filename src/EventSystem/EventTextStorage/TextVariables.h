@@ -25,6 +25,7 @@ public:
 
     static std::string KEY_PLAYER(){return "ACTION_PLAYER";}
     static std::string KEY_TARGETPLAYER(){return "ACTION_TARGETPLAYER";}
+    static std::string MOVE_DIR(){return "MOVE_DIR";}
     static std::string KEY_SURVIVORLIST(){return "FIGHT_SURVIVORLIST";}
     static std::string KEY_DEADLIST(){return "FIGHT_DEADLIST";}
 

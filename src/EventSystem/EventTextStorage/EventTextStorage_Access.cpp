@@ -32,6 +32,12 @@ std::string EventTextStorage_Access::getKill(const TextVariables& vars, bool gro
     return EventTextTranslator::translate(vars, ret);
 }
 
+std::string EventTextStorage_Access::getMove(const TextVariables &vars) {
+    std::string ret = EventTextStorageContainer::move();
+    return EventTextTranslator::translate(vars, ret);
+
+}
+
 
 
 

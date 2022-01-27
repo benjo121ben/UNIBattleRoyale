@@ -20,6 +20,8 @@ class TextVariableLambdas{
     static std::string getPlayerPronoun_possessive(const std::any& p);
     static std::string getPlayerPronoun_objective(const std::any& p);
 
+    static std::string translateCardinalDir(const std::any &anyObj);
+
 public:
     static std::function<std::string(std::any)> getLambda(std::string);
 
@@ -29,6 +31,8 @@ public:
     static std::string LM_PLAYER_SUBJECTIVE(){return "LAMBDA_PLAYER_SUBJECTIVE";}
     static std::string LM_PLAYER_OBJECTIVE(){return "LAMBDA_PLAYER_OBJECTIVE";}
     static std::string LM_PLAYER_POSESSIVE(){return "LAMBDA_PLAYER_POSSESSIVE";}
+
+    static std::string LM_CARDINAL_DIR(){return "LAMBDA_CARDINAL_DIR";}
 
 
 };
