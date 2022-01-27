@@ -1,6 +1,7 @@
 //
 // Created by benja on 18/01/2022.
 //
+#include <algorithm>
 #include "TurnManager.h"
 #include "../Exceptions/GameExceptions.h"
 #include "../EventSystem/Events/Events.h"
@@ -116,10 +117,7 @@ void TurnManager::scheduleFight(Coordinate coordinate) {
 }
 
 bool TurnManager::isFightOnCoord(Coordinate coordinate) {
-    for(const auto& checkCoord : scheduledFightsList){
-        if(checkCoord == coordinate) return true;
-    }
-    return false;
+    return std::any_of(scheduledFightsList.begin(), scheduledFightsList.end(), [coordinate](const Coordinate& checkCoord)-> bool {return checkCoord == coordinate;});
 }
 
 bool TurnManager::anotherPlayerOnTile(int playerNr) {
