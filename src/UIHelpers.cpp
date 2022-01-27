@@ -70,7 +70,7 @@ GameManager setupGame() {
             }
     );
     std::vector<Player> playerList;
-    GameManager man{GameMap::getMap1()};
+    GameManager man{GameMap::getMap2()};
     std::cout << "In this Game, up to six characters face off on a deserted Island.\n"
                  "The last person or thing standing wins.\n"
                  "You decide who enters the competition.\n"

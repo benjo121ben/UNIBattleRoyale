@@ -142,7 +142,9 @@ std::string EventTextStorageContainer::oneVone() {
                 makeQuery(Vars::KEY_PLAYER(), Lambdas::LM_PLAYERNAME()) +
                 "'s rogue " +
                 makeQuery(Vars::KEY_PLAYER(), Lambdas::LM_PLAYERWEAPON()) +
-                "s hits him in the back.\n He bleeds out shortly after.\n",
+                "s hits " +
+                    makeQuery(Vars::KEY_TARGETPLAYER(), Lambdas::LM_PLAYER_SUBJECTIVE()) +
+                " in the back.\n He bleeds out shortly after.\n",
 
             "It is almost midnight as " +
                 makeQuery(Vars::KEY_TARGETPLAYER(), Lambdas::LM_PLAYERNAME()) +

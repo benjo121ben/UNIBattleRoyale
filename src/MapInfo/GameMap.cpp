@@ -20,6 +20,19 @@ GameMap GameMap::getMap1() {
     );
 }
 
+GameMap GameMap::getMap2() {
+    return  GameMap(
+   "~~~~~~~~~~~~~~~~~~~~\n"
+            "~~~~~pp###0##pp~~~~~\n"
+            "~~~~pp0pp###0###~~~~\n"
+            "~~~~~pp#MMMM##pp~~~~\n"
+            "~~~~~p0#MMM####0p~~~\n"
+            "~~~~~~p##M0M~#pp~~~~\n"
+            "~~~~~~~~p#M##pp~~~~~\n"
+            "~~~~~~~~~~~~~~~~~~~~\n"
+    );
+}
+
 GameMap GameMap::getMultifightTestMap() {
     return GameMap(
             "000\n"

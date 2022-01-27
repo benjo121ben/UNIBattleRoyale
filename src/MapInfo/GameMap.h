@@ -14,6 +14,7 @@ class GameMap : public TileMap<BRTile>{
 
 public:
     static GameMap getMap1();
+    static GameMap getMap2();
     static GameMap getMultifightTestMap();
 
     GameMap();
