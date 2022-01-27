@@ -11,7 +11,9 @@
 /// \param max excluded maximum value
 /// \return random value
 int Random::get_random_Int(int max){
-    std::uniform_int_distribution<int> intDistro(0,max-1);
-    return intDistro(device);
+    static Random rand;
+    std::uniform_int_distribution<int> intDistro(0,(max-1));
+    return intDistro(rand.device);
 }
+
 

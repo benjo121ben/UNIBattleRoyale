@@ -5,6 +5,7 @@
 #ifndef GAME_TURNMANAGER_H
 #define GAME_TURNMANAGER_H
 #include<vector>
+#include<set>
 #include<unordered_set>
 #include "../MapInfo/GameMap.h"
 #include "../PlayerInfo/Player.h"
@@ -15,7 +16,7 @@
 class TurnManager : public EventAnnouncer{
     std::vector<Player>& allPlayerList;
     std::unordered_set<int> interruptedList;
-    std::unordered_set<int> &alive2PlayersList;
+    std::set<int> &alivePlayersList;
     std::vector<Coordinate> scheduledFightsList;
     std::map<int, Coordinate> &playerPositions;
     GameMap &map;

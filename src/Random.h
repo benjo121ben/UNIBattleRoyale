@@ -9,8 +9,10 @@
 #include <random>
 
 class Random{
+
     std::random_device device;
+    Random() = default;
 public:
-    int get_random_Int(int max);
+    static int get_random_Int(int max);
 };
 #endif //GAME_RANDOM_H

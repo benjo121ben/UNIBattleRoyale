@@ -46,7 +46,7 @@ std::string pressEnterToContinue(){
 bool getConfirmation() {
     std::string line;
     do{
-        std::cout << std::endl << "enter:\n";
+        std::cout<<isolator();
         std::cout << "y= Yes; n=No\n";
         std::getline(std::cin, line);
     } while (line != "n" && line != "y");
@@ -90,7 +90,7 @@ GameManager setupGame() {
             if(!getConfirmation()) break;
         }
         insertNewPlayer(playerList);
-    } while (playerList.size() < 6);
+    } while (playerList.size() < man.getMaxPlayers());
     man.registerPlayer(playerList);
     return man;
 }

@@ -8,7 +8,7 @@
 
 TurnManager::TurnManager(GameData& dataObject) :
         allPlayerList{dataObject.allPlayersList},
-        alive2PlayersList{dataObject.alivePlayerList},
+        alivePlayersList{dataObject.alivePlayerList},
         playerPositions{dataObject.playerPositions},
         map{dataObject.map} {}
 
@@ -27,7 +27,7 @@ void TurnManager::handleTurn(){
         //checks if a players action was interupted by another player
         auto elem = instructions.begin();
         int playerNr = elem->first;
-        if(interruptedList.count(playerNr) || alive2PlayersList.count(playerNr) == 0) {
+        if(interruptedList.count(playerNr) || alivePlayersList.count(playerNr) == 0) {
             instructions.erase(elem);
             continue;
         }
@@ -94,7 +94,7 @@ void TurnManager::handleMove(int playerNr, const TickInfo &t) {
 
 
 bool TurnManager::handleFight(int p1ID, int p2ID) {
-    if(!alive2PlayersList.count(p1ID) || !alive2PlayersList.count(p2ID)) return false;
+    if(!alivePlayersList.count(p1ID) || !alivePlayersList.count(p2ID)) return false;
     int winner = (allPlayerList.at(p1ID).fight(allPlayerList.at(p2ID)) == -1) ? p1ID : p2ID;
     auto looser = (winner == p1ID) ? p2ID : p1ID;
     fireEvent(KillEvent(allPlayerList.at(winner), allPlayerList.at(looser)));
@@ -104,7 +104,7 @@ bool TurnManager::handleFight(int p1ID, int p2ID) {
 
 void TurnManager::killPlayer(int looser) {
     interruptedList.insert(looser);
-    alive2PlayersList.erase(looser);
+    alivePlayersList.erase(looser);
     playerPositions.erase(looser);
 }
 
@@ -125,7 +125,7 @@ bool TurnManager::isFightOnCoord(Coordinate coordinate) {
 bool TurnManager::anotherPlayerOnTile(int playerNr) {
     auto coord = playerPositions.at(playerNr);
     for(auto playerPos {playerPositions.begin()}; playerPos != playerPositions.end(); playerPos++) {
-        if (playerPos->first != playerNr && playerPos->second == coord) {
+        if (playerPos->first != playerNr && alivePlayersList.count(playerPos->first) && playerPos->second == coord) {
             return true;
         }
     }
@@ -145,6 +145,7 @@ void TurnManager::resolveAllFights() {
             handleSkirmish(playerList);
         }
     }
+    scheduledFightsList.clear();
 }
 
 bool TurnManager::handleSkirmish(std::vector<int> &participantIndices) {
@@ -152,11 +153,10 @@ bool TurnManager::handleSkirmish(std::vector<int> &participantIndices) {
     for(auto& index : participantIndices){
         survivors.push_back(allPlayerList.at(index));
     }
-    Random rand;
-    int deadAmount = rand.get_random_Int(survivors.size() - 2) + 1;
+    int deadAmount = Random::get_random_Int(survivors.size() - 2) + 1;
     std::vector<Player> deadList;
     while (deadAmount > 0){
-        int index = rand.get_random_Int(survivors.size());
+        int index = Random::get_random_Int(survivors.size());
         deadList.push_back(survivors.at(index));
         survivors.erase(survivors.begin() + index);
         --deadAmount;

@@ -39,7 +39,7 @@ const std::map<int, Coordinate> &BTBlackboard::getPlayerPositionList() {
     return publicData.playerPositions;
 }
 
-const std::unordered_set<int> &BTBlackboard::alivePlayerList() {
+const std::set<int> &BTBlackboard::alivePlayerList() {
     return publicData.alivePlayerList;
 }
 

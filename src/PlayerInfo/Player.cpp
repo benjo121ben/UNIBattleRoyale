@@ -18,8 +18,7 @@ Player::Player(std::string name, std::string weapon, Pronouns pronouns) :
 
 
 int Player::fight(const Player& other){
-    Random rand;
-    return rand.get_random_Int(2) -1;
+    return Random::get_random_Int(2) -1;
 }
 
 void Player::addBehaviour(const BehaviourTree& bt, int id){
@@ -33,8 +32,7 @@ TickInfo Player::tick() const{
 }
 
 int Player::skillCheck(SkillCheckType type){
-    Random rand;
-    return rand.get_random_Int(2);
+    return Random::get_random_Int(2);
 }
 
 int Player::getID() const{

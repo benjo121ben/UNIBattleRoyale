@@ -17,9 +17,12 @@ class GameManager{
     GameEventTextHandler textHandler;
 
     GameMap& map();
-    std::unordered_set<int>& alivePlayerList();
+    std::set<int>& alivePlayerList();
+    const std::set<int>& alivePlayerList() const;
     std::vector<Player>& allPlayerList();
+    const std::vector<Player>& allPlayerList() const;
     std::map<int,Coordinate>& playerPositions();
+    const std::map<int,Coordinate>& playerPositions() const;
 
     void init_game();
 public:
@@ -29,6 +32,7 @@ public:
     explicit GameManager(GameMap& map);
 
     const GameMap& getMap() const;
+    int getMaxPlayers() const;
     void printMap(bool showSpawn = false);
 
     void registerPlayer(const Player& p);

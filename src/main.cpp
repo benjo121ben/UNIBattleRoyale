@@ -19,7 +19,7 @@ int main() {
 
         std::string line;
         do {
-            std::cout << "-------------------------------------------\n\n";
+            std::cout << isolator();
             running = handleInput(man, line);
 
             if (running) {
