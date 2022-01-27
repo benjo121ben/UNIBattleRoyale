@@ -12,6 +12,8 @@ std::string TextVariableLambdas::getPlayerInfo(const std::any& an, playerInfoTyp
     switch (type) {
         case name: return p.name;
         case weapon: return p.weapon;
+        case pronoun_sub: return p.pronouns.subjective;
+        case pronoun_obj: return p.pronouns.objective;
         case pronoun_poss: return p.pronouns.possessive;
     }
     throw std::runtime_error("error in TextVariableLambdas::getPlayerInfo");
@@ -25,6 +27,14 @@ std::string TextVariableLambdas::getPlayerWeapon(const std::any &p) {
     return getPlayerInfo(p,weapon);
 }
 
+std::string TextVariableLambdas::getPlayerPronoun_subjective(const std::any &p) {
+    return getPlayerInfo(p,pronoun_sub);
+}
+
+std::string TextVariableLambdas::getPlayerPronoun_objective(const std::any &p) {
+    return getPlayerInfo(p,pronoun_obj);
+}
+
 std::string TextVariableLambdas::getPlayerPronoun_possessive(const std::any &p) {
     return getPlayerInfo(p,pronoun_poss);
 }
@@ -33,7 +43,9 @@ std::function<std::string(std::any)> TextVariableLambdas::getLambda(std::string 
     static std::map<std::string, std::function<std::string(std::any)>> functionMap{
             {LM_PLAYERNAME(), getPlayerName},
             {LM_PLAYERWEAPON(), getPlayerWeapon},
-            {LM_PLAYER_POSESSIVE(), getPlayerPronoun_possessive}
+            {LM_PLAYER_SUBJECTIVE(), getPlayerPronoun_subjective},
+            {LM_PLAYER_POSESSIVE(), getPlayerPronoun_possessive},
+            {LM_PLAYER_OBJECTIVE(), getPlayerPronoun_objective}
     };
     if(!functionMap.count(key)) throw std::runtime_error("TextVariableLambdas::getLambda( key invalid: " + key  +")");
     else return functionMap.at(key);
