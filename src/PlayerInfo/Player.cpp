@@ -32,7 +32,7 @@ TickInfo Player::tick() const{
 }
 
 int Player::skillCheck(SkillCheckType type){
-    return Random::get_random_Int(2);
+    return 0;
 }
 
 int Player::getID() const{

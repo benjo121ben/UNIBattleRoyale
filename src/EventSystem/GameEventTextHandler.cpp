@@ -12,8 +12,9 @@ void GameEventTextHandler::handleEvent(const BaseEvent& e){
 }
 
 void GameEventTextHandler::printEvents(){
+    std::cout << "\nEVENTS:" << std::endl;
     for(const BaseEvent& e : events){
-        std::cout << e.getEventText();
+        std::cout <<"* " << e.getEventText();
     }
     std::cout << std::endl;
 }
