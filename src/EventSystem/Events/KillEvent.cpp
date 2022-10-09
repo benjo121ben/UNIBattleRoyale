@@ -9,15 +9,15 @@
 KillEvent::KillEvent(const Player &survivor, const Player &deadPlayer) {
     eventType = "Kill";
     TextVariables vars;
-    vars.setValue(TextVariables::KEY_PLAYER(), survivor);
-    vars.setValue(TextVariables::KEY_TARGETPLAYER(), deadPlayer);
+    vars.setValue<const Player*>(TextVariables::KEY_PLAYER(), &survivor);
+    vars.setValue<const Player*>(TextVariables::KEY_TARGETPLAYER(), &deadPlayer);
     eventText = EventTextStorage_Access::getKill(vars, false);
 }
 
-KillEvent::KillEvent(const std::vector<Player> &survivorList, const std::vector<Player> &deadPlayerList) {
+KillEvent::KillEvent(const std::vector<const Player*> &survivorList, const std::vector<const Player*> &deadPlayerList) {
     eventType = "Kill";
     TextVariables vars;
-    vars.setValue<std::vector<Player>>(TextVariables::KEY_SURVIVORLIST(), survivorList);
-    vars.setValue<std::vector<Player>>(TextVariables::KEY_DEADLIST(), deadPlayerList);
+    vars.setValue<std::vector<const Player*>>(TextVariables::KEY_SURVIVORLIST(), survivorList);
+    vars.setValue<std::vector<const Player*>>(TextVariables::KEY_DEADLIST(), deadPlayerList);
     eventText = EventTextStorage_Access::getKill(vars, true);
 }

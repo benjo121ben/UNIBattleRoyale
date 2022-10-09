@@ -19,23 +19,23 @@ void TileMap<T>::add(T* t) {
 }
 
 template <typename T>
-std::vector<T*> TileMap<T>::getTilesAround(const Coordinate& c)const{
+std::vector<const T*> TileMap<T>::getTilesAround(const Coordinate& c)const{
     return this->getTilesAround(c.x, c.y);
 }
 
 template <typename T>
-std::vector<T*> TileMap<T>::getTilesAround(int x, int y) const{
-    std::vector<T*> ret {};
+std::vector<const T*> TileMap<T>::getTilesAround(int x, int y) const{
+    std::vector<const T*> ret {};
     for (int addedIndex {-1}; addedIndex < 2; addedIndex+=2){
 
         //std::cout << "exists? " << static_cast<char>(static_cast<int>(x) + addedIndex) << std::to_string(y);
 
         if(existsTileAt(x + addedIndex, y)){
-            ret.push_back(getTileAt(x + addedIndex, y)->getCopyPtr());
+            ret.push_back(getTileAt(x + addedIndex, y)->getPtr());
         }
 
         if(existsTileAt(x, y + addedIndex)){
-            ret.push_back(getTileAt(x, y + addedIndex)->getCopyPtr());
+            ret.push_back(getTileAt(x, y + addedIndex)->getPtr());
         }
     }
     return ret;
@@ -43,10 +43,7 @@ std::vector<T*> TileMap<T>::getTilesAround(int x, int y) const{
 
 template <typename T>
 const T* TileMap<T>::getTileAt(int x, int y) const{
-    if(tileMap.count(Coordinate(x,y).hashValue())){
-        return tileMap.at(Coordinate(x,y).hashValue());
-    }
-    throw std::runtime_error("Tiles do not exist at: " + std::to_string(x) +", " + std::to_string(y));
+    return tileMap.at(Coordinate(x,y).hashValue());
 }
 
 template <typename T>
@@ -56,7 +53,12 @@ bool TileMap<T>::existsTileAt(int x, int y) const{
 
 template <typename T>
 bool TileMap<T>::existsTileAt(const Coordinate& c) const{
-    return tileMap.count(c.hashValue()) != 0;
+    return c.x < this->sizeX && c.y < this->sizeY;
+}
+
+template <typename T>
+bool TileMap<T>::debug_existsTileAt(const Coordinate& c) const{
+    return tileMap.count(c.hashValue());
 }
 
 template<typename T> TileMap<T>::~TileMap(){

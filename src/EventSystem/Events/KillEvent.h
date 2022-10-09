@@ -11,7 +11,7 @@
 class KillEvent : public BaseEvent{
 public:
     KillEvent(const Player& survivor, const Player& deadPlayer);
-    KillEvent(const std::vector<Player>& survivor, const std::vector<Player>& deadPlayer);
+    KillEvent(const std::vector<const Player*>& survivor, const std::vector<const Player*>& deadPlayer);
 };
 
 

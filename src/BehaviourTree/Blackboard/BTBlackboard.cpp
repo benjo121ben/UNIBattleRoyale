@@ -9,6 +9,7 @@
 #include "BlackboardKeys.h"
 
 BTBlackboard::BTBlackboard(const GameData& insertData) : publicData{insertData}{}
+BTBlackboard::BTBlackboard(const BTBlackboard& other) : publicData{other.publicData}, blackboardMap(other.blackboardMap){}
 
 bool BTBlackboard::isSet(std::string key) const{
     return blackboardMap.count(key) != 0;
@@ -32,6 +33,7 @@ const Player& BTBlackboard::getCurrentPlayerInfo() const{
 
 
 BTBlackboard BTBlackboard::getCopy() const{
+    std::cout << "BlackboardCopyCalled\n";
     return BTBlackboard(publicData);
 }
 

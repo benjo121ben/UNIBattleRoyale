@@ -147,12 +147,12 @@ void TurnManager::resolveAllFights() {
 }
 
 bool TurnManager::handleSkirmish(std::vector<int> &participantIndices) {
-    std::vector<Player> survivors;
+    std::vector<const Player*> survivors;
     for(auto& index : participantIndices){
-        survivors.push_back(allPlayerList.at(index));
+        survivors.push_back(&allPlayerList.at(index));
     }
     int deadAmount = Random::get_random_Int(survivors.size() - 2) + 1;
-    std::vector<Player> deadList;
+    std::vector<const Player*> deadList;
     while (deadAmount > 0){
         int index = Random::get_random_Int(survivors.size());
         deadList.push_back(survivors.at(index));
@@ -166,8 +166,8 @@ bool TurnManager::handleSkirmish(std::vector<int> &participantIndices) {
 
 
 
-void TurnManager::killPlayer(const std::vector<Player> &looserList) {
+void TurnManager::killPlayer(const std::vector<const Player*> &looserList) {
     for(auto& looser : looserList){
-        killPlayer(looser.getID());
+        killPlayer(looser->getID());
     }
 }

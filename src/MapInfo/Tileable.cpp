@@ -6,6 +6,7 @@
 #include<stdexcept>
 #include<cmath>
 #include<iostream>
+#include <sstream>
 
 Coordinate::Coordinate() {x = -1; y = -1;}
 Coordinate::Coordinate(int x, int y) :x{x}, y{y}{}
@@ -21,8 +22,10 @@ std::string Coordinate::print() const{
 
 Coordinate& Coordinate::operator=(const Coordinate& c2)= default;
 
-std::string Coordinate::hashValue()const{
-    return std::to_string(x) + "/" + std::to_string(y);
+std::size_t Coordinate::hashValue()const{
+    std::stringstream s;
+    s << x << "/" << y;
+    return std::hash<std::string>()(s.str());
 }
 
 Coordinate operator-(const Coordinate &c1, const Coordinate &c2){
@@ -56,7 +59,7 @@ int stepDistance(const Coordinate &c1, const Coordinate &c2){
 
 Tileable::Tileable(int x, int y): coords{x,y}{}
 
-std::string Tileable::hashValue() const{
+std::size_t Tileable::hashValue() const{
     return coords.hashValue();
 }
 
@@ -100,6 +103,10 @@ Tile* Tile::getCopyPtr() const{
     return new Tile(*this);
 }
 
+const Tile* Tile::getPtr() const{
+    return this;
+}
+
 
 
 BRTile::BRTile(int x, int y, TerrainType tileType, bool spawn) : Tile(x,y, tileType), spawn{spawn}{}
@@ -117,3 +124,9 @@ bool BRTile::isSpawn() const{
 BRTile* BRTile::getCopyPtr() const{
     return new BRTile(*this);
 }
+
+const BRTile* BRTile::getPtr() const{
+    return this;
+}
+
+

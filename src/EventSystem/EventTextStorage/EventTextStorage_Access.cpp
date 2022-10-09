@@ -18,7 +18,7 @@ using container = EventTextStorageContainer;
 std::string EventTextStorage_Access::getKill(const TextVariables& vars, bool groupFight) {
     std::string ret;
     if(groupFight) { //GROUP FIGHT
-        auto survivorList{vars.getValue<std::vector<Player>>(TextVariables::KEY_SURVIVORLIST())};
+        auto survivorList{vars.getValue<std::vector<const Player*>>(TextVariables::KEY_SURVIVORLIST())};
 
         if (survivorList.size() > 1) {
             ret = container::manySurvivorSkirmish();

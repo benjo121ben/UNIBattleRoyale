@@ -10,8 +10,11 @@ class BTNode_Abstract;
 class BehaviourTree{
     BTNode_Abstract* rootNode = nullptr;
     BTBlackboard blackboard;
+
 public:
+    [[nodiscard]] static BTNode_Abstract* move_BT_to_Subtree(BehaviourTree* bt);
     BehaviourTree(const BehaviourTree& other);
+    ~BehaviourTree();
     explicit BehaviourTree(const BTBlackboard& blackboard);
     explicit BehaviourTree(const GameData& data);
     TickInfo traverse();
@@ -19,7 +22,6 @@ public:
     void setPlayerInfo(int id);
     void setRootNode(BTNode_Abstract * node);
     BehaviourTree* getCopy() const;
-    BTNode_Abstract* convertToSubtree() const;
 };
 
 #endif //GAME_BEHAVIOURTREE_H

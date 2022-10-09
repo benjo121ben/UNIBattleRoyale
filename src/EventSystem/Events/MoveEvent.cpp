@@ -12,7 +12,7 @@ MoveEvent::MoveEvent(const Player& p, cardinal_directions dir, moveEventType typ
     }
     else{
         TextVariables vars;
-        vars.setValue(TextVariables::KEY_PLAYER(), p);
+        vars.setValue<const Player*>(TextVariables::KEY_PLAYER(), &p);
         vars.setValue(TextVariables::MOVE_DIR(), dir);
         eventText = EventTextStorage_Access::getMove(vars);
     }

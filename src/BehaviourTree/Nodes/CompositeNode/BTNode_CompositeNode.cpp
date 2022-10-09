@@ -4,6 +4,12 @@
 
 #include "BTNode_CompositeNode.h"
 
+BTNode_CompositeNode::~BTNode_CompositeNode(){
+    for (BTNode_Abstract* child: children) {
+        delete child;
+    }
+}
+
 void BTNode_CompositeNode::push_back_child(BTNode_Abstract * child){
     children.push_back(child);
 }

@@ -14,15 +14,30 @@
 Player::Player(std::string name, std::string weapon, Pronouns pronouns) :
     name{std::move(name)}, weapon{std::move(weapon)}, pronouns{std::move(pronouns)} {}
 
+Player::Player(const Player& other) :
+    name{other.name},
+    weapon{other.weapon},
+    pronouns{other.pronouns}
+    {
+        if (other.bt != nullptr) {
+            bt = other.bt->getCopy();
+        }
+    }
 
+
+Player::~Player(){
+    if(bt != nullptr){
+        delete bt;
+    }
+}
 
 
 int Player::fight(const Player& other){
     return Random::get_random_Int(2) -1;
 }
 
-void Player::addBehaviour(const BehaviourTree& bt, int id){
-    this->bt = bt.getCopy();
+void Player::addBehaviour(BehaviourTree* bt, int id){
+    this->bt = bt;
     this->bt->setPlayerInfo(id);
     this->id = id;
 }

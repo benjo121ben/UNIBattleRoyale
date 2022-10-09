@@ -16,6 +16,7 @@ public:
     void push_back_child(BTNode_Abstract * child);
     void push_front_child(BTNode_Abstract * child);
     void reset() override;
+    virtual ~BTNode_CompositeNode();
 };
 
 

@@ -16,5 +16,6 @@ public:
     virtual void reset();
     virtual BTNodestatus traverse(BTBlackboard* board);
     virtual BTNode_Abstract* getCopy() const = 0;
+    virtual ~BTNode_Abstract() = default;
 };
 #endif //GAME_BTNODE_H

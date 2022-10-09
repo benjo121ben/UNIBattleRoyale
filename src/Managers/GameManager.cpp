@@ -101,11 +101,10 @@ void GameManager::registerPlayer(const Player& p){
     if(started) throw game_started_error();
     if(allPlayerList().size() == playerPositions().size()) throw generic_game_error("already max amount of players");
     else{
-        BehaviourTree tree {BTTemplates::testTree_Move_and_Attack(gameData)};
-        int nr = allPlayerList().size();
+        auto nr = allPlayerList().size();
         allPlayerList().push_back(p);
         alivePlayerList().emplace(nr);
-        allPlayerList().at(nr).addBehaviour(tree, nr);
+        allPlayerList().at(nr).addBehaviour(BTTemplates::testTree_Move_and_Attack(gameData), nr);
     }
 }
 

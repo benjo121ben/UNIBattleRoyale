@@ -13,13 +13,25 @@
 #include "Blackboard/BlackboardKeys.h"
 #include "Blackboard/BTBlackboard.h"
 
+BTNode_Abstract* BehaviourTree::move_BT_to_Subtree(BehaviourTree* bt){
+    auto ret =  (bt->rootNode) ? bt->rootNode->getCopy() : nullptr;
+    delete bt;
+    return ret;
+}
+
+
 BehaviourTree::BehaviourTree(const BehaviourTree &other) : blackboard{other.blackboard}{
 
 }
 
-BehaviourTree::BehaviourTree(const BTBlackboard& blackB) : blackboard{std::move(blackB.getCopy())}{}
+BehaviourTree::BehaviourTree(const BTBlackboard& blackB) : blackboard{blackB}{std::cout << "consCalled\n";}
 
-BehaviourTree::BehaviourTree(const GameData& data) : blackboard{data}{}
+BehaviourTree::BehaviourTree(const GameData& data) : blackboard{data}{std::cout << "consCalled\n";}
+
+BehaviourTree::~BehaviourTree(){
+    delete this->rootNode;
+    std::cout << "desCalled\n";
+}
 
 TickInfo BehaviourTree::traverse(){
     if(rootNode == nullptr){
@@ -36,10 +48,6 @@ BehaviourTree* BehaviourTree::getCopy() const{
     BehaviourTree* ret { new BehaviourTree(blackboard)};
     ret->setRootNode(rootNode->getCopy());
     return ret;
-}
-
-BTNode_Abstract* BehaviourTree::convertToSubtree()const {
-    return (rootNode) ? rootNode->getCopy() : nullptr;
 }
 
 void BehaviourTree::setRootNode(BTNode_Abstract * node) {

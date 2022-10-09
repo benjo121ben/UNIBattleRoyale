@@ -23,9 +23,11 @@ public:
     BehaviourTree* bt = nullptr;
 
     Player(std::string name, std::string weapon, Pronouns pronouns);
+    Player(const Player&);
+    ~Player();
     int getID() const;
     int fight(const Player& other);
-    void addBehaviour(const BehaviourTree& bt, int id);
+    void addBehaviour(BehaviourTree* bt, int id);
     TickInfo tick() const;
 
     int skillCheck(SkillCheckType);

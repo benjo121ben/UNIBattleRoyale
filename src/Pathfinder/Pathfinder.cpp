@@ -34,32 +34,22 @@ bool Pathfinder::getDirection(const GameMap& map, const Coordinate& start, const
 }
 
 std::deque<Node> Pathfinder::findPath(const GameMap& map, const Coordinate &start, const Coordinate &goal) {
-    TileMap<Tileable> tileMap;
-    for(int y {0}; y < map.sizeY; y++) {
-        for (int x{0}; x < map.sizeX; x++) {
-            tileMap.add(map.getTileAt(x,y)->getCopyPtr());
-        }
-    }
-    return findPath(tileMap,start,goal);
-}
-
-std::deque<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordinate &start, const Coordinate &goal) {
 
     if(!map.existsTileAt(start.x,start.y)) throw std::invalid_argument("invalid start coordinate");
 
     Node root{map.getTileAt(start.x, start.y),goal};
 
-    std::map<std::string, Node> nodes;
-    std::map<std::string, Node *> toVisit;
-    std::unordered_set<std::string> visited;
+    std::map<std::size_t, Node> nodes;
+    std::map<std::size_t, Node *> toVisit;
+    std::unordered_set<std::size_t> visited;
 
     visited.insert(root.getCoords().hashValue());
     //std:.cout << "children: ";
-    for(Tileable* t : map.getTilesAround(root.getCoords())){
+    for(const Tileable* t : map.getTilesAround(root.getCoords())){
         //std:.cout << t.coords.print() <<", " << "\n";
-        nodes.insert(std::pair<std::string, Node>(t->hashValue(),Node(t, goal,&root)));
+        nodes.insert(std::pair<std::size_t, Node>(t->hashValue(),Node(t, goal,&root)));
         Node * ptr = &nodes.at(t->hashValue());
-        toVisit.insert(std::pair<std::string, Node *> (t->hashValue(),ptr));
+        toVisit.insert(std::pair<std::size_t, Node *> (t->hashValue(),ptr));
     }
 
     while(!toVisit.empty()){
@@ -91,9 +81,9 @@ std::deque<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordi
                     //std:.cout << "inserting: \n";
                     //std:.cout << n->getCoords().print() << "\n";
                     //std:.cout << checkTile.coords.print() << "\n";
-                    nodes.insert(std::pair<std::string, Node>(checkTile->hashValue(),Node(checkTile, goal,n)));
+                    nodes.insert(std::pair<std::size_t, Node>(checkTile->hashValue(),Node(checkTile, goal,n)));
                     Node * ptr = &nodes.at(checkTile->hashValue());
-                    toVisit.insert(std::pair<std::string, Node *> (checkTile->hashValue(),ptr));
+                    toVisit.insert(std::pair<std::size_t, Node *> (checkTile->hashValue(),ptr));
                 }
             }
         }
@@ -101,17 +91,6 @@ std::deque<Node> Pathfinder::findPath(const TileMap<Tileable>& map, const Coordi
     }
     throw std::runtime_error("could not reach goal coordinate");
 
-}
-
-void Pathfinder::outputPath(const TileMap<Tileable>& map, const Coordinate& start, const Coordinate& goal){
-    std::cout << "Route: " << start.print() << " -> " << goal.print() << std::endl;
-    std::deque<Node> deque = findPath(map,start,goal);
-    std::cout << "Path taken: ";
-    for(int pos {0}; pos < deque.size(); pos++){
-        Node n = deque.at(pos);
-        std::cout << " -> " << n.getCoords().print() << "/" << n.getCost();
-    }
-    std::cout << "\ncost: " << deque.at(deque.size()-1).getCost() << "\n\n\n";
 }
 
 void Pathfinder::outputPath(const GameMap& map, const Coordinate& start, const Coordinate& goal){
@@ -128,7 +107,7 @@ void Pathfinder::outputPath(const GameMap& map, const Coordinate& start, const C
     std::cout << "\ncost: " << deque.at(deque.size()-1).getCost() << "\n\n\n";
 }
 
-Node::Node(const Tileable* t, const Coordinate& goal, Node *parent) : tile{t->getCopyPtr()}, parent{parent} {
+Node::Node(const Tileable* t, const Coordinate& goal, Node *parent) : tile{t->getPtr()}, parent{parent} {
     if(parent){
         baseCost = tile->cost() + parent->getCost();
 
@@ -152,8 +131,11 @@ Node::Node(const Tileable* t, const Coordinate& goal, Node *parent) : tile{t->ge
     }
     distanceCost = distance(Coordinate(t->getX(), t->getY()) ,goal);
 }
+Node::~Node(){
+}
 
-Node::Node(const Node& n) : tile{n.tile->getCopyPtr()},parent{n.parent},distanceCost{n.distanceCost},baseCost{n.baseCost}{
+
+Node::Node(const Node& n) : tile{n.tile->getPtr()},parent{n.parent},distanceCost{n.distanceCost},baseCost{n.baseCost}{
 }
 
 Coordinate Node::getCoords() const{

@@ -14,17 +14,18 @@
 
 template <typename T> class TileMap{
 protected:
-    std::map<std::string,T*> tileMap;
+    std::map<std::size_t,T*> tileMap;
 public:
 
     int sizeX = 0;
     int sizeY = 0;
     void add(T* t);
-    std::vector<T*> getTilesAround(int x, int y) const;
-    std::vector<T*> getTilesAround(const Coordinate& c)const;
+    std::vector<const T*> getTilesAround(int x, int y) const;
+    std::vector<const T*> getTilesAround(const Coordinate& c)const;
     const T* getTileAt(int x, int y) const;
     [[nodiscard]] bool existsTileAt(int x, int y) const;
     [[nodiscard]] bool existsTileAt(const Coordinate& c) const;
+    [[nodiscard]] bool debug_existsTileAt(const Coordinate& c) const;
 
     ~TileMap();
 

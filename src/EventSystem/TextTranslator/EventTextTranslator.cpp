@@ -76,12 +76,12 @@ std::string EventTextTranslator::interpretListKeyword(const TextVariables &varia
 
     //MAIN KEYS
     if(mainKeyword == TextVariables::KEY_SURVIVORLIST()){
-        auto survivorList = variables.getValue<std::vector<Player>>(TextVariables::KEY_SURVIVORLIST());
-        return outputList<Player>(survivorList, func);
+        auto survivorList = variables.getValue<std::vector<const Player*>>(TextVariables::KEY_SURVIVORLIST());
+        return outputList<const Player*>(survivorList, func);
     }
     else if(mainKeyword == TextVariables::KEY_DEADLIST()){
-        auto survivorList = variables.getValue<std::vector<Player>>(TextVariables::KEY_DEADLIST());
-        return outputList<Player>(survivorList, func);
+        auto survivorList = variables.getValue<std::vector<const Player*>>(TextVariables::KEY_DEADLIST());
+        return outputList<const Player*>(survivorList, func);
     }
 
     return "COULD NOT TRANSLATE THIS KEYWORD:/" + mainKeyword +"/";

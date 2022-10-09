@@ -9,13 +9,13 @@
 #include <map>
 
 std::string TextVariableLambdas::getPlayerInfo(const std::any& an, playerInfoType type){
-    auto p = std::any_cast<Player>(an);
+    auto p = std::any_cast<const Player*>(an);
     switch (type) {
-        case name: return p.name;
-        case weapon: return p.weapon;
-        case pronoun_sub: return p.pronouns.subjective;
-        case pronoun_obj: return p.pronouns.objective;
-        case pronoun_poss: return p.pronouns.possessive;
+        case name: return p->name;
+        case weapon: return p->weapon;
+        case pronoun_sub: return p->pronouns.subjective;
+        case pronoun_obj: return p->pronouns.objective;
+        case pronoun_poss: return p->pronouns.possessive;
     }
     throw std::runtime_error("error in TextVariableLambdas::getPlayerInfo");
 }

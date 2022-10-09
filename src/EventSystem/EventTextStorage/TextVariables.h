@@ -10,15 +10,15 @@
 #include <stdexcept>
 
 class TextVariables {
-    std::map<std::string, std::any> varMap;
+    std::map<std::size_t, std::any> varMap;
 public:
 
     std::any getValue_asAny(const std::string& key) const;
     template <typename T> T getValue(const std::string& key) const{
         if(!isSet(key)){throw std::runtime_error("TextVariables::getValue " + key);}
-        return std::any_cast<T>(varMap.at(key));
+        return std::any_cast<T>(varMap.at(std::hash<std::string>()(key)));
     }
-    template <typename T> void setValue(const std::string key, T value){varMap.insert_or_assign(key, std::make_any<T>(value));}
+    template <typename T> void setValue(const std::string key, T value){varMap.insert_or_assign(std::hash<std::string>()(key), std::make_any<T>(value));}
 
     bool isSet(const std::string& key) const;
 

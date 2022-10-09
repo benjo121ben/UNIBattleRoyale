@@ -6,12 +6,12 @@
 #include "TextVariableLambdas.h"
 
 bool TextVariables::isSet(const std::string& key) const {
-    return varMap.count(key);
+    return varMap.count(std::hash<std::string>()(key));
 }
 
 std::any TextVariables::getValue_asAny(const std::string& key) const{
     if(!isSet(key)){throw std::runtime_error("TextVariables::getValue_asAny " + key);}
-    return varMap.at(key);
+    return varMap.at(std::hash<std::string>()(key));
 }
 
 

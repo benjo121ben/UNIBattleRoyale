@@ -27,7 +27,7 @@ class TurnManager : public EventAnnouncer{
     bool anotherPlayerOnTile(int playerID);
     void scheduleFight(Coordinate coordinate);
     void killPlayer(int looser);
-    void killPlayer(const std::vector<Player>& looser);
+    void killPlayer(const std::vector<const Player*>& looser);
 
     void handleMove(int playerNr, const TickInfo &t);
     void resolveAllFights();
